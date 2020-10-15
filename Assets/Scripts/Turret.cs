@@ -9,9 +9,13 @@ public class Turret : MonoBehaviour
 
 
     public float turretRange = 5f;
-
-
     public string targetTag = "enemy";
+
+    public float fireSpeed = 1f;
+    private float fireCounter = 0f;
+
+    public GameObject bulletPrefab;
+    public Transform bulletBeginPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -20,10 +24,35 @@ public class Turret : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        FindTarget();           
+        FindTarget();  
+        
+        if (fireCounter <= 0f)
+        {
+            Fire();
+            fireCounter = 1f / fireSpeed;
+        }
+
+        fireCounter -= Time.deltaTime;
+
     }
+
+
+
+    void Fire()
+    {
+        Debug.Log("FIRE");
+        GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, bulletBeginPoint.position, bulletBeginPoint.rotation);
+        Bullet bullet = bulletGO.GetComponent<Bullet>();
+
+        if(bullet != null)
+        {
+            bullet.Find(target);    
+        }
+    }
+
+
 
     //Functie dat de dichtbijzijnste enemy zoekt en markt als target
     void FindTarget()
