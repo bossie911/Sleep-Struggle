@@ -16,6 +16,7 @@ public class TileManager: MonoBehaviour
     int[,] tileTypes;
 
     public int width, height;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,13 +30,19 @@ public class TileManager: MonoBehaviour
             for(int y = middleTile.y - height/2; y < middleTile.y + height/2; y++){
                 //tilemap.SetTile(new Vector3Int(x,y,0), middleTileSprite);
             }
-
         }
     }
-
 
     // Update is called once per frame
     void Update()
     {
+        Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector3Int currentTile = tilemap.WorldToCell(point);
+
+            tilemap.SetTile(currentTile, middleTileSprite);
+        }
     }
 }
