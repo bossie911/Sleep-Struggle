@@ -36,13 +36,5 @@ public class TileManager: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            Vector3Int currentTile = tilemap.WorldToCell(point);
-
-            tilemap.SetTile(currentTile, middleTileSprite);
-        }
     }
 }
