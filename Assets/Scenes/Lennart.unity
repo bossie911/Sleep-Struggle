@@ -6183,7 +6183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   regularEnemy: {fileID: 6327538895089355321, guid: 14eed0477c1ea2c4eaa66a4116710b8b,
     type: 3}
-  timeBetweenEnemies: 0.1
+  timeBetweenEnemies: 2
   spawnPoint:
   - {fileID: 125693393}
   - {fileID: 153271295}

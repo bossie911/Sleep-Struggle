@@ -24,9 +24,6 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        //Enemy beweegt naar de tile die op de beste weg ligt naar de player base. 
-        //Hiervoor stel ik de enemy position gelijk aan de position van de desbetreffende tile
-
         //Enemy scant de tiles naast hem voor turrets. als er een turret naast hem staat, val deze aan. 
         //als er niet een naast hem staat, heal voor 5 hp en move dichterbij de player base
 
@@ -49,6 +46,6 @@ public class Enemy : MonoBehaviour
 
     public void EnemyDied()
     {
-        Enemy.Destroy(this);
+        Destroy(this.gameObject);
     }
 }
