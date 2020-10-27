@@ -11,11 +11,12 @@ public class PlaceTurret : MonoBehaviour
     private Rigidbody ghost;
 
     //Place the turret slightly higher (looks better)
-    private float offset = 0.4f; 
+    private Vector3 offset; 
 
     void Start()
     {
-        ghost = GetComponentInChildren<Rigidbody>(); 
+        offset = new Vector3(0, 0.4f);
+        ghost = GetComponentInChildren<Rigidbody>();
     }
 
     void Update()
@@ -23,13 +24,13 @@ public class PlaceTurret : MonoBehaviour
         Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         //Draw ghost on the tile the mouse is currently hovering over
-        ghost.position = tilemap.CellToWorld(tilemap.WorldToCell(point)) + new Vector3(0, offset); 
+        ghost.position = tilemap.CellToWorld(tilemap.WorldToCell(point)) + offset; 
 
         if (Input.GetMouseButtonDown(0))
         {   
             Vector3 worldPosition = tilemap.CellToWorld(tilemap.WorldToCell(point));
 
-            GameObject newTurret = Instantiate(turret, new Vector3(worldPosition.x, worldPosition.y + offset), Quaternion.identity);
+            GameObject newTurret = Instantiate(turret, worldPosition + offset, Quaternion.identity);
 
             //Create all turrets as a child of this gameobj, so the hierarchy doesn't get cluttered
             newTurret.transform.SetParent(this.transform);
