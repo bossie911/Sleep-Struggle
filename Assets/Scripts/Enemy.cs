@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
-{
-    public float enemyPosition; 
-
+{ 
     public float enemyDamage = 10f;
 
     public float currentHealth;
@@ -15,7 +13,9 @@ public class Enemy : MonoBehaviour
         set { currentHealth = value; }    
     }
 
-    public float getHealed = 5f; 
+    public float getHealed = 5f;
+
+    public GameObject turret;
 
     void Start()
     {
@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
 
     public void DealDamage()
     {
-
+        //Scan tiles om enemy heen voor turrets. als er een turret 1 tile naast de enemy staat, doe damage hierop per 5 seconden.
     }
 
     public void HealEnemy()
