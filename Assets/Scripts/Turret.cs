@@ -30,8 +30,9 @@ public class Turret : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        FindTarget();  
-        
+        FindTarget();
+        UpdateFogOfWar();
+
         if (fireCounter <= 0f)
         {
             Fire();
