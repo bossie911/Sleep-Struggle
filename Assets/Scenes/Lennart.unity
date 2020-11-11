@@ -6229,17 +6229,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 780436401}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1aeb6d82d0cbcb49bd875f895c76b12, type: 3}
+  m_Script: {fileID: 11500000, guid: 554b68b693c54e041971e6216100ceb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   middleTilePoint: {fileID: 181036702}
-  middleTileSprite: {fileID: 11400000, guid: 2a6ebcda5e931cc4fa187601890054ba, type: 2}
+  middleTileSprite: {fileID: 0}
   differentTiles:
   - {fileID: 11400000, guid: 9511c21c48b8a8c4db13af783b77dddb, type: 2}
-  - {fileID: 11400000, guid: 6bd82084a337f69459dfb85e259106ab, type: 2}
+  - {fileID: 11400000, guid: 9511c21c48b8a8c4db13af783b77dddb, type: 2}
+  - {fileID: 11400000, guid: 4c82e7ef9f87fe2498a4593d6b2737d9, type: 2}
   tilemap: {fileID: 71264574}
-  width: 30
-  height: 23
+  width: 26
+  height: 21
+  scale: 4
 --- !u!1 &793879089
 GameObject:
   m_ObjectHideFlags: 0
