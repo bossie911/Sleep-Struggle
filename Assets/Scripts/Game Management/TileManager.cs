@@ -34,7 +34,7 @@ public class TileManager : MonoBehaviour
         {
             for (int y = middleTile.y - height / 2; y < middleTile.y + height / 2; y++)
             {
-                tilemap.SetTile(new Vector3Int(x,y,0), middleTileSprite);
+               // tilemap.SetTile(new Vector3Int(x,y,0), middleTileSprite);
             }
         }
         random = new Random();
