@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class AIMovement : MonoBehaviour
 {
+
+    public float distanceToBase = 100;
     NavMeshAgent agent;
     // Start is called before the first frame update
     void Start()
@@ -17,9 +19,24 @@ public class AIMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //this is not efficient we should make it so that it only updates when the target changes
+        cornersCalculation();
     }
 
-    
-    
+    void cornersCalculation()
+    {
+        NavMeshPath path = agent.path;
+
+        Vector3 previousCorner = path.corners[0];
+        float lengthSoFar = 0.0F;
+        int i = 1;
+        while (i < path.corners.Length)
+        {
+            Vector3 currentCorner = path.corners[i];
+            lengthSoFar += Vector3.Distance(previousCorner, currentCorner);
+            previousCorner = currentCorner;
+            i++;
+        }
+        distanceToBase = lengthSoFar;
+        Debug.Log(distanceToBase);
+    }
 }

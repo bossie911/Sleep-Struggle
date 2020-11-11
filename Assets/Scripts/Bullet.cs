@@ -33,13 +33,13 @@ public class Bullet : MonoBehaviour
 
     void TargetHit()
     {
-        Debug.Log("HIT");
+        //Debug.Log("HIT");
 
         Destroy(gameObject);
 
         target.GetComponent<Enemy>().currentHealth -= bulletDamage;
 
-        Debug.Log(target.GetComponent<Enemy>().currentHealth);
+        //Debug.Log(target.GetComponent<Enemy>().currentHealth);
 
     }
 

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Accessibility;
+using UnityEngine.Tilemaps;
 
 public class Turret : MonoBehaviour
 {
@@ -17,6 +19,8 @@ public class Turret : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform bulletBeginPoint;
 
+    public Tilemap fogOfWar;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,8 +30,9 @@ public class Turret : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        FindTarget();  
-        
+        FindTarget();
+        UpdateFogOfWar();
+
         if (fireCounter <= 0f)
         {
             Fire();
@@ -42,7 +47,7 @@ public class Turret : MonoBehaviour
 
     void Fire()
     {
-        Debug.Log("FIRE");
+        //Debug.Log("FIRE");
         GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, bulletBeginPoint.position, bulletBeginPoint.rotation);
         Bullet bullet = bulletGO.GetComponent<Bullet>();
 
@@ -93,4 +98,18 @@ public class Turret : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, turretRange);
     }
 
+    public int vision = 1;
+    void UpdateFogOfWar()
+    {
+        Vector3Int currentTowerTile = fogOfWar.WorldToCell(transform.position);
+
+        //Clear the surrounding tiles
+        for(int x=-vision; x<= vision; x++)
+        {
+            for(int y=-vision; y<= vision; y++)
+            {
+                fogOfWar.SetTile(currentTowerTile + new Vector3Int(x, y, 0), null);
+            }    
+        }    
+    }
 }
