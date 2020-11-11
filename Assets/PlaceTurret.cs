@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -7,7 +8,8 @@ public class PlaceTurret : MonoBehaviour
 {
     public Tilemap tilemap;
     public GameObject turret;
-    
+    public Tilemap fogOfWar; 
+
     private Rigidbody ghost;
 
     //Place the turret slightly higher (looks better)
@@ -27,13 +29,16 @@ public class PlaceTurret : MonoBehaviour
         ghost.position = tilemap.CellToWorld(tilemap.WorldToCell(point)) + offset; 
 
         if (Input.GetMouseButtonDown(0))
-        {   
+        {
             Vector3 worldPosition = tilemap.CellToWorld(tilemap.WorldToCell(point));
 
             GameObject newTurret = Instantiate(turret, worldPosition + offset, Quaternion.identity);
 
             //Create all turrets as a child of this gameobj, so the hierarchy doesn't get cluttered
             newTurret.transform.SetParent(this.transform);
+
+            //Set reference FoW of the newly created turret
+            newTurret.GetComponent<Turret>().fogOfWar = fogOfWar; 
         }
     }
 }
