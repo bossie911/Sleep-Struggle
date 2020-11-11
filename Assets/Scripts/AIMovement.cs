@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class AIMovement : MonoBehaviour
 {
 
-    public float distanceToBase = 100;
+    public static float distanceToBase = 100;
     NavMeshAgent agent;
     // Start is called before the first frame update
     void Start()

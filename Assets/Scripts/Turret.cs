@@ -9,6 +9,8 @@ public class Turret : MonoBehaviour
 
     public Transform target;
 
+    List<GameObject> enemiesInRange = new List<GameObject>();
+
 
     public float turretRange = 5f;
     public string targetTag = "enemy";
@@ -30,7 +32,8 @@ public class Turret : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        FindTarget();
+        //FindClosestTarget();
+        FindTargetClosestToBase();
         UpdateFogOfWar();
 
         if (fireCounter <= 0f)
@@ -60,7 +63,7 @@ public class Turret : MonoBehaviour
 
 
     //Functie dat de dichtbijzijnste enemy zoekt en markt als target
-    void FindTarget()
+    void FindClosestTarget()
     {    
         //array voor enemy gameobjects
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(targetTag);
@@ -87,6 +90,37 @@ public class Turret : MonoBehaviour
         {
             target = null;
         }
+    }
+
+    void FindTargetClosestToBase()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag(targetTag);
+
+        float closestDistanceToBase = Mathf.Infinity;
+
+        //Zet alle enemies die in range zijn in een list
+        foreach (GameObject enemy in enemies)
+        {
+            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+            if (distanceToEnemy < turretRange)
+            {
+                enemiesInRange.Add(enemy);
+            }
+        }
+
+        //enemy die het dichtsbijzijnde de base is marken als target
+        foreach (GameObject enemy in enemiesInRange)
+        {
+            if (AIMovement.distanceToBase < closestDistanceToBase)
+            {
+                closestDistanceToBase = AIMovement.distanceToBase;
+                target = enemy.transform;
+            }
+
+        }
+
+        enemiesInRange.Clear();
+
     }
 
 
