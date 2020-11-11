@@ -6071,6 +6071,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilemap: {fileID: 71264574}
   turret: {fileID: 6632914316725575977, guid: d95c414eb70456f4da2a4fbf3d3e6635, type: 3}
+  FogOfWar: {fileID: 751798288}
 --- !u!1 &545113971
 GameObject:
   m_ObjectHideFlags: 0
@@ -6206,7 +6207,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!483693784 &751798286
 TilemapRenderer:
   m_ObjectHideFlags: 0
