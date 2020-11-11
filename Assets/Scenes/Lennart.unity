@@ -7814,15 +7814,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   middleTilePoint: {fileID: 181036702}
-  middleTileSprite: {fileID: 0}
+  middleTileSprite: {fileID: 11400000, guid: 2a6ebcda5e931cc4fa187601890054ba, type: 2}
   differentTiles:
   - {fileID: 11400000, guid: 9511c21c48b8a8c4db13af783b77dddb, type: 2}
   - {fileID: 11400000, guid: 9511c21c48b8a8c4db13af783b77dddb, type: 2}
   - {fileID: 11400000, guid: 4c82e7ef9f87fe2498a4593d6b2737d9, type: 2}
   tilemap: {fileID: 71264574}
+  obstacles: {fileID: 1849902417}
   width: 26
   height: 21
   scale: 4
+  navMesh: {fileID: 545113971}
 --- !u!1 &793879089
 GameObject:
   m_ObjectHideFlags: 0

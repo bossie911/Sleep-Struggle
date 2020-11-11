@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.AI;
+
 
 
 public class TileManager : MonoBehaviour
@@ -11,6 +13,7 @@ public class TileManager : MonoBehaviour
     public TileBase[] differentTiles;
 
     public Tilemap tilemap;
+    public Tilemap obstacles;
 
     Vector3Int middleTile;
 
@@ -19,34 +22,20 @@ public class TileManager : MonoBehaviour
     public int width, height;
 
     public float scale;
-    Random random;
+
+    public GameObject navMesh;
 
     // Start is called before the first frame update
     void Start()
     {
-        middleTile = tilemap.WorldToCell(middleTilePoint.position);
-
-        tilemap.SetTile(middleTile, middleTileSprite);
-
         tileTypes = new int[width, height];
-
-        for (int x = middleTile.x - width / 2; x < middleTile.x + width / 2; x++)
-        {
-            for (int y = middleTile.y - height / 2; y < middleTile.y + height / 2; y++)
-            {
-               // tilemap.SetTile(new Vector3Int(x,y,0), middleTileSprite);
-            }
-        }
-        random = new Random();
+        SetTiles();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            SetTiles(); // if f is pressed, the generation will occur
-        }
+
 
     }
 
@@ -58,8 +47,8 @@ public class TileManager : MonoBehaviour
         {
             for (int y = 0; y < mapHeight; y++)
             {
-                float sampleX = (float)x / mapWidth * scale;
-                float sampleY = (float)y / mapHeight * scale;
+                float sampleX = (float)x / mapWidth * scale + xOffset * 10;
+                float sampleY = (float)y / mapHeight * scale + yOffset * 10;
                 float noise = Mathf.PerlinNoise(sampleX, sampleY) * differentTiles.Length;
                 noiseMap[x, y] = (int)noise;
             }
@@ -69,15 +58,42 @@ public class TileManager : MonoBehaviour
 
     void SetTiles()
     {
-        tileTypes = GenerateNoiseMap(width, height, scale, 1, 1);
+        tileTypes = GenerateNoiseMap(width, height, scale, Random.Range(-100, 100), Random.Range(-100, 100));
+        tilemap.ClearAllTiles();
+        obstacles.ClearAllTiles();
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                tilemap.SetTile(new Vector3Int(x - width / 2, y - height / 2, 0), differentTiles[tileTypes[x, y]]);
-            }
+                switch (tileTypes[x, y])
+                {
+                    case 0:
+                        tilemap.SetTile(new Vector3Int(x - width / 2, y - height / 2, 0), differentTiles[tileTypes[x, y]]);
+                        break;
+                    case 1:
+                        tilemap.SetTile(new Vector3Int(x - width / 2, y - height / 2, 0), differentTiles[tileTypes[x, y]]);
+                        break;
+                    case 2:
+                        obstacles.SetTile(new Vector3Int(x - width / 2, y - height / 2, 0), differentTiles[tileTypes[x, y]]);
+                    break;
 
+                }
+            }
         }
+        SetMiddleTile();
+        UpdateNavMesh();
+    }
+
+    void UpdateNavMesh()
+    {
+        navMesh.GetComponent<NavMeshSurface2d>().BuildNavMesh();
+
+    }
+
+    void SetMiddleTile(){
+        middleTile = tilemap.WorldToCell(middleTilePoint.position);
+        tilemap.SetTile(middleTile, middleTileSprite);
+
     }
 }
 
