@@ -18,6 +18,7 @@ public class TileManager : MonoBehaviour
     Vector3Int middleTile;
 
     int[,] tileTypes;
+    TileObject[,] tileObjects;
 
     public int width, height;
 
@@ -29,6 +30,7 @@ public class TileManager : MonoBehaviour
     void Start()
     {
         tileTypes = new int[width, height];
+        tileObjects = new TileObject[width, height];
         SetTiles();
     }
 
@@ -68,14 +70,14 @@ public class TileManager : MonoBehaviour
                 switch (tileTypes[x, y])
                 {
                     case 0:
-                        tilemap.SetTile(new Vector3Int(x - width / 2, y - height / 2, 0), differentTiles[tileTypes[x, y]]);
+                        placeGrass(x, y);
                         break;
                     case 1:
-                        tilemap.SetTile(new Vector3Int(x - width / 2, y - height / 2, 0), differentTiles[tileTypes[x, y]]);
+                        placeGrass(x, y);
                         break;
                     case 2:
-                        obstacles.SetTile(new Vector3Int(x - width / 2, y - height / 2, 0), differentTiles[tileTypes[x, y]]);
-                    break;
+                        PlaceWater(x, y);
+                        break;
 
                 }
             }
@@ -87,13 +89,32 @@ public class TileManager : MonoBehaviour
     void UpdateNavMesh()
     {
         navMesh.GetComponent<NavMeshSurface2d>().BuildNavMesh();
-
     }
 
-    void SetMiddleTile(){
+    void placeGrass(int x, int y)
+    {
+        tileObjects[x, y] = new TileObject(differentTiles[tileTypes[x, y]], x, y, true);
+        tilemap.SetTile(new Vector3Int(x - width / 2, y - height / 2, 0), tileObjects[x, y].GetTile());
+    }
+
+    void PlaceWater(int x, int y)
+    {
+        tileObjects[x, y] = new TileObject(differentTiles[tileTypes[x, y]], x, y, false);
+        obstacles.SetTile(new Vector3Int(x - width / 2, y - height / 2, 0), tileObjects[x, y].GetTile());
+    }
+
+    void SetMiddleTile()
+    {
         middleTile = tilemap.WorldToCell(middleTilePoint.position);
         tilemap.SetTile(middleTile, middleTileSprite);
 
     }
+
+    public TileObject GetTileFromPosition(Vector3 positionRequest)
+    {
+        Vector3Int pos = tilemap.WorldToCell(positionRequest);
+        return tileObjects[pos.x + width/2, pos.y + height/2];
+    }
+
 }
 
