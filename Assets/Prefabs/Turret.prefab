@@ -102,6 +102,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6578100918322970512, guid: f847d32aa9d42e84bba3a7d5837d91bf,
     type: 3}
   bulletBeginPoint: {fileID: 6632914317620150802}
+  fogOfWar: {fileID: 0}
+  vision: 2
 --- !u!1 &6632914317620150829
 GameObject:
   m_ObjectHideFlags: 0
