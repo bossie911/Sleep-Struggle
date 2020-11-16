@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DreamFuel : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class DreamFuel : MonoBehaviour
     public float baseGeneration = 1f;
     public float generationDelay = 1f;
     protected float generationTimer;
+    public float addedGeneration;
+
+    public Text dreamFuelDisp;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +25,9 @@ public class DreamFuel : MonoBehaviour
     void Update()
     {
         ResourceGeneration();
+
+        //voor nu displayt het baseGeneration, moet veranderen naar basegeneration + addedGeneration
+        dreamFuelDisp.text = "" + currentResourceValue + "/" + baseGeneration;
     }
 
     //ResourceGeneration manages the amount of DreamFuel that is added per x amount of time.
@@ -32,7 +39,6 @@ public class DreamFuel : MonoBehaviour
         if(generationTimer >= generationDelay)
         {
             currentResourceValue += baseGeneration;
-            Debug.Log(currentResourceValue);
             generationTimer = 0f;
         }
     }
