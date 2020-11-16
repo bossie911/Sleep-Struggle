@@ -33,24 +33,24 @@ public class PlaceTurret : MonoBehaviour
         //Draw ghost on the tile the mouse is currently hovering over
         ghost.position = tilemap.CellToWorld(tilemap.WorldToCell(point)) + offset;
 
-        var currentTile = manager.GetTileFromPosition(point);
+        TileObject currentTile = manager.GetTileFromPosition(point);
 
-        //I'm aware this is gross, but it works
-        if (currentTile == null) return; 
+        if (Input.GetMouseButtonDown(0) && currentTile != null && currentTile.CanPlaceTurret())
+            Place(point, currentTile);
+    }
 
-            if (Input.GetMouseButtonDown(0) && currentTile.CanPlaceTurret())
-            {
-                Vector3 worldPosition = tilemap.CellToWorld(tilemap.WorldToCell(point));
+    void Place(Vector3 point, TileObject currentTile)
+    {
+        Vector3 worldPosition = tilemap.CellToWorld(tilemap.WorldToCell(point));
 
-                GameObject newTurret = Instantiate(turret, worldPosition + offset, Quaternion.identity);
+        GameObject newTurret = Instantiate(turret, worldPosition + offset, Quaternion.identity);
 
-                //Create all turrets as a child of this gameobj, so the hierarchy doesn't get cluttered
-                newTurret.transform.SetParent(this.transform);
+        //Create all turrets as a child of this gameobj, so the hierarchy doesn't get cluttered
+        newTurret.transform.SetParent(this.transform);
 
-                //Set reference FoW of the newly created turret
-                newTurret.GetComponent<Turret>().fogOfWar = fogOfWar;
+        //Set reference FoW of the newly created turret
+        newTurret.GetComponent<Turret>().fogOfWar = fogOfWar;
 
-                currentTile.TurretPlaced = true;
-            }
+        currentTile.TurretPlaced = true;
     }
 }
