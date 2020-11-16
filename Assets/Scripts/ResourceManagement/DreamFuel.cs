@@ -41,6 +41,7 @@ public class DreamFuel : MonoBehaviour
             currentResourceValue += baseGeneration;
             generationTimer = 0f;
         }
+
     }
 
     public void TurretPlaced()
