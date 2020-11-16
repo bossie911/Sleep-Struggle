@@ -22,5 +22,11 @@ public class HPBarBase : MonoBehaviour
     void Update()
     {
         slider.value = baseHP;
+
+
+        if (baseHP <= 0)
+        {
+            SceneManager.LoadScene("GameOverScreen");
+        }
     }
 }
