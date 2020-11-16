@@ -138,9 +138,9 @@ public class Turret : MonoBehaviour
         Vector3Int currentTowerTile = fogOfWar.WorldToCell(transform.position);
 
         //Clear the surrounding tiles
-        for(int x=-vision; x<= vision; x++)
+        for(int x=-vision; x<= vision - 1; x++)
         {
-            for(int y=-vision; y<= vision; y++)
+            for(int y = -vision - 1; y<= vision; y++)
             {
                 fogOfWar.SetTile(currentTowerTile + new Vector3Int(x, y, 0), null);
             }    
