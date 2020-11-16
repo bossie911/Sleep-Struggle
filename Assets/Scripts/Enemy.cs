@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
-{ 
-    public float enemyDamage = 10f;
+{   
+    public static float enemyDamage = 0.1f;
 
     public float currentHealth;
     public float maxHealth
