@@ -1,14 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 public class PlaceTurret : MonoBehaviour
 {
     public Tilemap tilemap;
     public GameObject turret;
-    public Tilemap fogOfWar; 
+    public Tilemap fogOfWar;
+    
+    TileManager manager; 
 
     private Rigidbody ghost;
 
@@ -19,6 +23,7 @@ public class PlaceTurret : MonoBehaviour
     {
         offset = new Vector3(0, 0.4f);
         ghost = GetComponentInChildren<Rigidbody>();
+        manager = GameObject.Find("TileManager").GetComponent<TileManager>();
     }
 
     void Update()
@@ -26,19 +31,26 @@ public class PlaceTurret : MonoBehaviour
         Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         //Draw ghost on the tile the mouse is currently hovering over
-        ghost.position = tilemap.CellToWorld(tilemap.WorldToCell(point)) + offset; 
+        ghost.position = tilemap.CellToWorld(tilemap.WorldToCell(point)) + offset;
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            Vector3 worldPosition = tilemap.CellToWorld(tilemap.WorldToCell(point));
+        var currentTile = manager.GetTileFromPosition(point);
 
-            GameObject newTurret = Instantiate(turret, worldPosition + offset, Quaternion.identity);
+        //I'm aware this is gross, but it works
+        if (currentTile == null) return; 
 
-            //Create all turrets as a child of this gameobj, so the hierarchy doesn't get cluttered
-            newTurret.transform.SetParent(this.transform);
+            if (Input.GetMouseButtonDown(0) && currentTile.CanPlaceTurret())
+            {
+                Vector3 worldPosition = tilemap.CellToWorld(tilemap.WorldToCell(point));
 
-            //Set reference FoW of the newly created turret
-            newTurret.GetComponent<Turret>().fogOfWar = fogOfWar; 
-        }
+                GameObject newTurret = Instantiate(turret, worldPosition + offset, Quaternion.identity);
+
+                //Create all turrets as a child of this gameobj, so the hierarchy doesn't get cluttered
+                newTurret.transform.SetParent(this.transform);
+
+                //Set reference FoW of the newly created turret
+                newTurret.GetComponent<Turret>().fogOfWar = fogOfWar;
+
+                currentTile.TurretPlaced = true;
+            }
     }
 }

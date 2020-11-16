@@ -37,6 +37,6 @@ public class AIMovement : MonoBehaviour
             i++;
         }
         distanceToBase = lengthSoFar;
-        Debug.Log(distanceToBase);
+        //Debug.Log(distanceToBase);
     }
 }

@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.AI;
-
+using Random = UnityEngine.Random;
 
 
 public class TileManager : MonoBehaviour
@@ -37,8 +39,6 @@ public class TileManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
     }
 
     public int[,] GenerateNoiseMap(int mapWidth, int mapHeight, float scale, float xOffset, float yOffset)
@@ -105,6 +105,7 @@ public class TileManager : MonoBehaviour
 
     void SetMiddleTile()
     {
+
         middleTile = tilemap.WorldToCell(middleTilePoint.position);
         tilemap.SetTile(middleTile, middleTileSprite);
 
@@ -113,8 +114,19 @@ public class TileManager : MonoBehaviour
     public TileObject GetTileFromPosition(Vector3 positionRequest)
     {
         Vector3Int pos = tilemap.WorldToCell(positionRequest);
-        return tileObjects[pos.x + width/2, pos.y + height/2];
-    }
 
+        //Check whether the given world position is on the tilemap
+        try
+        {
+            var tryGetIndex = tileObjects[pos.x + width / 2, pos.y + height / 2];
+        }
+        catch (IndexOutOfRangeException e)
+        {
+            Console.WriteLine(e.Message);
+            return null; 
+        }
+
+        return tileObjects[pos.x + width / 2, pos.y + height / 2];
+    }
 }
 
