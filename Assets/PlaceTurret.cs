@@ -36,10 +36,10 @@ public class PlaceTurret : MonoBehaviour
         TileObject currentTile = manager.GetTileFromPosition(point);
 
         if (Input.GetMouseButtonDown(0) && currentTile != null && currentTile.CanPlaceTurret())
-            place(point, currentTile);
+            Place(point, currentTile);
     }
 
-    void place(Vector3 point, TileObject currentTile)
+    void Place(Vector3 point, TileObject currentTile)
     {
         Vector3 worldPosition = tilemap.CellToWorld(tilemap.WorldToCell(point));
 
