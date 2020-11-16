@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.XR.WSA.Persistence;
 
 public class TileObject
 {
@@ -23,6 +24,12 @@ public class TileObject
         turretCanBePlaced = canPlace;
     }
 
+    public bool TurretPlaced
+    {
+        get { return turretPlaced; }
+        set { turretPlaced = value; }
+    }
+
     /// <summary>
     /// 
     /// </summary>
@@ -37,13 +44,8 @@ public class TileObject
         return new Vector2Int(xLocation, yLocation);
     }
 
-    public void PlaceTurret()
-    {
-        turretPlaced = true;
-    }
-
     public bool CanPlaceTurret(){
-        if(turretCanBePlaced && !turretPlaced){return true;}
-        else{return false;}
+        if (turretCanBePlaced && !turretPlaced) return true;
+        return false;
     }
 }
