@@ -9,6 +9,8 @@ public class DreamFactorySelector : MonoBehaviour
     public Button FactoryButton;
     public Button TurretButton;
 
+    public bool PlaceableType = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +25,7 @@ public class DreamFactorySelector : MonoBehaviour
     {
         if (FactoryButton)
         {
-            Debug.Log("Factory now selected");
+            PlaceableType = true;
         }
     }
 
@@ -31,7 +33,7 @@ public class DreamFactorySelector : MonoBehaviour
     {
         if (TurretButton)
         {
-            Debug.Log("Turret now selected");
+            PlaceableType = false;
         }
     }
 
