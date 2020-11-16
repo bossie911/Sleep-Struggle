@@ -251,6 +251,8 @@ MonoBehaviour:
   currentResourceValue: 50
   baseGeneration: 1
   generationDelay: 1
+  addedGeneration: 0
+  dreamFuelDisp: {fileID: 803912520}
 --- !u!114 &298381931
 MonoBehaviour:
   m_ObjectHideFlags: 0
