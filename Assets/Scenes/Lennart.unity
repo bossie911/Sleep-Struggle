@@ -6503,20 +6503,20 @@ MonoBehaviour:
     type: 3}
   waves:
   - waveDurationSeconds: 20
-    cooldownAfterWave: 0
-    amountOfNormalEnemies: 0
+    cooldownAfterWave: 5
+    amountOfNormalEnemies: 3
   - waveDurationSeconds: 20
     cooldownAfterWave: 30
     amountOfNormalEnemies: 5
   - waveDurationSeconds: 20
-    cooldownAfterWave: 20
-    amountOfNormalEnemies: 10
-  - waveDurationSeconds: 20
-    cooldownAfterWave: 15
-    amountOfNormalEnemies: 15
-  - waveDurationSeconds: 20
     cooldownAfterWave: 10
     amountOfNormalEnemies: 20
+  - waveDurationSeconds: 10
+    cooldownAfterWave: 5
+    amountOfNormalEnemies: 20
+  - waveDurationSeconds: 10
+    cooldownAfterWave: 10
+    amountOfNormalEnemies: 30
   spawnPoints:
   - {fileID: 125693393}
   - {fileID: 153271295}
@@ -11968,8 +11968,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 41074aaa334a18745ad4436114ff97b8, type: 2}
   tilemap: {fileID: 71264574}
   obstacles: {fileID: 1849902417}
-  width: 26
-  height: 21
+  width: 30
+  height: 26
   scale: 4
   navMesh: {fileID: 545113971}
 --- !u!1 &793879089
