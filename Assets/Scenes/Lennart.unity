@@ -6493,21 +6493,21 @@ MonoBehaviour:
   regularEnemy: {fileID: 6327538895089355321, guid: 14eed0477c1ea2c4eaa66a4116710b8b,
     type: 3}
   waves:
-  - waveDurationSeconds: 5
+  - waveDurationSeconds: 20
     cooldownAfterWave: 0
     amountOfNormalEnemies: 0
   - waveDurationSeconds: 20
     cooldownAfterWave: 30
+    amountOfNormalEnemies: 5
+  - waveDurationSeconds: 20
+    cooldownAfterWave: 20
     amountOfNormalEnemies: 10
   - waveDurationSeconds: 20
-    cooldownAfterWave: 30
-    amountOfNormalEnemies: 10
+    cooldownAfterWave: 15
+    amountOfNormalEnemies: 15
   - waveDurationSeconds: 20
-    cooldownAfterWave: 30
-    amountOfNormalEnemies: 10
-  - waveDurationSeconds: 20
-    cooldownAfterWave: 30
-    amountOfNormalEnemies: 10
+    cooldownAfterWave: 10
+    amountOfNormalEnemies: 20
   spawnPoints:
   - {fileID: 125693393}
   - {fileID: 153271295}
