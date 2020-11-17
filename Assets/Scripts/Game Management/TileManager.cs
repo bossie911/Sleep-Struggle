@@ -105,10 +105,10 @@ public class TileManager : MonoBehaviour
 
     void SetMiddleTile()
     {
-
-        middleTile = tilemap.WorldToCell(middleTilePoint.position);
-        tilemap.SetTile(middleTile, middleTileSprite);
-
+        int x = (width / 2) - 1;  
+        
+        tileObjects[x ,height/2] = new TileObject(middleTileSprite, x, height/2, false);
+        tilemap.SetTile(tilemap.WorldToCell(middleTilePoint.position), tileObjects[x, height/2].GetTile());
     }
 
     public TileObject GetTileFromPosition(Vector3 positionRequest)
