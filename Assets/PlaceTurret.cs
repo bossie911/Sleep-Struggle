@@ -11,11 +11,12 @@ public class PlaceTurret : MonoBehaviour
     public Tilemap tilemap;
     public GameObject turret, factory;
     public Tilemap fogOfWar;
-    
+
     TileManager manager;
     public DreamFactorySelector script;
 
-    private Rigidbody ghost;
+    private Rigidbody ghost; 
+    private Rigidbody turretGhost, factoryGhost;
 
     //Place the turret slightly higher (looks better)
     private Vector3 offset;
@@ -25,20 +26,17 @@ public class PlaceTurret : MonoBehaviour
     {
         offset = new Vector3(0, 0.4f);
         factoryOffset = new Vector3(0, 0.6f);
-        ghost = GetComponentInChildren<Rigidbody>();
+
+        turretGhost = GetComponentInChildren<Rigidbody>();
+        factoryGhost = GameObject.Find("FactoryGhost").GetComponent<Rigidbody>();
         manager = GameObject.Find("TileManager").GetComponent<TileManager>();
+
         script = GameObject.Find("DreamFactorySelector").GetComponent<DreamFactorySelector>();
     }
 
     void Update()
     {
-        //Dit moeten we herschrijven
-        if(script.PlaceableType)
-        {
-            ghost = GameObject.Find("FactoryGhost").GetComponent<Rigidbody>();
-        }
-        else ghost = GetComponentInChildren<Rigidbody>();
-        //tot hier
+        ghost = script.PlaceableType ? factoryGhost : turretGhost;
 
         Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -47,17 +45,10 @@ public class PlaceTurret : MonoBehaviour
 
         TileObject currentTile = manager.GetTileFromPosition(point);
 
-        //Dit moet herschreven worden
         if (Input.GetMouseButtonDown(0) && currentTile != null && currentTile.CanPlaceTurret())
-            if (script.PlaceableType == false)
-            {
-                Place(point, currentTile, turret);
-            }
-            else
-            {
-                Place(point, currentTile, factory);
-            }    
-        //tot hier
+            if (script.PlaceableType) Place(point, currentTile, factory);
+            
+            else Place(point, currentTile, turret);
     }
 
     void Place(Vector3 point, TileObject currentTile, GameObject towerToPlace)
