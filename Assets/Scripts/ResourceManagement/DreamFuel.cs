@@ -41,21 +41,5 @@ public class DreamFuel : MonoBehaviour
             currentResourceValue += baseGeneration;
             generationTimer = 0f;
         }
-
-    }
-
-    public void TurretPlaced()
-    {
-        //This script gets called when the player places a turret of said type. 
-        //The dreamfuel cost has to be subtracted from the currentResourceValue
-        //currentResourceValue has to then be updated
-    }
-
-    public void DreamFactoryPlaced()
-    {
-        //This script is different than the TurretPlaced script in the fact that it 
-        //also adds an x amount to baseGeneration within the ResourceGeneration Function
-        //The dreamfuel cost has to be subtracted from the currentResourceValue
-        //currentResourceValue has to then be updated
     }
 }

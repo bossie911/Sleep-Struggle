@@ -5,11 +5,6 @@ using UnityEngine.Tilemaps;
 
 public class DreamFactory : MonoBehaviour
 {
-
-    public float resourceCost = 25f;
-
-    public float addedGeneration = 0.5f;
-
     public Tilemap fogOfWar;
 
     // Start is called before the first frame update

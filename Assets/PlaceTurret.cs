@@ -5,11 +5,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
+using UnityEngine.EventSystems;
 
 public class PlaceTurret : MonoBehaviour
 {
     public Tilemap tilemap;
-    public GameObject turret, factory;
+    public GameObject turret, factory, DreamFuel;
     public Tilemap fogOfWar;
 
     TileManager manager;
@@ -21,6 +22,9 @@ public class PlaceTurret : MonoBehaviour
     //Place the turret slightly higher (looks better)
     private Vector3 offset;
     private Vector3 factoryOffset;
+
+    public float resourceCost;
+    public float factoryAddedGeneration = 0.5f;
 
     void Start()
     {
@@ -41,23 +45,30 @@ public class PlaceTurret : MonoBehaviour
         Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         //Draw ghost on the tile the mouse is currently hovering over
-        ghost.position = tilemap.CellToWorld(tilemap.WorldToCell(point)) + offset;
+        if (!EventSystem.current.IsPointerOverGameObject())
+        {
+            ghost.position = tilemap.CellToWorld(tilemap.WorldToCell(point)) + offset;
+        }
 
         TileObject currentTile = manager.GetTileFromPosition(point);
 
-        if (Input.GetMouseButtonDown(0) && currentTile != null && currentTile.CanPlaceTurret())
+        if (Input.GetMouseButtonDown(0) && currentTile != null && currentTile.CanPlaceTurret() && 
+            DreamFuel.GetComponent<DreamFuel>().currentResourceValue > 0 + resourceCost && ! EventSystem.current.IsPointerOverGameObject())
+
             if (script.PlaceableType) Place(point, currentTile, factory);
             
             else Place(point, currentTile, turret);
     }
 
-    void Place(Vector3 point, TileObject currentTile, GameObject towerToPlace)
+    public void Place(Vector3 point, TileObject currentTile, GameObject towerToPlace)
     {
         Vector3 worldPosition = tilemap.CellToWorld(tilemap.WorldToCell(point));
 
+        resourceCost = 0f;
         //Dit moeten we herschrijven
         if (towerToPlace == turret)
         {
+            resourceCost = 50f;
             GameObject newTurret = Instantiate(turret, worldPosition + offset, Quaternion.identity);
 
             //Create all turrets as a child of this gameobj, so the hierarchy doesn't get cluttered
@@ -65,14 +76,20 @@ public class PlaceTurret : MonoBehaviour
 
             //Set reference FoW of the newly created turret
             newTurret.GetComponent<Turret>().fogOfWar = fogOfWar;
+
+            DreamFuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost;
         }
         else
         {
+            resourceCost = 25f;
             GameObject newFactory = Instantiate(factory, worldPosition + factoryOffset, Quaternion.identity);
 
             newFactory.transform.SetParent(this.transform);
 
             newFactory.GetComponent<DreamFactory>().fogOfWar = fogOfWar;
+
+            DreamFuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost;
+            DreamFuel.GetComponent<DreamFuel>().baseGeneration += factoryAddedGeneration;
         }
         //tot hier
 
