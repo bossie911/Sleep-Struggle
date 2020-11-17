@@ -9,7 +9,7 @@ public class DreamFactorySelector : MonoBehaviour
     public Button FactoryButton;
     public Button TurretButton;
 
-    public bool PlaceableType = false;
+    public bool PlaceableType; 
 
     // Start is called before the first frame update
     void Start()

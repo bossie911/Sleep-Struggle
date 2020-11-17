@@ -14,14 +14,14 @@ public class PlaceTurret : MonoBehaviour
     public Tilemap fogOfWar;
 
     TileManager manager;
-    public DreamFactorySelector script;
+    static DreamFactorySelector script;
 
     private Rigidbody ghost; 
     private Rigidbody turretGhost, factoryGhost;
 
     //Place the turret slightly higher (looks better)
-    private Vector3 offset;
-    private Vector3 factoryOffset;
+    static Vector3 offset; 
+    static Vector3 factoryOffset;
 
     public float resourceCost;
     public float factoryAddedGeneration = 0.5f;
@@ -29,13 +29,12 @@ public class PlaceTurret : MonoBehaviour
     void Start()
     {
         offset = new Vector3(0, 0.4f);
-        factoryOffset = new Vector3(0, 0.6f);
+        factoryOffset = new Vector3(0, 0.66f);
 
         turretGhost = GetComponentInChildren<Rigidbody>();
         factoryGhost = GameObject.Find("FactoryGhost").GetComponent<Rigidbody>();
         manager = GameObject.Find("TileManager").GetComponent<TileManager>();
-
-        script = GameObject.Find("DreamFactorySelector").GetComponent<DreamFactorySelector>();
+        script = GameObject.Find("ResourcePanel").GetComponent<DreamFactorySelector>();
     }
 
     void Update()
@@ -46,14 +45,12 @@ public class PlaceTurret : MonoBehaviour
 
         //Draw ghost on the tile the mouse is currently hovering over
         if (!EventSystem.current.IsPointerOverGameObject())
-        {
-            ghost.position = tilemap.CellToWorld(tilemap.WorldToCell(point)) + offset;
-        }
-
+            ghost.position = tilemap.CellToWorld(tilemap.WorldToCell(point)) + (script.PlaceableType ? factoryOffset : offset);
+        
         TileObject currentTile = manager.GetTileFromPosition(point);
 
         if (Input.GetMouseButtonDown(0) && currentTile != null && currentTile.CanPlaceTurret() && 
-            DreamFuel.GetComponent<DreamFuel>().currentResourceValue > 0 + resourceCost && ! EventSystem.current.IsPointerOverGameObject())
+            DreamFuel.GetComponent<DreamFuel>().currentResourceValue > 0 + resourceCost && !EventSystem.current.IsPointerOverGameObject())
 
             if (script.PlaceableType) Place(point, currentTile, factory);
             
@@ -65,8 +62,7 @@ public class PlaceTurret : MonoBehaviour
         Vector3 worldPosition = tilemap.CellToWorld(tilemap.WorldToCell(point));
 
         resourceCost = 0f;
-        //Dit moeten we herschrijven
-        if (towerToPlace == turret)
+        if (Equals(towerToPlace, turret))
         {
             resourceCost = 50f;
             GameObject newTurret = Instantiate(turret, worldPosition + offset, Quaternion.identity);
@@ -91,7 +87,6 @@ public class PlaceTurret : MonoBehaviour
             DreamFuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost;
             DreamFuel.GetComponent<DreamFuel>().baseGeneration += factoryAddedGeneration;
         }
-        //tot hier
 
         currentTile.TurretPlaced = true;
     }
