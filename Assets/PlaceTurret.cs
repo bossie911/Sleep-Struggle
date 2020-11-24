@@ -18,6 +18,7 @@ public class PlaceTurret : MonoBehaviour
 
     TileManager manager;
     static DreamFactorySelector script;
+    int count; 
 
     private Rigidbody ghost; 
     private Rigidbody turretGhost, factoryGhost;
@@ -64,6 +65,9 @@ public class PlaceTurret : MonoBehaviour
     {
         Vector3 worldPosition = tilemap.CellToWorld(tilemap.WorldToCell(point));
 
+        //Get all turrets currently on the field
+        count = Resources.FindObjectsOfTypeAll<GameObject>().Count(obj => obj.name == "Turret");
+
         resourceCost = 0f;
         if (Equals(towerToPlace, turret))
         {
@@ -78,12 +82,11 @@ public class PlaceTurret : MonoBehaviour
             newTurret.GetComponent<Turret>().fogOfWar = fogOfWar;
             DreamFuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost;
 
-            int count = Resources.FindObjectsOfTypeAll<GameObject>().Count(obj => obj.name == "Turret");
-
             Analytics.CustomEvent("TurretsBuild", new Dictionary<string, object>
             {
-                {$"(new version) Turret number = {count}", count}
+                {$"(Turret number = {count}", count}
             }); 
+
         }
         else
         {
