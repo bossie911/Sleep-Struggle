@@ -70,13 +70,13 @@ public class TileManager : MonoBehaviour
                 switch (tileTypes[x, y])
                 {
                     case 0:
-                        placeGrass(x, y);
+                        PlaceWalkable(x, y);
                         break;
                     case 1:
-                        placeGrass(x, y);
+                        PlaceWalkable(x, y);
                         break;
                     case 2:
-                        PlaceWater(x, y);
+                        PlaceObstacle(x, y);
                         break;
 
                 }
@@ -91,13 +91,14 @@ public class TileManager : MonoBehaviour
         navMesh.GetComponent<NavMeshSurface2d>().BuildNavMesh();
     }
 
-    void placeGrass(int x, int y)
+    void PlaceWalkable(int x, int y)
     {
         tileObjects[x, y] = new TileObject(differentTiles[tileTypes[x, y]], x, y, true);
         tilemap.SetTile(new Vector3Int(x - width / 2, y - height / 2, 0), tileObjects[x, y].GetTile());
+        Debug.Log("grass");
     }
 
-    void PlaceWater(int x, int y)
+    void PlaceObstacle(int x, int y)
     {
         tileObjects[x, y] = new TileObject(differentTiles[tileTypes[x, y]], x, y, false);
         obstacles.SetTile(new Vector3Int(x - width / 2, y - height / 2, 0), tileObjects[x, y].GetTile());
