@@ -1,11 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 using UnityEngine.EventSystems;
+using UnityEngine.Analytics;
 
 public class PlaceTurret : MonoBehaviour
 {
@@ -15,6 +18,7 @@ public class PlaceTurret : MonoBehaviour
 
     TileManager manager;
     static DreamFactorySelector script;
+    int count; 
 
     private Rigidbody ghost; 
     private Rigidbody turretGhost, factoryGhost;
@@ -31,7 +35,7 @@ public class PlaceTurret : MonoBehaviour
         offset = new Vector3(0, 0.4f);
         factoryOffset = new Vector3(0, 0.66f);
 
-        turretGhost = GetComponentInChildren<Rigidbody>();
+        turretGhost = GameObject.Find("TurretGhost").GetComponent<Rigidbody>(); 
         factoryGhost = GameObject.Find("FactoryGhost").GetComponent<Rigidbody>();
         manager = GameObject.Find("TileManager").GetComponent<TileManager>();
         script = GameObject.Find("ResourcePanel").GetComponent<DreamFactorySelector>();
@@ -61,19 +65,28 @@ public class PlaceTurret : MonoBehaviour
     {
         Vector3 worldPosition = tilemap.CellToWorld(tilemap.WorldToCell(point));
 
+        //Get all turrets currently on the field
+        count = Resources.FindObjectsOfTypeAll<GameObject>().Count(obj => obj.name == "Turret");
+
         resourceCost = 0f;
         if (Equals(towerToPlace, turret))
         {
             resourceCost = 50f;
             GameObject newTurret = Instantiate(turret, worldPosition + offset, Quaternion.identity);
+            newTurret.name = "Turret";
 
             //Create all turrets as a child of this gameobj, so the hierarchy doesn't get cluttered
             newTurret.transform.SetParent(this.transform);
 
             //Set reference FoW of the newly created turret
             newTurret.GetComponent<Turret>().fogOfWar = fogOfWar;
-
             DreamFuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost;
+
+            Analytics.CustomEvent("TurretsBuild", new Dictionary<string, object>
+            {
+                {$"(Turret number = {count}", count}
+            }); 
+
         }
         else
         {
@@ -86,6 +99,12 @@ public class PlaceTurret : MonoBehaviour
 
             DreamFuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost;
             DreamFuel.GetComponent<DreamFuel>().baseGeneration += factoryAddedGeneration;
+
+            //TODO
+            //Analytics.CustomEvent("FactoriesBuilt", new Dictionary<string, object>
+            //{
+            //    {$"Turret number = {this.transform.childCount}", this.transform.childCount}
+            //});
         }
 
         currentTile.TurretPlaced = true;
