@@ -89,7 +89,6 @@ public class TileManager : MonoBehaviour
                     case 2:
                         PlaceObstacle(x, y);
                         break;
-
                 }
             }
         }
@@ -167,37 +166,36 @@ public class TileManager : MonoBehaviour
     /// </summary>
     /// <param name="amount"> Determines the amount of resource tiles placed</param>
     void PlaceResources() {
+
         for (int i = 5; i < 15; i++) {
             
             Vector2Int whereToPlace = RandomTile(i);
-            while (IsSurroundedByWater( whereToPlace)) {
+            //while (tileObjects[whereToPlace.x, whereToPlace.y].CanPlaceTurret()) { // Issurroundedbywater is broken, ik ga het later opnieuw proberen -Lennart
                 whereToPlace = RandomTile(i);
-            }
-
+            //}
             PlaceResource(whereToPlace);
             
         }
     }
 
     Vector2Int RandomTile(int i) {
-        //return new Vector2Int(Random.Range(1, width - 1), Random.Range(1, height - 1));
+        //Return new Vector2Int(Random.Range(1, width - 1), Random.Range(1, height - 1));
         int xOffset = Random.Range(-i, i);
         bool aboveMiddle = (Random.value > 0.5f);
         if (aboveMiddle)
         {
-            Debug.Log("location(above)" + new Vector2Int(xOffset + width / 2, i - xOffset + height / 2));
-            return new Vector2Int(xOffset + width / 2, i - xOffset + height / 2);
+            return new Vector2Int(xOffset, i - xOffset);
         }
         else {
-            Debug.Log("Location(below) =" + new Vector2Int(-xOffset + width / 2, -i + xOffset + height / 2));
-            return new Vector2Int(-xOffset + width / 2, -i + xOffset + height / 2);
-
+            return new Vector2Int(-xOffset, -i + xOffset);
         }
     }
 
     void PlaceResource(Vector2Int loc) {
-        tileObjects[loc.x, loc.y] = new TileObject(resourceTilePrefab, loc.x, loc.y, true, true);
-        tilemap.SetTile(new Vector3Int(loc.x - width / 2, loc.y - height / 2, 0), tileObjects[loc.x, loc.y].GetTile());
+
+        Debug.Log("Place" + loc);
+        tileObjects[loc.x + width/2,loc.y +  height/2] = new TileObject(resourceTilePrefab, loc.x, loc.y, true, true);
+        tilemap.SetTile(new Vector3Int(loc.x , loc.y, 0), tileObjects[loc.x + width / 2, loc.y + height / 2].GetTile());
     }
 
     /// <summary>
