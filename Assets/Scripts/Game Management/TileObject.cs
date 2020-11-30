@@ -9,18 +9,28 @@ public class TileObject
 
     TileBase tileBase;
 
-    int xLocation, yLocation;
+    public int xLocation, yLocation;
+
+    bool isResourceTile, isBeingMined;
+
+    int startingResources, currentResources;
 
     /// <summary>
     /// An object with different values all linked to a specific tile in the tilemap
     /// </summary>
     /// <param name="tile">The tile that this place in the tilemap will start with</param>
-    public TileObject(TileBase tile, int x, int y, bool canPlace)
+    public TileObject(TileBase tile, int x, int y, bool canPlace, bool isResource)
     {
         tileBase = tile;
         xLocation = x;
         yLocation = y;
         turretCanBePlaced = canPlace;
+        isResourceTile = isResource;
+        if (isResourceTile) {
+            startingResources = 100;
+            currentResources = startingResources;
+        }
+
     }
 
     public bool TurretPlaced
@@ -47,4 +57,17 @@ public class TileObject
         if (turretCanBePlaced && !turretPlaced) return true;
         return false;
     }
+
+    public bool IsResourceTile() {
+        return isResourceTile;
+    }
+
+    public void MakeResourceTile(bool resource) {
+        isResourceTile = resource;
+    }
+
+    public void Mine(int amountMined) {
+        currentResources -= amountMined;
+    }
+
 }

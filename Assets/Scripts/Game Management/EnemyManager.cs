@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Analytics;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -21,7 +22,12 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         startWave();
+        AnalyticsResult result = Analytics.CustomEvent("Startlevel", new Dictionary<string, object>
+                {{"StartLevel", 1}
+        });
+        Debug.Log("start:" + result);
     }
+
 
     // Update is called once per frame
     void Update()
@@ -35,9 +41,16 @@ public class EnemyManager : MonoBehaviour
 
         if (waveTimer >= waves[currentWave].cooldownAfterWave + waves[currentWave].waveDurationSeconds && currentWave < waves.Length -1)
         {
+            if (currentWave > waves.Length - 1) {
+                AnalyticsResult result = Analytics.CustomEvent("CompleteLevel", new Dictionary<string, object> 
+                {{"CompleteLevel", 1}
+                });
+                Debug.Log("leveldone : " + result);
+            }
             currentWave++;
             startWave();
         }
+
 
 
         if (!cooldownActive && waveTimer >= nextEnemyTime)
