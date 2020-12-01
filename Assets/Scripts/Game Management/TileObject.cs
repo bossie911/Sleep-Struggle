@@ -62,6 +62,10 @@ public class TileObject
         return isResourceTile;
     }
 
+    public int GetResources() {
+        return currentResources;
+    }
+
     public void MakeResourceTile(bool resource) {
         isResourceTile = resource;
     }
