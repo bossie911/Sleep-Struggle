@@ -28,7 +28,12 @@ public class PlaceTurret : MonoBehaviour
     static Vector3 factoryOffset;
 
     public float resourceCost;
+
     public float factoryAddedGeneration = 0.5f;
+    float factoryBaseCost = 30;
+    public float factoryExtraCost;
+    public float factoryExtraCostPerFactory = 5;
+    public static float factoryTotalCost = 30;
 
     void Start()
     {
@@ -90,7 +95,13 @@ public class PlaceTurret : MonoBehaviour
         }
         else
         {
-            resourceCost = 25f;
+            //Code voor factories die steeds meer kosten
+            factoryExtraCost += factoryExtraCostPerFactory;
+            factoryTotalCost = factoryBaseCost + factoryExtraCost;
+
+            resourceCost = factoryTotalCost;
+            Debug.Log(resourceCost);
+
             GameObject newFactory = Instantiate(factory, worldPosition + factoryOffset, Quaternion.identity);
 
             newFactory.transform.SetParent(this.transform);
