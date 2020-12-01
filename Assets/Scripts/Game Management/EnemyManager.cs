@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 using UnityEngine.Analytics;
 
 public class EnemyManager : MonoBehaviour
@@ -18,6 +19,9 @@ public class EnemyManager : MonoBehaviour
     public Transform parent;
     public Transform middle;
 
+    float totalWaveTime, gameEndTimer;
+    public Text victoryText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +30,11 @@ public class EnemyManager : MonoBehaviour
                 {{"StartLevel", 1}
         });
         Debug.Log("start:" + result);
+
+        for (int i = 0; i < waves.Length; i++) {
+            totalWaveTime += waves[i].waveDurationSeconds;
+            totalWaveTime += waves[i].cooldownAfterWave;
+        }
     }
 
 
@@ -51,6 +60,11 @@ public class EnemyManager : MonoBehaviour
             startWave();
         }
 
+        gameEndTimer += Time.deltaTime;
+        if (gameEndTimer > totalWaveTime) {
+            victoryText.enabled = true;
+        }
+
 
 
         if (!cooldownActive && waveTimer >= nextEnemyTime)
@@ -60,7 +74,7 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    // starts a new wave and calculates the values needed
+    /// starts a new wave and calculates the values needed
     void startWave()
     {
         waveTimer = 0;
