@@ -178,9 +178,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "-Left mouse click to select and place a turret. \n-Place turrets to collect
-    resources and to defeat the enemies attack your base. \n-Expand your base to
-    find more resource tiles.\n-Survive long enough to survive the day and to fall
-    asleep.\n\nGood luck!"
+    resources and to defeat the enemies attacking your base. \n-Expand your base
+    to find more resource tiles.\n-Survive long enough to survive the day and to
+    fall asleep.\n\nGood luck!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
