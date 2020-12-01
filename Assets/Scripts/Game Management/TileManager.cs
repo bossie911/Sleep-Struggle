@@ -44,8 +44,8 @@ public class TileManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse1)) {
-            Debug.Log("surrounded? " + IsSurroundedByWater(new Vector2Int( GetTileFromPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition)).xLocation, 
-                GetTileFromPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition)).yLocation)));
+            Debug.Log("resources: " + GetTileFromPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition)).GetResources()); 
+                
         }
     }
 
@@ -192,8 +192,6 @@ public class TileManager : MonoBehaviour
     }
 
     void PlaceResource(Vector2Int loc) {
-
-        Debug.Log("Place" + loc);
         tileObjects[loc.x + width/2,loc.y +  height/2] = new TileObject(resourceTilePrefab, loc.x, loc.y, true, true);
         tilemap.SetTile(new Vector3Int(loc.x , loc.y, 0), tileObjects[loc.x + width / 2, loc.y + height / 2].GetTile());
     }
