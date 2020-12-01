@@ -81,10 +81,10 @@ public class TileManager : MonoBehaviour
                 switch (tileTypes[x, y])
                 {
                     case 0:
-                        PlaceWalkable(x, y);
+                        PlaceWalkable(new Vector2Int(x,y));
                         break;
                     case 1:
-                        PlaceWalkable(x, y);
+                        PlaceWalkable(new Vector2Int(x, y));
                         break;
                     case 2:
                         PlaceObstacle(x, y);
@@ -108,10 +108,10 @@ public class TileManager : MonoBehaviour
     /// </summary>
     /// <param name="x">The x in the tilemap</param>
     /// <param name="y">the Y in the tilemap</param>
-    void PlaceWalkable(int x, int y)
+    public void PlaceWalkable(Vector2Int loc)
     {
-        tileObjects[x, y] = new TileObject(differentTiles[tileTypes[x, y]], x, y, true, false);
-        tilemap.SetTile(new Vector3Int(x - width / 2, y - height / 2, 0), tileObjects[x, y].GetTile());
+        tileObjects[loc.x, loc.y] = new TileObject(differentTiles[tileTypes[loc.x, loc.y]], loc.x, loc.y, true, false);
+        tilemap.SetTile(new Vector3Int(loc.x - width / 2, loc.y - height / 2, 0), tileObjects[loc.x, loc.y].GetTile());
 
     }
 
