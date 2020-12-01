@@ -19,6 +19,8 @@ public class EnemyManager : MonoBehaviour
     public Transform parent;
     public Transform middle;
 
+    public Text waveDisplay;
+
     float totalWaveTime, gameEndTimer;
     public Text victoryText;
 
@@ -54,6 +56,7 @@ public class EnemyManager : MonoBehaviour
                 AnalyticsResult result = Analytics.CustomEvent("CompleteLevel", new Dictionary<string, object> 
                 {{"CompleteLevel", 1}
                 });
+
                 Debug.Log("leveldone : " + result);
             }
             currentWave++;
@@ -65,7 +68,7 @@ public class EnemyManager : MonoBehaviour
             victoryText.enabled = true;
         }
 
-
+        waveDisplay.text = (currentWave + 1).ToString();
 
         if (!cooldownActive && waveTimer >= nextEnemyTime)
         {
