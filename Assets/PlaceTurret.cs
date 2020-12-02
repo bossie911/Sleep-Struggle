@@ -64,7 +64,7 @@ public class PlaceTurret : MonoBehaviour
 
         if (!Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, fow_layer)) 
         {
-            if (Input.GetMouseButtonDown(0) && currentTile != null && currentTile.CanPlaceTurret() &&
+            if (Input.GetMouseButtonDown(0) && currentTile != null && currentTile.CanPlaceTower() &&
                 DreamFuel.GetComponent<DreamFuel>().currentResourceValue > 0 + resourceCost && !EventSystem.current.IsPointerOverGameObject())
 
                 if (script.PlaceableType) Place(point, currentTile, factory);

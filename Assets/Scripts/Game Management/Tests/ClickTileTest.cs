@@ -18,7 +18,7 @@ public class ClickTileTest : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            Debug.Log(manager.GetTileFromPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition)).CanPlaceTurret());
+            Debug.Log(manager.GetTileFromPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition)).CanPlaceTower());
         }
     }
 }
