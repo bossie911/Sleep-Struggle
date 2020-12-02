@@ -40,12 +40,6 @@ public class TileManager : MonoBehaviour
         cam = Camera.main;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public int[,] GenerateNoiseMap(int mapWidth, int mapHeight, float scale, float xOffset, float yOffset)
     {
         int[,] noiseMap = new int[mapWidth, mapHeight];
@@ -64,7 +58,7 @@ public class TileManager : MonoBehaviour
     }
 
     /// <summary>
-    /// sets all tiles at the beginning
+    /// sets all tiles when starting up
     /// </summary>
     void SetTiles()
     {
@@ -175,19 +169,29 @@ public class TileManager : MonoBehaviour
         }
     }
 
-    Vector2Int RandomTile(int i) {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="distance">The distance from the middle tile </param>
+    /// <returns>Random tile with a specified distance from the middle</returns>
+    Vector2Int RandomTile(int distance) {
         //Return new Vector2Int(Random.Range(1, width - 1), Random.Range(1, height - 1));
-        int xOffset = Random.Range(-i, i);
+        int xOffset = Random.Range(-distance, distance);
         bool aboveMiddle = (Random.value > 0.5f);
         if (aboveMiddle)
         {
-            return new Vector2Int(xOffset, i - xOffset);
+            return new Vector2Int(xOffset, distance - xOffset);
         }
         else {
-            return new Vector2Int(-xOffset, -i + xOffset);
+            return new Vector2Int(-xOffset, -distance + xOffset);
         }
     }
 
+
+    /// <summary>
+    /// Places a resource tile and a tileObject at a specified location
+    /// </summary>
+    /// <param name="loc">The location where the resource tile will be placed</param>
     void PlaceResource(Vector2Int loc) {
         try
         {
@@ -199,6 +203,8 @@ public class TileManager : MonoBehaviour
         }
     }
 
+
+    /*//completely broken now
     /// <summary>
     /// Returns if a coordinate of the tilemap is surrounded by water tiles
     /// </summary>
@@ -256,6 +262,6 @@ public class TileManager : MonoBehaviour
             }
         }
         return true;
-    }
+    }*/
 }
 
