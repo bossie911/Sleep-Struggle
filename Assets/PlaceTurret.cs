@@ -82,9 +82,10 @@ public class PlaceTurret : MonoBehaviour
             newTurret.GetComponent<Turret>().fogOfWar = fogOfWar;
             DreamFuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost;
 
-            Analytics.CustomEvent("TurretsBuild", new Dictionary<string, object>
+            AnalyticsEvent.Custom("TurretsBuild", new Dictionary<string, object>
             {
-                {$"(Turret number = {count}", count}
+                {$"(Turret number = {count}", count},
+                {"Time_elapsed", Time.timeSinceLevelLoad}
             }); 
 
         }
