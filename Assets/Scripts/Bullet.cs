@@ -13,34 +13,38 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(target == null)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        NoTargetDestroy();
 
-        Vector3 dir = target.position - transform.position;
+
+        Vector3 direction = target.position - transform.position;
         float distanceThisFrame = bulletSpeed * Time.deltaTime;
 
-        if(dir.magnitude <= distanceThisFrame)
+        //De TargetHit funcite wordt uitgevoerd als de lengte van de dir vector gelijk is als de afstand die hij heeft afgelegt deze frame
+        if(direction.magnitude <= distanceThisFrame)
         {
             TargetHit();
             return;
         }
 
-        transform.Translate(dir.normalized * distanceThisFrame, Space.World);       
+        //movement
+        transform.Translate(direction.normalized * distanceThisFrame, Space.World);       
     }
 
+    //Destroyed de bullet als hij geen target meer heeft
+    void NoTargetDestroy()
+    {
+        if (target == null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
+    //Code die wordt uitgevoerd als de bullet collide met een enemy
     void TargetHit()
     {
-        //Debug.Log("HIT");
-
         Destroy(gameObject);
-
         target.GetComponent<Enemy>().currentHealth -= bulletDamage;
-
-        //Debug.Log(target.GetComponent<Enemy>().currentHealth);
-
     }
 
     //functie wordt aangeroepen in de turret script om de target van de turret naar de script te krijgen
