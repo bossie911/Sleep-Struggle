@@ -18,7 +18,8 @@ public class PlaceTurret : MonoBehaviour
 
     TileManager manager;
     static DreamFactorySelector script;
-    int count; 
+    int count;
+    public int fow_layer; 
 
     private Rigidbody ghost; 
     private Rigidbody turretGhost, factoryGhost;
@@ -44,6 +45,8 @@ public class PlaceTurret : MonoBehaviour
         factoryGhost = GameObject.Find("FactoryGhost").GetComponent<Rigidbody>();
         manager = GameObject.Find("TileManager").GetComponent<TileManager>();
         script = GameObject.Find("ResourcePanel").GetComponent<DreamFactorySelector>();
+
+        fow_layer = 1 << 8; 
     }
 
     void Update()
@@ -51,6 +54,7 @@ public class PlaceTurret : MonoBehaviour
         ghost = script.PlaceableType ? factoryGhost : turretGhost;
 
         Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); 
 
         //Draw ghost on the tile the mouse is currently hovering over
         if (!EventSystem.current.IsPointerOverGameObject())
@@ -58,12 +62,16 @@ public class PlaceTurret : MonoBehaviour
         
         TileObject currentTile = manager.GetTileFromPosition(point);
 
-        if (Input.GetMouseButtonDown(0) && currentTile != null && currentTile.CanPlaceTurret() && 
-            DreamFuel.GetComponent<DreamFuel>().currentResourceValue > 0 + resourceCost && !EventSystem.current.IsPointerOverGameObject())
+        if (!Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, fow_layer)) 
+        {
+            if (Input.GetMouseButtonDown(0) && currentTile != null && currentTile.CanPlaceTurret() &&
+                DreamFuel.GetComponent<DreamFuel>().currentResourceValue > 0 + resourceCost && !EventSystem.current.IsPointerOverGameObject())
 
-            if (script.PlaceableType) Place(point, currentTile, factory);
-            
-            else Place(point, currentTile, turret);
+                if (script.PlaceableType) Place(point, currentTile, factory);
+
+                else Place(point, currentTile, turret);
+        }
+        
     }
 
     public void Place(Vector3 point, TileObject currentTile, GameObject towerToPlace)
@@ -87,11 +95,11 @@ public class PlaceTurret : MonoBehaviour
             newTurret.GetComponent<Turret>().fogOfWar = fogOfWar;
             DreamFuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost;
 
-            AnalyticsEvent.Custom("TurretsBuild", new Dictionary<string, object>
+            /*AnalyticsEvent.Custom("TurretsBuild", new Dictionary<string, object>
             {
                 {$"(Turret number = {count}", count},
                 {"Time_elapsed", Time.timeSinceLevelLoad}
-            }); 
+            }); */
 
         }
         else
