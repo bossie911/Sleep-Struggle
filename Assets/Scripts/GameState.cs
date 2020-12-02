@@ -36,4 +36,9 @@ public class GameState : MonoBehaviour
     {
         Debug.Log("Settings bestaan nog niet");
     }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
 }

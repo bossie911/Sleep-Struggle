@@ -41,18 +41,15 @@ public class Turret : MonoBehaviour
             Fire();
             fireCounter = 1f / fireSpeed;
         }
-
         fireCounter -= Time.deltaTime;
-
     }
 
 
-
+    //Vuur functie die een bullet maakt en een target er aan mee geeft
     void Fire()
     {
-        //Debug.Log("FIRE");
-        GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, bulletBeginPoint.position, bulletBeginPoint.rotation);
-        Bullet bullet = bulletGO.GetComponent<Bullet>();
+        GameObject bulletB = (GameObject)Instantiate(bulletPrefab, bulletBeginPoint.position, bulletBeginPoint.rotation);
+        Bullet bullet = bulletB.GetComponent<Bullet>();
 
         if(bullet != null)
         {
@@ -92,6 +89,8 @@ public class Turret : MonoBehaviour
         }
     }
 
+
+    //functie dat de enemy zoekt die het dicht bij de base is en markt deze als target
     void FindTargetClosestToBase()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(targetTag);
@@ -108,7 +107,7 @@ public class Turret : MonoBehaviour
             }
         }
 
-        //enemy die het dichtsbijzijnde de base is marken als target
+        //enemy die het dichtsbijzijnde de base is marken als target en daarna de list clearen
         foreach (GameObject enemy in enemiesInRange)
         {
             if (AIMovement.distanceToBase < closestDistanceToBase)
@@ -118,9 +117,7 @@ public class Turret : MonoBehaviour
             }
 
         }
-
         enemiesInRange.Clear();
-
     }
 
 
