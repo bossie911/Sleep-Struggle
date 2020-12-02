@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 6327538895089355317}
   - component: {fileID: 6683918669469570276}
   - component: {fileID: -3948020141505585730}
-  - component: {fileID: 6786208836563147633}
   m_Layer: 0
   m_Name: Enemy 1
   m_TagString: enemy
@@ -132,7 +131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c5545214c67b164f8c7f0f862b03d86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyDamage: 10
   currentHealth: 0
   getHealed: 5
   turret: {fileID: 0}
@@ -162,24 +160,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.50265026, y: 0.55855155}
   m_EdgeRadius: 0
---- !u!50 &6786208836563147633
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6327538895089355321}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
