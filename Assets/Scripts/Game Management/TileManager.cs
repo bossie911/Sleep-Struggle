@@ -189,8 +189,14 @@ public class TileManager : MonoBehaviour
     }
 
     void PlaceResource(Vector2Int loc) {
-        tileObjects[loc.x + width/2,loc.y +  height/2] = new TileObject(resourceTilePrefab, loc.x, loc.y, true, true);
-        tilemap.SetTile(new Vector3Int(loc.x , loc.y, 0), tileObjects[loc.x + width / 2, loc.y + height / 2].GetTile());
+        try
+        {
+            tileObjects[loc.x + width / 2, loc.y + height / 2] = new TileObject(resourceTilePrefab, loc.x, loc.y, true, true);
+            tilemap.SetTile(new Vector3Int(loc.x, loc.y, 0), tileObjects[loc.x + width / 2, loc.y + height / 2].GetTile());
+        }
+        catch(IndexOutOfRangeException) {
+            //PlaceResource(loc);
+        }
     }
 
     /// <summary>
