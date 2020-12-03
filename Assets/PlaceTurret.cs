@@ -19,7 +19,7 @@ public class PlaceTurret : MonoBehaviour
     TileManager manager;
     static DreamFactorySelector script;
     int count;
-    public int fow_layer; 
+    private int fow_layer; 
 
     private Rigidbody ghost; 
     private Rigidbody turretGhost, factoryGhost;
@@ -54,24 +54,26 @@ public class PlaceTurret : MonoBehaviour
         ghost = script.PlaceableType ? factoryGhost : turretGhost;
 
         Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); 
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        TileObject currentTile = manager.GetTileFromPosition(point);
 
         //Draw ghost on the tile the mouse is currently hovering over
         if (!EventSystem.current.IsPointerOverGameObject())
             ghost.position = tilemap.CellToWorld(tilemap.WorldToCell(point)) + (script.PlaceableType ? factoryOffset : offset);
-        
-        TileObject currentTile = manager.GetTileFromPosition(point);
 
-        if (!Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, fow_layer)) 
+        //Make sure that the mouse is not inside the FoW
+        if (Input.GetMouseButtonDown(0) && currentTile != null && currentTile.CanPlaceTower()) 
         {
-            if (Input.GetMouseButtonDown(0) && currentTile != null && currentTile.CanPlaceTower() &&
-                DreamFuel.GetComponent<DreamFuel>().currentResourceValue > 0 + resourceCost && !EventSystem.current.IsPointerOverGameObject())
-
+            //TODO: make use of a function inside this if
+            if (!Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, fow_layer) &&
+                DreamFuel.GetComponent<DreamFuel>().currentResourceValue > 0 + resourceCost &&
+                !EventSystem.current.IsPointerOverGameObject())
+            {
                 if (script.PlaceableType) Place(point, currentTile, factory);
 
                 else Place(point, currentTile, turret);
+            }
         }
-        
     }
 
     public void Place(Vector3 point, TileObject currentTile, GameObject towerToPlace)
