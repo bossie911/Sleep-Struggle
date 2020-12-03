@@ -88,7 +88,7 @@ public class TileObject
 
 
     /// <summary>
-    /// changes the current amount of resources left
+    /// Changes the current amount of resources left
     /// </summary>
     /// <param name="amountMined">The amount changed</param>
     public void Mine(int amountMined) {

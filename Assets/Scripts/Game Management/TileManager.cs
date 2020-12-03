@@ -83,9 +83,41 @@ public class TileManager : MonoBehaviour
                 }
             }
         }
+        CheckMiddleTileLocation();
         SetMiddleTile();
         PlaceResources();
         UpdateNavMesh();
+    }
+
+    void CheckMiddleTileLocation() 
+    {
+        bool onWater = !GetTileFromPosition(middleTilePoint.transform.position).CanPlaceTower();
+
+        if(onWater) {
+            tileTypes = GenerateNoiseMap(width, height, scale, Random.Range(-100, 100), Random.Range(-100, 100));
+            tilemap.ClearAllTiles();
+            obstacles.ClearAllTiles();
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    switch (tileTypes[x, y])
+                    {
+                        case 0:
+                            PlaceWalkable(new Vector2Int(x, y));
+                            break;
+                        case 1:
+                            PlaceWalkable(new Vector2Int(x, y));
+                            break;
+                        case 2:
+                            PlaceObstacle(x, y);
+                            break;
+                    }
+                }
+
+            }
+            CheckMiddleTileLocation();
+        }
     }
 
     //can be called whenever to update the navmesh
