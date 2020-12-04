@@ -6275,7 +6275,6 @@ MonoBehaviour:
   factory: {fileID: 1521036077329811596, guid: 085f55935912aaa4cac61341a05cb2a2, type: 3}
   DreamFuel: {fileID: 92001913}
   fogOfWar: {fileID: 751798288}
-  fow_layer: 0
   resourceCost: 0
   factoryAddedGeneration: 2
   factoryExtraCost: 0
@@ -6794,6 +6793,7 @@ Transform:
   - {fileID: 1787200201}
   - {fileID: 545113972}
   - {fileID: 1738928574}
+  - {fileID: 2130868885}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -28008,6 +28008,57 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 6202323107687731190, guid: 440ecef812aa7d5418bfda2cc58897dd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 440ecef812aa7d5418bfda2cc58897dd, type: 3}
+--- !u!1 &2130868884
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2130868885}
+  - component: {fileID: 2130868886}
+  m_Layer: 0
+  m_Name: Audio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2130868885
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130868884}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 669132278}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2130868886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130868884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af55964068d208f4784d8fa5b9e4bf3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objects:
+  - name: music
+    speed: 0
+    pitch: 0
+    volume: 0
+    audioClip: {fileID: 0}
+  boss: {fileID: 0}
+  LoopMusic: 0
 --- !u!1 &2132800183
 GameObject:
   m_ObjectHideFlags: 0
