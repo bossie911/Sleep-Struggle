@@ -21,6 +21,7 @@ public class Turret : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform bulletBeginPoint;
 
+    //De naam van de Tilemap
     public Tilemap fogOfWar;
 
     // Start is called before the first frame update
@@ -129,13 +130,17 @@ public class Turret : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, turretRange);
     }
 
+    //Deze variabele past aan hoeveel vision de shooting turret weghaalt
     public int vision = 1;
+    
     void UpdateFogOfWar()
     {
+        //Een 3d vector op integer punten
         Vector3Int currentTowerTile = fogOfWar.WorldToCell(transform.position);
+        //WorldToCell converteert de wereldpositie naar cellpositie 
 
-        //Clear the surrounding tiles
-        for(int x=-vision; x<= vision - 1; x++)
+        //Deze forloop haalt tiles weg die eromheen staan
+        for (int x=-vision; x<= vision - 1; x++)
         {
             for(int y = -vision - 1; y<= vision; y++)
             {
