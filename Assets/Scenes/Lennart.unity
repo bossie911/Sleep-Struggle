@@ -28053,10 +28053,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objects:
   - name: music
-    speed: 0
-    pitch: 0
-    volume: 0
-    audioClip: {fileID: 0}
+    speed: 1
+    pitch: 1
+    volume: 1
+    audioClip: {fileID: 8300000, guid: 75af70f0d5eb8fb4eaffd42ee52e4394, type: 3}
   boss: {fileID: 0}
   LoopMusic: 0
 --- !u!1 &2132800183
