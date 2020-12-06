@@ -33,6 +33,9 @@ public class TileObject
 
     }
 
+    /// <summary>
+    /// Wether the tile contains a turret
+    /// </summary>
     public bool TurretPlaced
     {
         get { return turretPlaced; }
@@ -48,28 +51,46 @@ public class TileObject
         return tileBase;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns>The location of this tile in the tileObjects array</returns>
     public Vector2Int GetLocation()
     {
         return new Vector2Int(xLocation, yLocation);
     }
 
-    public bool CanPlaceTurret(){
+    /// <summary>
+    /// Returns if a tower can be placed on this tile
+    /// </summary>
+    /// <returns></returns>
+    public bool CanPlaceTower(){
         if (turretCanBePlaced && !turretPlaced) return true;
         return false;
     }
 
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns>Wether the tile is a resource tile</returns>
     public bool IsResourceTile() {
         return isResourceTile;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns>The current amount of resources left</returns>
     public int GetResources() {
         return currentResources;
     }
 
-    public void MakeResourceTile(bool resource) {
-        isResourceTile = resource;
-    }
 
+    /// <summary>
+    /// Changes the current amount of resources left
+    /// </summary>
+    /// <param name="amountMined">The amount changed</param>
     public void Mine(int amountMined) {
         currentResources -= amountMined;
     }
