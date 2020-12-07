@@ -13,16 +13,15 @@ using UnityEngine.Analytics;
 public class PlaceTurret : MonoBehaviour
 {
     public Tilemap tilemap;
-    public GameObject turret, factory, DreamFuel;
+    public GameObject turret, factory, DreamFuel, mine;
     public Tilemap fogOfWar;
 
     TileManager manager;
     static DreamFactorySelector selector;
-    int count;
     private int fow_layer; 
 
     private Rigidbody ghost; 
-    private Rigidbody turretGhost, factoryGhost;
+    private Rigidbody turretGhost, factoryGhost, mineGhost;
 
     //Place the turret slightly higher (looks better)
     private static Vector3 currentOffset; 
@@ -43,6 +42,7 @@ public class PlaceTurret : MonoBehaviour
 
         turretGhost = GameObject.Find("TurretGhost").GetComponent<Rigidbody>(); 
         factoryGhost = GameObject.Find("FactoryGhost").GetComponent<Rigidbody>();
+        mineGhost = GameObject.Find("MineGhost").GetComponent<Rigidbody>(); 
         manager = GameObject.Find("TileManager").GetComponent<TileManager>();
         selector = GameObject.Find("ResourcePanel").GetComponent<DreamFactorySelector>();
 
@@ -62,6 +62,9 @@ public class PlaceTurret : MonoBehaviour
                 ghost = factoryGhost;
                 currentOffset = factoryOffset; 
                 break;
+            case DreamFactorySelector.Placeables.Mine:
+                ghost = mineGhost;
+                break; 
         }
 
         Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -79,11 +82,15 @@ public class PlaceTurret : MonoBehaviour
                 switch (selector.CurrentPlaceable)
                 {
                     case DreamFactorySelector.Placeables.Turret:
-                        Place(point, currentTile, turret);
+                        Place(point, currentTile, turret, currentOffset);
                         break;
 
                     case DreamFactorySelector.Placeables.Factory:
-                        Place(point, currentTile, factory);
+                        Place(point, currentTile, factory, currentOffset);
+                        break;
+
+                    case DreamFactorySelector.Placeables.Mine:
+                        Place(point, currentTile, mine, currentOffset);
                         break; 
                 }
             }
@@ -104,19 +111,18 @@ public class PlaceTurret : MonoBehaviour
         return false; 
     }
 
-    public void Place(Vector3 point, TileObject currentTile, GameObject towerToPlace)
+    public void Place(Vector3 point, TileObject currentTile, GameObject towerToPlace, Vector3 offset)
     {
         Vector3 worldPosition = tilemap.CellToWorld(tilemap.WorldToCell(point));
 
         //Get all turrets currently on the field
-        count = Resources.FindObjectsOfTypeAll<GameObject>().Count(obj => obj.name == "Turret");
+        //count = Resources.FindObjectsOfTypeAll<GameObject>().Count(obj => obj.name == "Turret");
 
         resourceCost = 0f;
         if (Equals(towerToPlace, turret))
         {
             resourceCost = 50f;
-            GameObject newTurret = Instantiate(turret, worldPosition + turretOffset, Quaternion.identity);
-            newTurret.name = "Turret";
+            GameObject newTurret = Instantiate(turret, worldPosition + offset, Quaternion.identity);
 
             //Create all turrets as a child of this gameobj, so the hierarchy doesn't get cluttered
             newTurret.transform.SetParent(this.transform);
@@ -141,7 +147,7 @@ public class PlaceTurret : MonoBehaviour
             resourceCost = factoryTotalCost;
             Debug.Log(resourceCost);
 
-            GameObject newFactory = Instantiate(factory, worldPosition + factoryOffset, Quaternion.identity);
+            GameObject newFactory = Instantiate(factory, worldPosition + offset, Quaternion.identity);
 
             newFactory.transform.SetParent(this.transform);
 
