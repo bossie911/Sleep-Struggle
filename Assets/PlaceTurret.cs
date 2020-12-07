@@ -25,7 +25,7 @@ public class PlaceTurret : MonoBehaviour
 
     //Place the turret slightly higher (looks better)
     private static Vector3 currentOffset; 
-    static Vector3 turretOffset, factoryOffset;
+    static Vector3 turretOffset, factoryOffset, mineOffset;
 
     public float resourceCost;
 
@@ -39,6 +39,7 @@ public class PlaceTurret : MonoBehaviour
     {
         turretOffset = new Vector3(0, 0.4f);
         factoryOffset = new Vector3(0, 0.66f);
+        mineOffset = new Vector3(0, 0.33f);
 
         turretGhost = GameObject.Find("TurretGhost").GetComponent<Rigidbody>(); 
         factoryGhost = GameObject.Find("FactoryGhost").GetComponent<Rigidbody>();
@@ -51,7 +52,7 @@ public class PlaceTurret : MonoBehaviour
 
     void Update()
     {
-        switch (selector.CurrentPlaceable)
+        switch (selector.SelectedPlaceable)
         {
             case DreamFactorySelector.Placeables.Turret:
                 ghost = turretGhost;
@@ -64,6 +65,7 @@ public class PlaceTurret : MonoBehaviour
                 break;
             case DreamFactorySelector.Placeables.Mine:
                 ghost = mineGhost;
+                currentOffset = mineOffset; 
                 break; 
         }
 
@@ -72,17 +74,14 @@ public class PlaceTurret : MonoBehaviour
         TileObject currentTile = manager.GetTileFromPosition(point);
 
         //Draw ghost on the tile the mouse is currently hovering over
-        if (!EventSystem.current.IsPointerOverGameObject())
-            ghost.position = tilemap.CellToWorld(tilemap.WorldToCell(point)) + currentOffset;
+        DrawGhost(point);
 
         //Make sure that the mouse is not inside the FoW
         if (Input.GetMouseButtonDown(0) && currentTile != null && currentTile.CanPlaceTower()) 
         {
-            if (!Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, fow_layer) &&
-                DreamFuel.GetComponent<DreamFuel>().currentResourceValue > 0 + resourceCost &&
-                !EventSystem.current.IsPointerOverGameObject())
+            if (CanPlace(ray))
             {
-                switch (selector.)
+                switch (selector.SelectedPlaceable)
                 {
                     case DreamFactorySelector.Placeables.Turret:
                         Place(point, currentTile, turret, currentOffset);
@@ -108,13 +107,15 @@ public class PlaceTurret : MonoBehaviour
 
     private bool CanPlace(Ray ray)
     {
-        if (!Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, fow_layer) && DreamFuel.GetComponent<DreamFuel>().currentResourceValue > 0 + resourceCost && !EventSystem.current.IsPointerOverGameObject())
+        if (!Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, fow_layer) && 
+            DreamFuel.GetComponent<DreamFuel>().currentResourceValue > 0 + resourceCost && 
+            !EventSystem.current.IsPointerOverGameObject())
             return true;
 
         return false; 
     }
-
-    public void Place(Vector3 point, TileObject currentTile, GameObject towerToPlace, Vector3 offset)
+    
+    private void Place(Vector3 point, TileObject currentTile, GameObject towerToPlace, Vector3 offset)
     {
         Vector3 worldPosition = tilemap.CellToWorld(tilemap.WorldToCell(point));
 
