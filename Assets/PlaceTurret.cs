@@ -17,7 +17,7 @@ public class PlaceTurret : MonoBehaviour
     public Tilemap fogOfWar;
 
     TileManager manager;
-    static DreamFactorySelector script;
+    static DreamFactorySelector selector;
     int count;
     private int fow_layer; 
 
@@ -25,8 +25,8 @@ public class PlaceTurret : MonoBehaviour
     private Rigidbody turretGhost, factoryGhost;
 
     //Place the turret slightly higher (looks better)
-    static Vector3 offset; 
-    static Vector3 factoryOffset;
+    private static Vector3 currentOffset; 
+    static Vector3 turretOffset, factoryOffset;
 
     public float resourceCost;
 
@@ -38,20 +38,31 @@ public class PlaceTurret : MonoBehaviour
 
     void Start()
     {
-        offset = new Vector3(0, 0.4f);
+        turretOffset = new Vector3(0, 0.4f);
         factoryOffset = new Vector3(0, 0.66f);
 
         turretGhost = GameObject.Find("TurretGhost").GetComponent<Rigidbody>(); 
         factoryGhost = GameObject.Find("FactoryGhost").GetComponent<Rigidbody>();
         manager = GameObject.Find("TileManager").GetComponent<TileManager>();
-        script = GameObject.Find("ResourcePanel").GetComponent<DreamFactorySelector>();
+        selector = GameObject.Find("ResourcePanel").GetComponent<DreamFactorySelector>();
 
         fow_layer = 1 << 8; 
     }
 
     void Update()
     {
-        ghost = script.PlaceableType ? factoryGhost : turretGhost;
+        switch (selector.CurrentPlaceable)
+        {
+            case DreamFactorySelector.Placeables.Turret:
+                ghost = turretGhost;
+                currentOffset = turretOffset; 
+                break;
+
+            case DreamFactorySelector.Placeables.Factory:
+                ghost = factoryGhost;
+                currentOffset = factoryOffset; 
+                break;
+        }
 
         Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -59,19 +70,25 @@ public class PlaceTurret : MonoBehaviour
 
         //Draw ghost on the tile the mouse is currently hovering over
         if (!EventSystem.current.IsPointerOverGameObject())
-            ghost.position = tilemap.CellToWorld(tilemap.WorldToCell(point)) + (script.PlaceableType ? factoryOffset : offset);
+            ghost.position = tilemap.CellToWorld(tilemap.WorldToCell(point)) + currentOffset;
 
         //Make sure that the mouse is not inside the FoW
         if (Input.GetMouseButtonDown(0) && currentTile != null && currentTile.CanPlaceTower()) 
         {
-            //TODO: make use of a function inside this if
             if (!Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, fow_layer) &&
                 DreamFuel.GetComponent<DreamFuel>().currentResourceValue > 0 + resourceCost &&
                 !EventSystem.current.IsPointerOverGameObject())
             {
-                if (script.PlaceableType) Place(point, currentTile, factory);
+                switch (selector.CurrentPlaceable)
+                {
+                    case DreamFactorySelector.Placeables.Turret:
+                        Place(point, currentTile, turret);
+                        break;
 
-                else Place(point, currentTile, turret);
+                    case DreamFactorySelector.Placeables.Factory:
+                        Place(point, currentTile, factory);
+                        break; 
+                }
             }
         }
     }
@@ -87,7 +104,7 @@ public class PlaceTurret : MonoBehaviour
         if (Equals(towerToPlace, turret))
         {
             resourceCost = 50f;
-            GameObject newTurret = Instantiate(turret, worldPosition + offset, Quaternion.identity);
+            GameObject newTurret = Instantiate(turret, worldPosition + turretOffset, Quaternion.identity);
             newTurret.name = "Turret";
 
             //Create all turrets as a child of this gameobj, so the hierarchy doesn't get cluttered

@@ -5,11 +5,23 @@ using UnityEngine.UI;
 
 public class DreamFactorySelector : MonoBehaviour
 {
-
     public Button FactoryButton;
     public Button TurretButton;
 
-    public bool PlaceableType; 
+    private Placeables _selectedPlaceable;
+
+    public enum Placeables
+    {
+        Turret,
+        Factory,
+        Mine
+    }
+
+    public Placeables CurrentPlaceable
+    {
+        get { return _selectedPlaceable; }
+        set { _selectedPlaceable = value;  }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +37,7 @@ public class DreamFactorySelector : MonoBehaviour
     {
         if (FactoryButton)
         {
-            PlaceableType = true;
+            _selectedPlaceable = Placeables.Factory;
         }
     }
 
@@ -33,9 +45,7 @@ public class DreamFactorySelector : MonoBehaviour
     {
         if (TurretButton)
         {
-            PlaceableType = false;
+            _selectedPlaceable = Placeables.Turret; 
         }
     }
-
-
 }

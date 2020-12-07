@@ -6,11 +6,9 @@ using UnityEngine.Tilemaps;
 
 public class Turret : MonoBehaviour
 {
-
     public Transform target;
 
     List<GameObject> enemiesInRange = new List<GameObject>();
-
 
     public float turretRange = 5f;
     public string targetTag = "enemy";
@@ -57,9 +55,7 @@ public class Turret : MonoBehaviour
         }
     }
 
-
-
-    //Functie dat de dichtbijzijnste enemy zoekt en markt als target
+    //Truncated
     void FindClosestTarget()
     {    
         //array voor enemy gameobjects
@@ -88,7 +84,6 @@ public class Turret : MonoBehaviour
             target = null;
         }
     }
-
 
     //functie dat de enemy zoekt die het dicht bij de base is en markt deze als target
     void FindTargetClosestToBase()
@@ -119,8 +114,6 @@ public class Turret : MonoBehaviour
         }
         enemiesInRange.Clear();
     }
-
-
 
     //Range drawen
     void OnDrawGizmosSelected ()
