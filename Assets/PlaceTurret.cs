@@ -79,7 +79,7 @@ public class PlaceTurret : MonoBehaviour
                 DreamFuel.GetComponent<DreamFuel>().currentResourceValue > 0 + resourceCost &&
                 !EventSystem.current.IsPointerOverGameObject())
             {
-                switch (selector.CurrentPlaceable)
+                switch (selector.)
                 {
                     case DreamFactorySelector.Placeables.Turret:
                         Place(point, currentTile, turret);
