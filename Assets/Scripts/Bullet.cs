@@ -35,7 +35,7 @@ public class Bullet : MonoBehaviour
     {
         if (target == null)
         {
-            Destroy(gameObject);
+            DestroyImmediate(this.gameObject);
             return;
         }
     }
@@ -43,7 +43,7 @@ public class Bullet : MonoBehaviour
     //Code die wordt uitgevoerd als de bullet collide met een enemy
     void TargetHit()
     {
-        Destroy(gameObject);
+        Destroy(this.gameObject);
         target.GetComponent<Enemy>().currentHealth -= bulletDamage;
     }
 

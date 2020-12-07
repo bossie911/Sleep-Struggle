@@ -34,12 +34,16 @@ public class Turret : MonoBehaviour
         FindTargetClosestToBase();
         UpdateFogOfWar();
 
-        if (fireCounter <= 0f)
+        if (target != null)
         {
-            Fire();
-            fireCounter = 1f / fireSpeed;
+            if (fireCounter <= 0f)
+            {
+                Fire();
+                fireCounter = 1f / fireSpeed;
+            }
+            fireCounter -= Time.deltaTime;
         }
-        fireCounter -= Time.deltaTime;
+
     }
 
 
