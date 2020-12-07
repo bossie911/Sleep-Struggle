@@ -72,14 +72,17 @@ public class PlaceTurret : MonoBehaviour
         TileObject currentTile = manager.GetTileFromPosition(point);
 
         //Draw ghost on the tile the mouse is currently hovering over
-        DrawGhost(point); 
-        
+        if (!EventSystem.current.IsPointerOverGameObject())
+            ghost.position = tilemap.CellToWorld(tilemap.WorldToCell(point)) + currentOffset;
+
         //Make sure that the mouse is not inside the FoW
         if (Input.GetMouseButtonDown(0) && currentTile != null && currentTile.CanPlaceTower()) 
         {
-            if (CanPlace(ray))
+            if (!Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, fow_layer) &&
+                DreamFuel.GetComponent<DreamFuel>().currentResourceValue > 0 + resourceCost &&
+                !EventSystem.current.IsPointerOverGameObject())
             {
-                switch (selector.CurrentPlaceable)
+                switch (selector.)
                 {
                     case DreamFactorySelector.Placeables.Turret:
                         Place(point, currentTile, turret, currentOffset);
