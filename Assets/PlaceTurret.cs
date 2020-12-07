@@ -76,7 +76,7 @@ public class PlaceTurret : MonoBehaviour
         {
             if (CanPlace(ray))
             {
-                switch (selector.CurrentPlaceable)
+                switch (selector.)
                 {
                     case DreamFactorySelector.Placeables.Turret:
                         Place(point, currentTile, turret);
