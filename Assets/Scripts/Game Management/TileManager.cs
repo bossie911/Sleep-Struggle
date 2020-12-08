@@ -31,6 +31,8 @@ public class TileManager : MonoBehaviour
 
     private Camera cam;
 
+    Vector2Int middleTilePosition;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +40,13 @@ public class TileManager : MonoBehaviour
         tileObjects = new TileObject[width, height];
         SetTiles();
         cam = Camera.main;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse1)) {
+            Debug.Log(GetTileFromPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition)).xLocation + " and " + GetTileFromPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition)).yLocation + GetTileFromPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition)).IsResourceTile());
+        }
     }
 
     public int[,] GenerateNoiseMap(int mapWidth, int mapHeight, float scale, float xOffset, float yOffset)
@@ -135,7 +144,6 @@ public class TileManager : MonoBehaviour
     {
         tileObjects[loc.x, loc.y] = new TileObject(differentTiles[tileTypes[loc.x, loc.y]], loc.x, loc.y, true, false);
         tilemap.SetTile(new Vector3Int(loc.x - width / 2, loc.y - height / 2, 0), tileObjects[loc.x, loc.y].GetTile());
-
     }
 
     /// <summary>
@@ -155,8 +163,10 @@ public class TileManager : MonoBehaviour
     void SetMiddleTile()
     {
         int x = (width / 2) - 1;
+        int y = height / 2;
+        middleTilePosition = new Vector2Int(x, y);
 
-        tileObjects[x, height / 2] = new TileObject(middleTileSprite, x, height / 2, false, false);
+        tileObjects[x,y] = new TileObject(middleTileSprite, x, height / 2, false, false);
         tilemap.SetTile(tilemap.WorldToCell(middleTilePoint.position), tileObjects[x, height / 2].GetTile());
     }
 
@@ -191,13 +201,7 @@ public class TileManager : MonoBehaviour
     void PlaceResources() {
 
         for (int i = 5; i < 15; i++) {
-            
-            Vector2Int whereToPlace = RandomTile(i);
-            //while (tileObjects[whereToPlace.x, whereToPlace.y].CanPlaceTurret()) { // Issurroundedbywater is broken, ik ga het later opnieuw proberen -Lennart
-                whereToPlace = RandomTile(i);
-            //}
-            PlaceResource(whereToPlace);
-            
+            PlaceResource(RandomTile(i));
         }
     }
 
@@ -207,16 +211,17 @@ public class TileManager : MonoBehaviour
     /// <param name="distance">The distance from the middle tile </param>
     /// <returns>Random tile with a specified distance from the middle</returns>
     Vector2Int RandomTile(int distance) {
-        //Return new Vector2Int(Random.Range(1, width - 1), Random.Range(1, height - 1));
-        int xOffset = Random.Range(-distance, distance);
-        bool aboveMiddle = (Random.value > 0.5f);
-        if (aboveMiddle)
+        int xOffset =  Random.Range(-distance, distance);
+        int yOffset = distance - Math.Abs(xOffset);
+        bool spawnabove = (Random.Range(0, 2) == 0);
+        Debug.Log("spawn above" + spawnabove);
+        if (spawnabove)
         {
-            return new Vector2Int(xOffset, distance - xOffset);
+            return new Vector2Int(xOffset, -yOffset) + middleTilePosition;
         }
         else {
-            return new Vector2Int(-xOffset, -distance + xOffset);
-        }
+            return new Vector2Int(xOffset, yOffset) + middleTilePosition; }
+
     }
 
 
@@ -224,15 +229,10 @@ public class TileManager : MonoBehaviour
     /// Places a resource tile and a tileObject at a specified location
     /// </summary>
     /// <param name="loc">The location where the resource tile will be placed</param>
-    void PlaceResource(Vector2Int loc) {
-        try
-        {
-            tileObjects[loc.x + width / 2, loc.y + height / 2] = new TileObject(resourceTilePrefab, loc.x, loc.y, true, true);
-            tilemap.SetTile(new Vector3Int(loc.x, loc.y, 0), tileObjects[loc.x + width / 2, loc.y + height / 2].GetTile());
-        }
-        catch(IndexOutOfRangeException) {
-            //PlaceResource(loc);
-        }
+    void PlaceResource(Vector2Int loc) 
+    {
+        tileObjects[loc.x, loc.y] = new TileObject(resourceTilePrefab, loc.x, loc.y, true, true);
+        tilemap.SetTile(new Vector3Int(loc.x - width / 2, loc.y - height / 2, 0), tileObjects[loc.x, loc.y].GetTile());
     }
 
 

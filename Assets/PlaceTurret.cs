@@ -34,12 +34,13 @@ public class PlaceTurret : MonoBehaviour
     public float factoryExtraCost;
     public float factoryExtraCostPerFactory = 5;
     public static float factoryTotalCost = 30;
+    public int mineCost; 
 
     void Start()
     {
         turretOffset = new Vector3(0, 0.4f);
         factoryOffset = new Vector3(0, 0.66f);
-        mineOffset = new Vector3(0, 0.33f);
+        mineOffset = new Vector3(0,0);
 
         turretGhost = GameObject.Find("TurretGhost").GetComponent<Rigidbody>(); 
         factoryGhost = GameObject.Find("FactoryGhost").GetComponent<Rigidbody>();
@@ -93,6 +94,7 @@ public class PlaceTurret : MonoBehaviour
 
                     case DreamFactorySelector.Placeables.Mine:
                         Place(point, currentTile, mine, currentOffset);
+
                         break; 
                 }
             }
@@ -142,7 +144,7 @@ public class PlaceTurret : MonoBehaviour
             }); */
 
         }
-        else
+        else if(Equals(towerToPlace, factory))
         {
             //Code voor factories die steeds meer kosten
             factoryExtraCost += factoryExtraCostPerFactory;
@@ -165,6 +167,16 @@ public class PlaceTurret : MonoBehaviour
             //{
             //    {$"Turret number = {this.transform.childCount}", this.transform.childCount}
             //});
+        }
+        else if(Equals(towerToPlace, mine)) {
+
+            GameObject newMine = Instantiate(mine, worldPosition + offset, Quaternion.identity);
+            newMine.transform.SetParent(this.transform);
+            resourceCost = mineCost;
+            DreamFuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost;
+            DreamFuel.GetComponent<DreamFuel>().baseGeneration += factoryAddedGeneration;
+            newMine.GetComponent<Mine>().construct(manager, DreamFuel.GetComponent<DreamFuel>());
+
         }
 
         currentTile.TurretPlaced = true;
