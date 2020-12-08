@@ -8,8 +8,22 @@ public class DreamFactorySelector : MonoBehaviour
 
     public Button FactoryButton;
     public Button TurretButton;
+    public Button mineButton;
 
-    public bool PlaceableType; 
+    private Placeables _selectedPlaceable; 
+
+    public enum Placeables
+    {
+        Turret,
+        Factory,
+        Mine
+    }
+
+    public Placeables SelectedPlaceable
+    {
+        get { return _selectedPlaceable; }
+        private set { _selectedPlaceable = value;  }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -19,13 +33,16 @@ public class DreamFactorySelector : MonoBehaviour
 
         Button button2 = TurretButton.GetComponent<Button>();
         button2.onClick.AddListener(TaskOnClickTurret);
+
+        Button button3 = mineButton.GetComponent<Button>();
+        button3.onClick.AddListener(TaskOnClickMine);
     }
     
     public void TaskOnClickFactory()
     {
         if (FactoryButton)
         {
-            PlaceableType = true;
+            _selectedPlaceable = Placeables.Factory; 
         }
     }
 
@@ -33,7 +50,15 @@ public class DreamFactorySelector : MonoBehaviour
     {
         if (TurretButton)
         {
-            PlaceableType = false;
+            _selectedPlaceable = Placeables.Turret;
+        }
+    }
+
+    public void TaskOnClickMine() 
+    {
+        if (mineButton) 
+        {
+            _selectedPlaceable = Placeables.Mine;
         }
     }
 

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Mine : MonoBehaviour
 {
     Transform transform;
-    GameObject tileManager;
     public int resourcesPerSecond;
 
     TileManager tiles;
@@ -18,14 +17,15 @@ public class Mine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform = GetComponent<Transform>();
     }
 
-    public void construct(GameObject tilemanager, DreamFuel dreamFuel)
+    public void construct(TileManager tilemanager, DreamFuel dreamFuel)
     {
-        tileManager = tilemanager;
+        transform = GetComponent<Transform>();
+        tiles = tilemanager;
         fuel = dreamFuel;
-        whereIStand = tileManager.GetComponent<TileManager>().GetTileFromPosition(transform.position);
+        whereIStand = tiles.GetTileFromPosition(transform.position);
+        Debug.Log("current resources: " + whereIStand.IsResourceTile());
     }
 
     // Update is called once per frame
@@ -33,8 +33,9 @@ public class Mine : MonoBehaviour
     {
         mineTime += Time.deltaTime;
         if (mineTime > 1) {
-            mineTime = 0;
             MineResources();
+            mineTime = 0;
+            
         }
     }
 
@@ -43,7 +44,8 @@ public class Mine : MonoBehaviour
         if (whereIStand.GetResources() > 0)
         {
             whereIStand.Mine(resourcesPerSecond);
-            fuel.currentResourceValue += resourcesPerSecond; 
+            fuel.currentResourceValue += resourcesPerSecond;
+            Debug.Log("mine");
         }
         if (whereIStand.GetResources() <= 0) {
             tiles.PlaceWalkable(whereIStand.GetLocation());
