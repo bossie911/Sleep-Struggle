@@ -25663,6 +25663,7 @@ MonoBehaviour:
   height: 50
   scale: 5
   navMesh: {fileID: 545113971}
+  generateRandomMap: 1
 --- !u!1 &793879089
 GameObject:
   m_ObjectHideFlags: 0

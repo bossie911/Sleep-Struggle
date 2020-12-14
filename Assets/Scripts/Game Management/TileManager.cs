@@ -33,12 +33,18 @@ public class TileManager : MonoBehaviour
 
     Vector2Int middleTilePosition;
 
+    public bool generateRandomMap;
+
+
     // Start is called before the first frame update
     void Start()
     {
         tileTypes = new int[width, height];
         tileObjects = new TileObject[width, height];
-        SetTiles();
+        if (generateRandomMap)
+        {
+            SetTiles();
+        } else {GeneratePremadeObjectArray(); }
         cam = Camera.main;
     }
 
@@ -191,6 +197,26 @@ public class TileManager : MonoBehaviour
         }
 
         return tileObjects[pos.x + width / 2, pos.y + height / 2];
+    }
+
+    /// <summary>
+    /// Looks at the sprites already drawn in the editor and generates a tileobjects array from there
+    /// </summary>
+    /// <returns></returns>
+    TileObject[,] GeneratePremadeObjectArray() {
+        TileObject[,] objects = new TileObject[50, 50];
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++)
+            {
+                Vector3Int mid = tilemap.WorldToCell(middleTile);
+                if(tilemap.GetSprite(new Vector3Int( mid.x - width/2 + x, mid.y - height/2 + y, 0)).name != "Grass")
+                {
+                    Debug.Log(tilemap.GetSprite(new Vector3Int(mid.x - width / 2 + x, mid.y - height / 2 + y, 0)).name);
+                }
+            }
+        
+        }
+        return objects;
     }
 
 
