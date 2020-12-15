@@ -14,6 +14,8 @@ public class TileManager : MonoBehaviour
     public TileBase middleTileSprite;
     public TileBase[] differentTiles;
     public TileBase resourceTilePrefab;
+    public TileBase waterTilePrefab;
+    public TileBase GrassTilePrefab;
 
     public Tilemap tilemap;
     public Tilemap obstacles;
@@ -44,14 +46,14 @@ public class TileManager : MonoBehaviour
         if (generateRandomMap)
         {
             SetTiles();
-        } else {GeneratePremadeObjectArray(); }
+        } else {tileObjects = GeneratePremadeObjectArray(); }
         cam = Camera.main;
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse1)) {
-            Debug.Log(GetTileFromPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition)).xLocation + " and " + GetTileFromPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition)).yLocation + GetTileFromPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition)).IsResourceTile());
+            Debug.Log(GetTileFromPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition)).CanPlaceTower());
         }
     }
 
@@ -82,9 +84,9 @@ public class TileManager : MonoBehaviour
         obstacles.ClearAllTiles();
         for (int x = 0; x < width; x++)
         {
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < height; y++)//two dimentional for loop
             {
-                switch (tileTypes[x, y])
+                switch (tileTypes[x, y])//checks which tiles to place
                 {
                     case 0:
                         PlaceWalkable(new Vector2Int(x,y));
@@ -204,14 +206,22 @@ public class TileManager : MonoBehaviour
     /// </summary>
     /// <returns></returns>
     TileObject[,] GeneratePremadeObjectArray() {
-        TileObject[,] objects = new TileObject[50, 50];
+
+        TileObject[,] objects = new TileObject[width, height];
+
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++)
             {
                 Vector3Int mid = tilemap.WorldToCell(middleTile);
-                if(tilemap.GetSprite(new Vector3Int( mid.x - width/2 + x, mid.y - height/2 + y, 0)).name != "Grass")
+                if(tilemap.GetSprite(new Vector3Int( mid.x - width/2 + x, mid.y - height/2 + y, 0)).name != "Water")
                 {
-                    Debug.Log(tilemap.GetSprite(new Vector3Int(mid.x - width / 2 + x, mid.y - height / 2 + y, 0)).name);
+                    objects[x, y] = new TileObject(GrassTilePrefab, x, y, true, false);
+                }
+                else
+                {
+                    objects[x, y] = new TileObject(waterTilePrefab, x, y, false, false);
+                    tilemap.SetTile(new Vector3Int( x - width / 2, y - height / 2, 0), null);
+                    obstacles.SetTile(new Vector3Int(x - width / 2, y - height / 2, 0), waterTilePrefab);
                 }
             }
         
