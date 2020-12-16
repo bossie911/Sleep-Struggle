@@ -209,22 +209,26 @@ public class TileManager : MonoBehaviour
 
         TileObject[,] objects = new TileObject[width, height];
 
-        for (int x = 0; x < width; x++) {
+        for (int x = 0; x < width; x++)
+        {
             for (int y = 0; y < height; y++)
             {
                 Vector3Int mid = tilemap.WorldToCell(middleTile);
-                if(tilemap.GetSprite(new Vector3Int( mid.x - width/2 + x, mid.y - height/2 + y, 0)).name != "Water")
+                switch (tilemap.GetSprite(new Vector3Int(mid.x - width / 2 + x, mid.y - height / 2 + y, 0)).name)
                 {
-                    objects[x, y] = new TileObject(GrassTilePrefab, x, y, true, false);
-                }
-                else
-                {
-                    objects[x, y] = new TileObject(waterTilePrefab, x, y, false, false);
-                    tilemap.SetTile(new Vector3Int( x - width / 2, y - height / 2, 0), null);
-                    obstacles.SetTile(new Vector3Int(x - width / 2, y - height / 2, 0), waterTilePrefab);
+                    case "Grass":
+                        objects[x, y] = new TileObject(GrassTilePrefab, x, y, true, false);
+                        break;
+                    case "Resource":
+                        objects[x, y] = new TileObject(GrassTilePrefab, x, y, true, true);
+                        break;
+                    case "Water":
+                        objects[x, y] = new TileObject(waterTilePrefab, x, y, false, false);
+                        tilemap.SetTile(new Vector3Int(x - width / 2, y - height / 2, 0), null);
+                        obstacles.SetTile(new Vector3Int(x - width / 2, y - height / 2, 0), waterTilePrefab);
+                        break;
                 }
             }
-        
         }
         return objects;
     }

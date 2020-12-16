@@ -169,12 +169,11 @@ public class PlaceTurret : MonoBehaviour
             //});
         }
         else if(Equals(towerToPlace, mine)) {
-
+            resourceCost = mineCost;
             GameObject newMine = Instantiate(mine, worldPosition + offset, Quaternion.identity);
             newMine.transform.SetParent(this.transform);
-            resourceCost = mineCost;
             DreamFuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost;
-            DreamFuel.GetComponent<DreamFuel>().baseGeneration += factoryAddedGeneration;
+            //DreamFuel.GetComponent<DreamFuel>().baseGeneration += factoryAddedGeneration;
             newMine.GetComponent<Mine>().construct(manager, DreamFuel.GetComponent<DreamFuel>());
 
         }

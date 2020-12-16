@@ -14,9 +14,12 @@ public class Mine : MonoBehaviour
 
     DreamFuel fuel;
 
+    bool isActive;
+
     // Start is called before the first frame update
     void Start()
     {
+        isActive = true;
     }
 
     public void construct(TileManager tilemanager, DreamFuel dreamFuel)
@@ -31,11 +34,14 @@ public class Mine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mineTime += Time.deltaTime;
-        if (mineTime > 1) {
-            MineResources();
-            mineTime = 0;
-            
+        if (isActive)
+        {
+            mineTime += Time.deltaTime;
+            if (mineTime > 1)
+            {
+                MineResources();
+                mineTime = 0;
+            }
         }
     }
 
@@ -43,12 +49,13 @@ public class Mine : MonoBehaviour
     void MineResources() {
         if (whereIStand.GetResources() > 0)
         {
+            Debug.Log("mine");
             whereIStand.Mine(resourcesPerSecond);
             fuel.currentResourceValue += resourcesPerSecond;
-            Debug.Log("mine");
         }
-        if (whereIStand.GetResources() <= 0) {
+        if (whereIStand.GetResources() <= 0) {//checks if the resources have run out
             tiles.PlaceWalkable(whereIStand.GetLocation());
+            isActive = false;
             Destroy(gameObject);
         }
     }
