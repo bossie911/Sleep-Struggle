@@ -134,7 +134,7 @@ public class PlaceTurret : MonoBehaviour
             newTurret.transform.SetParent(this.transform);
 
             //Set reference FoW of the newly created turret
-            newTurret.GetComponent<Turret>().fogOfWar = fogOfWar;
+            newTurret.GetComponent<Turret>().FogOfWar = fogOfWar;
             DreamFuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost;
 
             /*AnalyticsEvent.Custom("TurretsBuild", new Dictionary<string, object>
