@@ -25657,6 +25657,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ec5a8b553eb4e15428855a176ed01b50, type: 2}
   - {fileID: 11400000, guid: 41074aaa334a18745ad4436114ff97b8, type: 2}
   resourceTilePrefab: {fileID: 11400000, guid: bc0be72f8858b5e48ae509398ff321fc, type: 2}
+  waterTilePrefab: {fileID: 0}
+  GrassTilePrefab: {fileID: 0}
   tilemap: {fileID: 71264574}
   obstacles: {fileID: 1849902417}
   width: 50

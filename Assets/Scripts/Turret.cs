@@ -113,8 +113,7 @@ public class Turret : MonoBehaviour
             {
                 closestDistanceToBase = AIMovement.distanceToBase;
                 target = enemy.transform;
-            }
-
+            }          
         }
         enemiesInRange.Clear();
     }
