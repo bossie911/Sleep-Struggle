@@ -13,11 +13,10 @@ using UnityEngine.Analytics;
 public class PlaceTurret : MonoBehaviour
 {
     public Tilemap tilemap;
-    public GameObject turretPrefab, factoryPrefab, DreamFuel, mine;
+    public GameObject turret, factory, DreamFuel, mine;
     public Tilemap fogOfWar;
-   
+
     TileManager manager;
-    
     static DreamFactorySelector selector;
     private int fow_layer; 
 
@@ -29,7 +28,6 @@ public class PlaceTurret : MonoBehaviour
     static Vector3 turretOffset, factoryOffset, mineOffset;
 
     public float resourceCost;
-    public float factoryCost;
 
     public float factoryAddedGeneration = 0.5f;
     float factoryBaseCost = 30;
@@ -87,15 +85,16 @@ public class PlaceTurret : MonoBehaviour
                 switch (selector.SelectedPlaceable)
                 {
                     case DreamFactorySelector.Placeables.Turret:
-                        Place(point, currentTile, turretPrefab, currentOffset);
+                        Place(point, currentTile, turret, currentOffset);
                         break;
 
                     case DreamFactorySelector.Placeables.Factory:
-                        Place(point, currentTile, factoryPrefab, currentOffset);
+                        Place(point, currentTile, factory, currentOffset);
                         break;
 
                     case DreamFactorySelector.Placeables.Mine:
                         Place(point, currentTile, mine, currentOffset);
+
                         break; 
                 }
             }
@@ -122,20 +121,30 @@ public class PlaceTurret : MonoBehaviour
     {
         Vector3 worldPosition = tilemap.CellToWorld(tilemap.WorldToCell(point));
 
-        if (Equals(towerToPlace, turretPrefab))
+        //Get all turrets currently on the field
+        //count = Resources.FindObjectsOfTypeAll<GameObject>().Count(obj => obj.name == "Turret");
+
+        resourceCost = 0f;
+        if (Equals(towerToPlace, turret))
         {
-            GameObject newTurret = Instantiate(turretPrefab, worldPosition + offset, Quaternion.identity);
+            resourceCost = 50f;
+            GameObject newTurret = Instantiate(turret, worldPosition + offset, Quaternion.identity);
 
             //Create all turrets as a child of this gameobj, so the hierarchy doesn't get cluttered
             newTurret.transform.SetParent(this.transform);
-            Turret turret = newTurret.GetComponent<Turret>(); 
 
             //Set reference FoW of the newly created turret
-            turret.FogOfWar = fogOfWar;
-            turret.PayResourceCost(DreamFuel);
-        }
+            newTurret.GetComponent<Turret>().FogOfWar = fogOfWar;
+            DreamFuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost;
 
-        else if(Equals(towerToPlace, factoryPrefab))
+            /*AnalyticsEvent.Custom("TurretsBuild", new Dictionary<string, object>
+            {
+                {$"(Turret number = {count}", count},
+                {"Time_elapsed", Time.timeSinceLevelLoad}
+            }); */
+
+        }
+        else if(Equals(towerToPlace, factory))
         {
             //Code voor factories die steeds meer kosten
             factoryExtraCost += factoryExtraCostPerFactory;
@@ -144,7 +153,7 @@ public class PlaceTurret : MonoBehaviour
             resourceCost = factoryTotalCost;
             Debug.Log(resourceCost);
 
-            GameObject newFactory = Instantiate(factoryPrefab, worldPosition + offset, Quaternion.identity);
+            GameObject newFactory = Instantiate(factory, worldPosition + offset, Quaternion.identity);
 
             newFactory.transform.SetParent(this.transform);
 
@@ -152,8 +161,13 @@ public class PlaceTurret : MonoBehaviour
 
             DreamFuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost;
             DreamFuel.GetComponent<DreamFuel>().baseGeneration += 1f;//factoryAddedGeneration;
-        }
 
+            //TODO
+            //Analytics.CustomEvent("FactoriesBuilt", new Dictionary<string, object>
+            //{
+            //    {$"Turret number = {this.transform.childCount}", this.transform.childCount}
+            //});
+        }
         else if(Equals(towerToPlace, mine)) {
             resourceCost = mineCost;
             GameObject newMine = Instantiate(mine, worldPosition + offset, Quaternion.identity);

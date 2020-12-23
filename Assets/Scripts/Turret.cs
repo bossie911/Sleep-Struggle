@@ -1,24 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Accessibility;
 using UnityEngine.Tilemaps;
 
 public class Turret : BaseTurret
 {
-    void Awake()
-    {
-        bulletBeginPoint = gameObject.GetComponentInChildren<Transform>();
-        range = 5f;
-        targetTag = "enemy";
-        fireSpeed = 1f;
-        fireCounter = 0f;
-        BulletPreFab = Resources.Load("Prefabs/Bullet", typeof(GameObject)) as GameObject;
-        resourceCost = 50f; 
-    }
-
+    
     void FixedUpdate()
     {
         base.FindTarget();
@@ -33,11 +22,6 @@ public class Turret : BaseTurret
             }
             fireCounter -= Time.deltaTime;
         }
-    }
-
-    public override void PayResourceCost(GameObject dreamfuel)
-    {
-        dreamfuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost;
     }
 
     //Truncated

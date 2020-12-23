@@ -17,7 +17,6 @@ public class BaseTurret : MonoBehaviour
 
     protected float fireSpeed;
     protected float fireCounter; 
-    protected float resourceCost; 
 
     protected Transform bulletBeginPoint;
 
@@ -30,15 +29,20 @@ public class BaseTurret : MonoBehaviour
         set { fogOfWar = value; }
     }
 
-    public float ResourceCost
-    {
-        get { return resourceCost; }
-    }
-
     public GameObject BulletPreFab
     {
         get { return bulletPrefab; }
         protected set { bulletPrefab = value; }
+    }
+
+    void Start()
+    {
+        bulletBeginPoint = gameObject.GetComponentInChildren<Transform>(); 
+        range = 5f;
+        targetTag = "enemy";
+        fireSpeed = 1f;
+        fireCounter = 0f;
+        BulletPreFab = Resources.Load("Prefabs/Bullet", typeof(GameObject)) as GameObject;
     }
 
     //finds enemies closest to the base, and add them to a list. 
@@ -80,12 +84,6 @@ public class BaseTurret : MonoBehaviour
         {
             bullet.Find(target);
         }
-    }
-
-    //Pay the resource cost of a particular turret
-    public virtual void PayResourceCost(GameObject dreamfuel)
-    {
-        dreamfuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost; 
     }
 
     //Drawn range

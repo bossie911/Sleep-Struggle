@@ -6355,15 +6355,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 71264574}
-  turretPrefab: {fileID: 6632914316725575977, guid: d95c414eb70456f4da2a4fbf3d3e6635,
-    type: 3}
-  factoryPrefab: {fileID: 1521036077329811596, guid: 085f55935912aaa4cac61341a05cb2a2,
-    type: 3}
+  turret: {fileID: 6632914316725575977, guid: d95c414eb70456f4da2a4fbf3d3e6635, type: 3}
+  factory: {fileID: 1521036077329811596, guid: 085f55935912aaa4cac61341a05cb2a2, type: 3}
   DreamFuel: {fileID: 92001913}
   mine: {fileID: 9100678730388330573, guid: e89b305c5b84cb1498ee154fff4a8d54, type: 3}
   fogOfWar: {fileID: 751798288}
   resourceCost: 0
-  factoryCost: 0
   factoryAddedGeneration: 2
   factoryExtraCost: 0
   factoryExtraCostPerFactory: 5
@@ -25765,7 +25762,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2269438ba91e13b4ca39b5be5aee53aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomLerpSpeed: 30
+  zoomLerpSpeed: 16
 --- !u!1 &798035657
 GameObject:
   m_ObjectHideFlags: 0
