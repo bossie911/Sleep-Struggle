@@ -48,7 +48,7 @@ public class PlaceTurret : MonoBehaviour
         factoryGhost = GameObject.Find("FactoryGhost").GetComponent<Rigidbody>();
         mineGhost = GameObject.Find("MineGhost").GetComponent<Rigidbody>(); 
         manager = GameObject.Find("TileManager").GetComponent<TileManager>();
-        selector = GameObject.Find("ResourcePanel").GetComponent<DreamFactorySelector>();
+        selector = GameObject.Find("DreamFuelPanel").GetComponent<DreamFactorySelector>();
 
         fow_layer = 1 << 8; 
     }
@@ -57,7 +57,7 @@ public class PlaceTurret : MonoBehaviour
     {
         switch (selector.SelectedPlaceable)
         {
-            case DreamFactorySelector.Placeables.Turret:
+            case DreamFactorySelector.Placeables.Turret: 
                 ghost = turretGhost;
                 currentOffset = turretOffset; 
                 break;
@@ -82,7 +82,7 @@ public class PlaceTurret : MonoBehaviour
         //Make sure that the mouse is not inside the FoW
         if (Input.GetMouseButtonDown(0) && currentTile != null && currentTile.CanPlaceTower()) 
         {
-            if (CanPlace(ray))
+            if (IfCanPlace(ray))
             {
                 switch (selector.SelectedPlaceable)
                 {
@@ -108,7 +108,7 @@ public class PlaceTurret : MonoBehaviour
             ghost.position = tilemap.CellToWorld(tilemap.WorldToCell(point)) + currentOffset;
     }
 
-    private bool CanPlace(Ray ray)
+    private bool IfCanPlace(Ray ray)
     {
         if (!Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, fow_layer) && 
             DreamFuel.GetComponent<DreamFuel>().currentResourceValue > 0 + resourceCost && 

@@ -16,7 +16,7 @@ public class Turret : BaseTurret
         fireSpeed = 1f;
         fireCounter = 0f;
         BulletPreFab = Resources.Load("Prefabs/Bullet", typeof(GameObject)) as GameObject;
-        resourceCost = 50f; 
+        resourceCost = 50f;
     }
 
     void FixedUpdate()
