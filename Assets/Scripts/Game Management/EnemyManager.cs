@@ -66,7 +66,7 @@ public class EnemyManager : MonoBehaviour
 
         gameEndTimer += Time.deltaTime;
         if (gameEndTimer > totalWaveTime) {
-            //victoryText.enabled = true;
+            victoryText.enabled = true;
         }
 
         waveDisplay.text = (currentWave + 1).ToString();

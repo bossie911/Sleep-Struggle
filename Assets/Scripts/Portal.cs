@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
-    public float portalHealth = 500;
+    public float portalHealth = 100;
 
 
     // Start is called before the first frame update
