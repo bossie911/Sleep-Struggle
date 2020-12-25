@@ -10,5 +10,4 @@ public float waveDurationSeconds;
 public float cooldownAfterWave;
 public int amountOfNormalEnemies;
 
-
 }

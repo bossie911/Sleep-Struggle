@@ -27,7 +27,8 @@ public class DreamFuel : MonoBehaviour
         ResourceGeneration();
 
         //voor nu displayt het baseGeneration, moet veranderen naar basegeneration + addedGeneration
-        dreamFuelDisp.text = "" + currentResourceValue + "/" + baseGeneration;
+        //dreamFuelDisp.text = "" + currentResourceValue + "/" + baseGeneration;
+        dreamFuelDisp.text = currentResourceValue.ToString();
     }
 
     //ResourceGeneration manages the amount of DreamFuel that is added per x amount of time.
