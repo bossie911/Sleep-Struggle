@@ -14,6 +14,8 @@ public class TileManager : MonoBehaviour
     public TileBase middleTileSprite;
     public TileBase[] differentTiles;
     public TileBase resourceTilePrefab;
+    public TileBase waterTilePrefab;
+    public TileBase GrassTilePrefab;
 
     public Tilemap tilemap;
     public Tilemap obstacles;
@@ -33,6 +35,9 @@ public class TileManager : MonoBehaviour
 
     Vector2Int middleTilePosition;
 
+    public bool generateRandomMap;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,8 +49,9 @@ public class TileManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1)) {
-            Debug.Log(GetTileFromPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition)).xLocation + " and " + GetTileFromPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition)).yLocation + GetTileFromPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition)).IsResourceTile());
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            Debug.Log(GetTileFromPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition)).CanPlaceTower());
         }
     }
 
@@ -71,38 +77,43 @@ public class TileManager : MonoBehaviour
     /// </summary>
     void SetTiles()
     {
-        tileTypes = GenerateNoiseMap(width, height, scale, Random.Range(-100, 100), Random.Range(-100, 100));
-        tilemap.ClearAllTiles();
-        obstacles.ClearAllTiles();
-        for (int x = 0; x < width; x++)
+        if (generateRandomMap)
         {
-            for (int y = 0; y < height; y++)
+            tileTypes = GenerateNoiseMap(width, height, scale, Random.Range(-100, 100), Random.Range(-100, 100));
+            tilemap.ClearAllTiles();
+            obstacles.ClearAllTiles();
+            for (int x = 0; x < width; x++)
             {
-                switch (tileTypes[x, y])
+                for (int y = 0; y < height; y++)//two dimentional for loop
                 {
-                    case 0:
-                        PlaceWalkable(new Vector2Int(x,y));
-                        break;
-                    case 1:
-                        PlaceWalkable(new Vector2Int(x, y));
-                        break;
-                    case 2:
-                        PlaceObstacle(x, y);
-                        break;
+                    switch (tileTypes[x, y])//checks which tiles to place
+                    {
+                        case 0:
+                            PlaceWalkable(new Vector2Int(x, y));
+                            break;
+                        case 1:
+                            PlaceWalkable(new Vector2Int(x, y));
+                            break;
+                        case 2:
+                            PlaceObstacle(x, y);
+                            break;
+                    }
                 }
             }
+            PlaceResources();
+            CheckMiddleTileLocation();
+            SetMiddleTile();
         }
-        CheckMiddleTileLocation();
-        SetMiddleTile();
-        PlaceResources();
+        else { tileObjects = GeneratePremadeObjectArray(); }
         UpdateNavMesh();
     }
 
-    void CheckMiddleTileLocation() 
+    void CheckMiddleTileLocation()
     {
         bool onWater = !GetTileFromPosition(middleTilePoint.transform.position).CanPlaceTower();
 
-        if(onWater) {
+        if (onWater)
+        {
             tileTypes = GenerateNoiseMap(width, height, scale, Random.Range(-100, 100), Random.Range(-100, 100));
             tilemap.ClearAllTiles();
             obstacles.ClearAllTiles();
@@ -166,7 +177,7 @@ public class TileManager : MonoBehaviour
         int y = height / 2;
         middleTilePosition = new Vector2Int(x, y);
 
-        tileObjects[x,y] = new TileObject(middleTileSprite, x, height / 2, false, false);
+        tileObjects[x, y] = new TileObject(middleTileSprite, x, height / 2, false, false);
         tilemap.SetTile(tilemap.WorldToCell(middleTilePoint.position), tileObjects[x, height / 2].GetTile());
     }
 
@@ -193,14 +204,49 @@ public class TileManager : MonoBehaviour
         return tileObjects[pos.x + width / 2, pos.y + height / 2];
     }
 
+    /// <summary>
+    /// Looks at the sprites already drawn in the editor and generates a tileobjects array from there
+    /// </summary>
+    /// <returns></returns>
+    TileObject[,] GeneratePremadeObjectArray()
+    {
+
+        TileObject[,] objects = new TileObject[width, height];
+
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                Vector3Int mid = tilemap.WorldToCell(middleTile);
+                switch (tilemap.GetSprite(new Vector3Int(mid.x - width / 2 + x, mid.y - height / 2 + y, 0)).name)
+                {
+                    case "Grass":
+                        objects[x, y] = new TileObject(GrassTilePrefab, x, y, true, false);
+                        break;
+                    case "Resource":
+                        objects[x, y] = new TileObject(GrassTilePrefab, x, y, true, true);
+                        break;
+                    case "Water":
+                        objects[x, y] = new TileObject(waterTilePrefab, x, y, false, false);
+                        tilemap.SetTile(new Vector3Int(x - width / 2, y - height / 2, 0), null);
+                        obstacles.SetTile(new Vector3Int(x - width / 2, y - height / 2, 0), waterTilePrefab);
+                        break;
+                }
+            }
+        }
+        return objects;
+    }
+
 
     /// <summary>
     /// Places the resource tiles 
     /// </summary>
     /// <param name="amount"> Determines the amount of resource tiles placed</param>
-    void PlaceResources() {
+    void PlaceResources()
+    {
 
-        for (int i = 5; i < 15; i++) {
+        for (int i = 5; i < 15; i++)
+        {
             PlaceResource(RandomTile(i));
         }
     }
@@ -210,8 +256,9 @@ public class TileManager : MonoBehaviour
     /// </summary>
     /// <param name="distance">The distance from the middle tile </param>
     /// <returns>Random tile with a specified distance from the middle</returns>
-    Vector2Int RandomTile(int distance) {
-        int xOffset =  Random.Range(-distance, distance);
+    Vector2Int RandomTile(int distance)
+    {
+        int xOffset = Random.Range(-distance, distance);
         int yOffset = distance - Math.Abs(xOffset);
         bool spawnabove = (Random.Range(0, 2) == 0);
         Debug.Log("spawn above" + spawnabove);
@@ -219,8 +266,10 @@ public class TileManager : MonoBehaviour
         {
             return new Vector2Int(xOffset, -yOffset) + middleTilePosition;
         }
-        else {
-            return new Vector2Int(xOffset, yOffset) + middleTilePosition; }
+        else
+        {
+            return new Vector2Int(xOffset, yOffset) + middleTilePosition;
+        }
 
     }
 
@@ -229,7 +278,7 @@ public class TileManager : MonoBehaviour
     /// Places a resource tile and a tileObject at a specified location
     /// </summary>
     /// <param name="loc">The location where the resource tile will be placed</param>
-    void PlaceResource(Vector2Int loc) 
+    void PlaceResource(Vector2Int loc)
     {
         tileObjects[loc.x, loc.y] = new TileObject(resourceTilePrefab, loc.x, loc.y, true, true);
         tilemap.SetTile(new Vector3Int(loc.x - width / 2, loc.y - height / 2, 0), tileObjects[loc.x, loc.y].GetTile());

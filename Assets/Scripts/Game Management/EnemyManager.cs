@@ -24,6 +24,7 @@ public class EnemyManager : MonoBehaviour
     float totalWaveTime, gameEndTimer;
     public Text victoryText;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -65,7 +66,7 @@ public class EnemyManager : MonoBehaviour
 
         gameEndTimer += Time.deltaTime;
         if (gameEndTimer > totalWaveTime) {
-            victoryText.enabled = true;
+            //victoryText.enabled = true;
         }
 
         waveDisplay.text = (currentWave + 1).ToString();

@@ -44,7 +44,17 @@ public class Bullet : MonoBehaviour
     void TargetHit()
     {
         Destroy(this.gameObject);
-        target.GetComponent<Enemy>().currentHealth -= bulletDamage;
+
+        if (target.gameObject.name == "Enemy")
+        {
+            target.GetComponent<Enemy>().currentHealth -= bulletDamage;
+        }
+
+        if (target.gameObject.name == "Portal")
+        {
+            target.GetComponent<Portal>().portalHealth -= bulletDamage;
+        }
+
     }
 
     //functie wordt aangeroepen in de turret script om de target van de turret naar de script te krijgen

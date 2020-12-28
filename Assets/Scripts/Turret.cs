@@ -1,11 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Accessibility;
 using UnityEngine.Tilemaps;
 
-public class Turret : MonoBehaviour
+public class Turret : BaseTurret
 {
+<<<<<<< HEAD
     public Transform target;
 
     List<GameObject> enemiesInRange = new List<GameObject>();
@@ -24,40 +27,38 @@ public class Turret : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
+=======
+    void Awake()
+>>>>>>> 06f7f6e19bc34b77c474304dbc53711827080762
     {
-        
+        bulletBeginPoint = gameObject.GetComponentInChildren<Transform>();
+        range = 5f;
+        targetTag = "enemy";
+        fireSpeed = 1f;
+        fireCounter = 0f;
+        BulletPreFab = Resources.Load("Prefabs/Bullet", typeof(GameObject)) as GameObject;
+        resourceCost = 50f;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        //FindClosestTarget();
-        FindTargetClosestToBase();
+        base.FindTarget();
         UpdateFogOfWar();
 
         if (target != null)
         {
             if (fireCounter <= 0f)
             {
-                Fire();
+                base.Fire();
                 fireCounter = 1f / fireSpeed;
             }
             fireCounter -= Time.deltaTime;
         }
-
     }
 
-
-    //Vuur functie die een bullet maakt en een target er aan mee geeft
-    void Fire()
+    public override void PayResourceCost(GameObject dreamfuel)
     {
-        GameObject bulletB = (GameObject)Instantiate(bulletPrefab, bulletBeginPoint.position, bulletBeginPoint.rotation);
-        Bullet bullet = bulletB.GetComponent<Bullet>();
-
-        if(bullet != null)
-        {
-            bullet.Find(target);    
-        }
+        dreamfuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost;
     }
 
     //Truncated
@@ -80,7 +81,7 @@ public class Turret : MonoBehaviour
         }
 
         //Onderstaande code zorgt ervoor dat als de dichtbijzijnste enemy in range is van de turret deze enemy als target wordt gemarkeerd
-        if (closestEnemy != null && closestDistance <= turretRange)
+        if (closestEnemy != null && closestDistance <= range)
         {
             target = closestEnemy.transform;
         }
@@ -90,6 +91,7 @@ public class Turret : MonoBehaviour
         }
     }
 
+<<<<<<< HEAD
     //functie dat de enemy zoekt die het dicht bij de base is en markt deze als target
     void FindTargetClosestToBase()
     {
@@ -128,20 +130,26 @@ public class Turret : MonoBehaviour
     }
 
     //Deze variabele past aan hoeveel vision de shooting turret weghaalt
+=======
+>>>>>>> 06f7f6e19bc34b77c474304dbc53711827080762
     public int vision = 1;
     
     void UpdateFogOfWar()
     {
+<<<<<<< HEAD
         //Een 3d vector op integer punten
         Vector3Int currentTowerTile = fogOfWar.WorldToCell(transform.position);
         //WorldToCell converteert de wereldpositie naar cellpositie 
+=======
+        Vector3Int currentTowerTile = FogOfWar.WorldToCell(transform.position);
+>>>>>>> 06f7f6e19bc34b77c474304dbc53711827080762
 
         //Deze forloop haalt tiles weg die eromheen staan
         for (int x=-vision; x<= vision - 1; x++)
         {
             for(int y = -vision - 1; y<= vision; y++)
             {
-                fogOfWar.SetTile(currentTowerTile + new Vector3Int(x, y, 0), null);
+                FogOfWar.SetTile(currentTowerTile + new Vector3Int(x, y, 0), null);
             }    
         }    
     }

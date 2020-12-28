@@ -6355,12 +6355,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 71264574}
-  turret: {fileID: 6632914316725575977, guid: d95c414eb70456f4da2a4fbf3d3e6635, type: 3}
-  factory: {fileID: 1521036077329811596, guid: 085f55935912aaa4cac61341a05cb2a2, type: 3}
+  turretPrefab: {fileID: 6632914316725575977, guid: d95c414eb70456f4da2a4fbf3d3e6635,
+    type: 3}
+  factoryPrefab: {fileID: 1521036077329811596, guid: 085f55935912aaa4cac61341a05cb2a2,
+    type: 3}
   DreamFuel: {fileID: 92001913}
   mine: {fileID: 9100678730388330573, guid: e89b305c5b84cb1498ee154fff4a8d54, type: 3}
   fogOfWar: {fileID: 751798288}
   resourceCost: 0
+  factoryCost: 0
   factoryAddedGeneration: 2
   factoryExtraCost: 0
   factoryExtraCostPerFactory: 5
@@ -25657,12 +25660,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ec5a8b553eb4e15428855a176ed01b50, type: 2}
   - {fileID: 11400000, guid: 41074aaa334a18745ad4436114ff97b8, type: 2}
   resourceTilePrefab: {fileID: 11400000, guid: bc0be72f8858b5e48ae509398ff321fc, type: 2}
+  waterTilePrefab: {fileID: 0}
+  GrassTilePrefab: {fileID: 0}
   tilemap: {fileID: 71264574}
   obstacles: {fileID: 1849902417}
   width: 50
   height: 50
   scale: 5
   navMesh: {fileID: 545113971}
+  generateRandomMap: 1
 --- !u!1 &793879089
 GameObject:
   m_ObjectHideFlags: 0
@@ -25759,7 +25765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2269438ba91e13b4ca39b5be5aee53aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomLerpSpeed: 16
+  zoomLerpSpeed: 30
 --- !u!1 &798035657
 GameObject:
   m_ObjectHideFlags: 0
