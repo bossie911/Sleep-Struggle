@@ -8,28 +8,7 @@ using UnityEngine.Tilemaps;
 
 public class Turret : BaseTurret
 {
-<<<<<<< HEAD
-    public Transform target;
-
-    List<GameObject> enemiesInRange = new List<GameObject>();
-
-    public float turretRange = 5f;
-    public string targetTag = "enemy";
-
-    public float fireSpeed = 1f;
-    private float fireCounter = 0f;
-
-    public GameObject bulletPrefab;
-    public Transform bulletBeginPoint;
-
-    //De naam van de Tilemap
-    public Tilemap fogOfWar;
-
-    // Start is called before the first frame update
-    void Start()
-=======
     void Awake()
->>>>>>> 06f7f6e19bc34b77c474304dbc53711827080762
     {
         bulletBeginPoint = gameObject.GetComponentInChildren<Transform>();
         range = 5f;
@@ -91,61 +70,13 @@ public class Turret : BaseTurret
         }
     }
 
-<<<<<<< HEAD
-    //functie dat de enemy zoekt die het dicht bij de base is en markt deze als target
-    void FindTargetClosestToBase()
-    {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag(targetTag);
-
-        float closestDistanceToBase = Mathf.Infinity;
-
-        //Zet alle enemies die in range zijn in een list
-        foreach (GameObject enemy in enemies)
-        {
-            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distanceToEnemy < turretRange)
-            {
-                enemiesInRange.Add(enemy);
-            }
-        }
-
-        //enemy die het dichtsbijzijnde de base is marken als target en daarna de list clearen
-        foreach (GameObject enemy in enemiesInRange)
-        {
-            if (AIMovement.distanceToBase < closestDistanceToBase)
-            {
-                closestDistanceToBase = AIMovement.distanceToBase;
-                target = enemy.transform;
-            }
-
-        }
-        enemiesInRange.Clear();
-    }
-
-    //Range drawen
-    void OnDrawGizmosSelected ()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, turretRange);
-    }
-
-    //Deze variabele past aan hoeveel vision de shooting turret weghaalt
-=======
->>>>>>> 06f7f6e19bc34b77c474304dbc53711827080762
     public int vision = 1;
-    
     void UpdateFogOfWar()
     {
-<<<<<<< HEAD
-        //Een 3d vector op integer punten
-        Vector3Int currentTowerTile = fogOfWar.WorldToCell(transform.position);
-        //WorldToCell converteert de wereldpositie naar cellpositie 
-=======
         Vector3Int currentTowerTile = FogOfWar.WorldToCell(transform.position);
->>>>>>> 06f7f6e19bc34b77c474304dbc53711827080762
 
-        //Deze forloop haalt tiles weg die eromheen staan
-        for (int x=-vision; x<= vision - 1; x++)
+        //Clear the surrounding tiles
+        for(int x=-vision; x<= vision - 1; x++)
         {
             for(int y = -vision - 1; y<= vision; y++)
             {
