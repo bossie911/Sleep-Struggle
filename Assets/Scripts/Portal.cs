@@ -22,6 +22,6 @@ public class Portal : MonoBehaviour
         }
 
 
-        Debug.Log(portalHealth);
+        //Debug.Log(portalHealth);
     }
 }

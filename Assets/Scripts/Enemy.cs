@@ -32,6 +32,8 @@ public class Enemy : MonoBehaviour
         {
             EnemyDied();
         }
+
+        Debug.Log(currentHealth);
     }
 
     public void DealDamage()

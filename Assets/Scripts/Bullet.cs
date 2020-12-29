@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
         if(direction.magnitude <= distanceThisFrame)
         {
             TargetHit();
-            return;
+            //return;
         }
 
         //movement
@@ -43,10 +43,8 @@ public class Bullet : MonoBehaviour
     //Code die wordt uitgevoerd als de bullet collide met een enemy
     void TargetHit()
     {
-        Destroy(this.gameObject);
-
-        if (target.gameObject.name == "Enemy")
-        {
+        if (target.gameObject.name == "Enemy 1(Clone)")
+        {         
             target.GetComponent<Enemy>().currentHealth -= bulletDamage;
         }
 
@@ -55,6 +53,7 @@ public class Bullet : MonoBehaviour
             target.GetComponent<Portal>().portalHealth -= bulletDamage;
         }
 
+        Destroy(this.gameObject);
     }
 
     //functie wordt aangeroepen in de turret script om de target van de turret naar de script te krijgen

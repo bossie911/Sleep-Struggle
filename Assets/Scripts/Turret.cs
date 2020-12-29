@@ -8,6 +8,11 @@ using UnityEngine.Tilemaps;
 
 public class Turret : BaseTurret
 {
+    public Transform target;
+
+    public List<GameObject> enemiesInRange = new List<GameObject>();
+
+
     void Awake()
     {
         bulletBeginPoint = gameObject.GetComponentInChildren<Transform>();
@@ -15,61 +20,74 @@ public class Turret : BaseTurret
         targetTag = "enemy";
         fireSpeed = 1f;
         fireCounter = 0f;
-        BulletPreFab = Resources.Load("Prefabs/Bullet", typeof(GameObject)) as GameObject;
+        BulletPrefab = Resources.Load("Prefabs/Bullet", typeof(GameObject)) as GameObject;
         resourceCost = 50f;
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        base.FindTarget();
+        FindTarget();
         UpdateFogOfWar();
 
         if (target != null)
         {
             if (fireCounter <= 0f)
             {
-                base.Fire();
+                Fire();
                 fireCounter = 1f / fireSpeed;
             }
             fireCounter -= Time.deltaTime;
         }
     }
 
+    //finds enemies closest to the base, and add them to a list. 
+    public void FindTarget()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag(targetTag);
+
+        float closestDistanceToBase = Mathf.Infinity;
+
+        //Add all enemies in range to the list
+        foreach (GameObject enemy in enemies)
+        {
+            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+            if (distanceToEnemy < range)
+            {
+                enemiesInRange.Add(enemy);
+            }
+        }
+
+        //Mark enemies closest to the base as 'target' and clear the list. 
+        foreach (GameObject enemy in enemiesInRange)
+        {
+            if (AIMovement.distanceToBase < closestDistanceToBase)
+            {
+                closestDistanceToBase = AIMovement.distanceToBase;
+                target = enemy.transform;
+            }
+        }
+        enemiesInRange.Clear();
+    }
+
+    //Fire a bullet
+    public void Fire()
+    {
+        GameObject bulletB = (GameObject)Instantiate(BulletPrefab, bulletBeginPoint.position, bulletBeginPoint.rotation);
+        Bullet bullet = bulletB.GetComponent<Bullet>();
+
+        if (bullet != null)
+        {
+            bullet.Find(target);
+        }
+    }
+
+
     public override void PayResourceCost(GameObject dreamfuel)
     {
         dreamfuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost;
     }
 
-    //Truncated
-    void FindClosestTarget()
-    {    
-        //array voor enemy gameobjects
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag(targetTag);
-
-        float closestDistance = Mathf.Infinity;
-        GameObject closestEnemy = null;
-
-        foreach (GameObject enemy in enemies)
-        {
-            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distanceToEnemy < closestDistance)
-            {
-                closestDistance = distanceToEnemy;
-                closestEnemy = enemy;
-            }
-        }
-
-        //Onderstaande code zorgt ervoor dat als de dichtbijzijnste enemy in range is van de turret deze enemy als target wordt gemarkeerd
-        if (closestEnemy != null && closestDistance <= range)
-        {
-            target = closestEnemy.transform;
-        }
-        else
-        {
-            target = null;
-        }
-    }
-
+ 
     public int vision = 1;
     void UpdateFogOfWar()
     {
