@@ -19,7 +19,7 @@ public class GameState : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("Lennart");
+        SceneManager.LoadScene("Level_1");
     }
 
     public void GoBack()

@@ -71,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ad353816b15eddb4ea4d05f35473aa10, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -95,14 +95,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8cd18e2d81a1b04e9dd563c70eb9a07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  turretRange: 5
-  targetTag: enemy
-  fireSpeed: 1
-  bulletPrefab: {fileID: 6578100918322970512, guid: f847d32aa9d42e84bba3a7d5837d91bf,
-    type: 3}
-  bulletBeginPoint: {fileID: 6632914317620150802}
-  fogOfWar: {fileID: 0}
   vision: 2
 --- !u!1 &6632914317620150829
 GameObject:

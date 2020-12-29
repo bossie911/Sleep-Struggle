@@ -94,6 +94,4 @@ public class EnemyManager : MonoBehaviour
         newGuy.transform.SetParent(parent);//orders the enemy to avoid cluttering
         newGuy.GetComponent<NavMeshAgent>().SetDestination(middle.position);//sets the destination of the enemy
     }
-
-
 }
