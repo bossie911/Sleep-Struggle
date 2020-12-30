@@ -12,6 +12,7 @@ public class Turret : BaseTurret
 
     public List<GameObject> enemiesInRange = new List<GameObject>();
 
+    private float priorityPortal = 10000;
 
     void Awake()
     {
@@ -60,7 +61,15 @@ public class Turret : BaseTurret
         //Mark enemies closest to the base as 'target' and clear the list. 
         foreach (GameObject enemy in enemiesInRange)
         {
-            if (AIMovement.distanceToBase < closestDistanceToBase)
+            if (enemy.gameObject.name == "Portal")
+            {
+                if(priorityPortal < closestDistanceToBase)
+                {
+                    closestDistanceToBase = priorityPortal;
+                    target = enemy.transform;
+                }
+            }
+            else if (AIMovement.distanceToBase < closestDistanceToBase)
             {
                 closestDistanceToBase = AIMovement.distanceToBase;
                 target = enemy.transform;
