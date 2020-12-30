@@ -43,20 +43,19 @@ public class Bullet : MonoBehaviour
     //Code die wordt uitgevoerd als de bullet collide met een enemy
     void TargetHit()
     {
-        if (target.gameObject.name == "Enemy 1(Clone)")
-        {         
-            target.GetComponent<Enemy>().currentHealth -= bulletDamage;
-        }
-
         if (target.gameObject.name == "Portal")
         {
             target.GetComponent<Portal>().portalHealth -= bulletDamage;
+        }
+        else if (target.gameObject.name == "Enemy 1(Clone)")
+        {         
+            target.GetComponent<Enemy>().currentHealth -= bulletDamage;
         }
 
         Destroy(this.gameObject);
     }
 
-    //functie wordt aangeroepen in de turret script om de target van de turret naar de script te krijgen
+    //functie wordt aangeroepen in de turret script om de target van de turret naar deze script te krijgen
     public void Find(Transform _target)
     {
         target = _target;
