@@ -8,10 +8,11 @@ using UnityEngine.Analytics;
 public class EnemyManager : MonoBehaviour
 {
 
-    public GameObject regularEnemy;
+    public GameObject regularEnemy, mosquito;
     public WaveObject[] waves;
     int currentWave;
-    float timeBetweenEnemies, nextEnemyTime;
+    float timeBetweenRegularEnemies, nextRegularEnemyTime;
+    float timeBetweenMosquito, nextMosquitoTime;
     float waveTimer;
     bool cooldownActive;
 
@@ -71,10 +72,18 @@ public class EnemyManager : MonoBehaviour
 
         waveDisplay.text = (currentWave + 1).ToString();
 
-        if (!cooldownActive && waveTimer >= nextEnemyTime)
+        if (!cooldownActive && waveTimer >= nextRegularEnemyTime)
         {
-            spawnRegularEnemy();
-            nextEnemyTime += timeBetweenEnemies;
+            spawnEnemy(regularEnemy);
+
+            nextRegularEnemyTime += timeBetweenRegularEnemies;
+        }
+        
+        if (!cooldownActive && waveTimer >= nextMosquitoTime)
+        {
+            spawnEnemy(mosquito);
+
+            nextMosquitoTime += timeBetweenMosquito;
         }
     }
 
@@ -82,18 +91,20 @@ public class EnemyManager : MonoBehaviour
     void startWave()
     {
         waveTimer = 0;
-        timeBetweenEnemies = waves[currentWave].waveDurationSeconds / waves[currentWave].amountOfNormalEnemies;
-        nextEnemyTime = timeBetweenEnemies;
+        timeBetweenRegularEnemies = waves[currentWave].waveDurationSeconds / waves[currentWave].amountOfNormalEnemies;
+        nextRegularEnemyTime = timeBetweenRegularEnemies;
+        
+        timeBetweenMosquito = waves[currentWave].waveDurationSeconds / waves[currentWave].amountOfMosquitos;
+        nextMosquitoTime = timeBetweenMosquito;
+
         cooldownActive = false;
     }
 
-    void spawnRegularEnemy()
+    void spawnEnemy(GameObject enemy)
     {
         int whereToSpawn = Random.Range(0, spawnPoints.Length);
-        GameObject newGuy = Instantiate(regularEnemy, spawnPoints[whereToSpawn].position, Quaternion.identity);//Creates a new enemy
+        GameObject newGuy = Instantiate(enemy, spawnPoints[whereToSpawn].position, Quaternion.identity);//Creates a new enemy
         newGuy.transform.SetParent(parent);//orders the enemy to avoid cluttering
         newGuy.GetComponent<NavMeshAgent>().SetDestination(middle.position);//sets the destination of the enemy
     }
-
-
 }
