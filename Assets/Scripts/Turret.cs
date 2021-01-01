@@ -8,11 +8,16 @@ using UnityEngine.Tilemaps;
 
 public class Turret : BaseTurret
 {
+    public bool turretIsBuffed = false;
+
     public Transform target;
 
     public List<GameObject> enemiesInRange = new List<GameObject>();
 
     private float priorityPortal = 10000;
+
+    public float bulletDamage = 10;
+    public float buffedBulletDamage = 15;
 
     void Awake()
     {
@@ -29,6 +34,7 @@ public class Turret : BaseTurret
     {
         FindTarget();
         UpdateFogOfWar();
+        BuffedCheck();
 
         if (target != null)
         {
@@ -39,6 +45,9 @@ public class Turret : BaseTurret
             }
             fireCounter -= Time.deltaTime;
         }
+
+
+
     }
 
     //finds enemies closest to the base, and add them to a list. 
@@ -81,12 +90,21 @@ public class Turret : BaseTurret
     //Fire a bullet
     public void Fire()
     {
-        GameObject bulletB = (GameObject)Instantiate(BulletPrefab, bulletBeginPoint.position, bulletBeginPoint.rotation);
-        Bullet bullet = bulletB.GetComponent<Bullet>();
+        GameObject _bullet = (GameObject)Instantiate(BulletPrefab, bulletBeginPoint.position, bulletBeginPoint.rotation);
+        Bullet bullet = _bullet.GetComponent<Bullet>();
 
         if (bullet != null)
         {
+            bullet.BulletDamage(bulletDamage);
             bullet.Find(target);
+        }
+    }
+
+    public void BuffedCheck()
+    {
+        if (turretIsBuffed == true)
+        {
+            bulletDamage = buffedBulletDamage;
         }
     }
 

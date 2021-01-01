@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
         }
 
         //movement
-        transform.Translate(direction.normalized * distanceThisFrame, Space.World);       
+        transform.Translate(direction.normalized * distanceThisFrame, Space.World);
     }
 
     //Destroyed de bullet als hij geen target meer heeft
@@ -59,5 +59,10 @@ public class Bullet : MonoBehaviour
     public void Find(Transform _target)
     {
         target = _target;
+    }
+
+    public void BulletDamage(float _bulletDamage)
+    {
+        bulletDamage = _bulletDamage;
     }
 }
