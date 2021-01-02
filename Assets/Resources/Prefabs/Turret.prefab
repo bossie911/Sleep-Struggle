@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6632914316725575980}
   - component: {fileID: 6632914316725575983}
   - component: {fileID: 6632914316725575982}
+  - component: {fileID: 5724685129092915194}
   m_Layer: 0
   m_Name: Turret
   m_TagString: turret
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 6632914316725575977}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6632914317620150802}
   m_Father: {fileID: 0}
@@ -72,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: ad353816b15eddb4ea4d05f35473aa10, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ff69432fda88de841b10331ac71ddcde, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,9 +96,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8cd18e2d81a1b04e9dd563c70eb9a07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turretIsBuffed: 0
   target: {fileID: 0}
   enemiesInRange: []
+  bulletDamage: 10
+  buffedBulletDamage: 15
   vision: 2
+--- !u!95 &5724685129092915194
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6632914316725575977}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: eeb9e5eeb7861b04c84214d23adefaf6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6632914317620150829
 GameObject:
   m_ObjectHideFlags: 0
