@@ -95,7 +95,7 @@ public class Turret : BaseTurret
 
         if (bullet != null)
         {
-            bullet.BulletDamage(bulletDamage);
+            bullet.BulletDamage(bulletDamage, turretIsBuffed);
             bullet.Find(target);
         }
     }
@@ -105,6 +105,7 @@ public class Turret : BaseTurret
         if (turretIsBuffed == true)
         {
             bulletDamage = buffedBulletDamage;
+
         }
     }
 
