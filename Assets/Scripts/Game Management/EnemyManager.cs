@@ -8,11 +8,14 @@ using UnityEngine.Analytics;
 public class EnemyManager : MonoBehaviour
 {
 
-    public GameObject regularEnemy, mosquito;
+    public GameObject regularEnemy, mosquito, nightmare;
     public WaveObject[] waves;
     int currentWave;
+
     float timeBetweenRegularEnemies, nextRegularEnemyTime;
     float timeBetweenMosquito, nextMosquitoTime;
+    float timeBetweenNightmare, nextNightmareTime;
+
     float waveTimer;
     bool cooldownActive;
 
@@ -94,6 +97,12 @@ public class EnemyManager : MonoBehaviour
             nextMosquitoTime += timeBetweenMosquito;
         }
 
+        if (!cooldownActive && waveTimer >= nextNightmareTime)
+        {
+            spawnEnemy(nightmare);
+
+            nextNightmareTime += timeBetweenNightmare;
+        }
     }
 
     /// starts a new wave and calculates the values needed
@@ -108,21 +117,13 @@ public class EnemyManager : MonoBehaviour
         //calculates how often mosquitos are spawned
         nextMosquitoTime = timeBetweenMosquito;
 
+        timeBetweenNightmare = waves[currentWave].waveDurationSeconds / waves[currentWave].amountOfNightmares;
+        //calculates how often nightmares are spawned
+        nextNightmareTime = timeBetweenNightmare;
+
         cooldownActive = false;
     }
-
     
-    void findGameObject()
-    {
-
-        float closestDistToMosquito;
-
-        GameObject[] allResources = GameObject.FindGameObjectsWithTag("resource");
-
-
-
-    }
-
     void spawnEnemy(GameObject enemy)
     {
         int whereToSpawn = Random.Range(0, spawnPoints.Length);

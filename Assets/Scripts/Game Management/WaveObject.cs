@@ -6,8 +6,9 @@ using UnityEngine;
 [Serializable]
 public class WaveObject
 {
-    public float waveDurationSeconds;
-    public float cooldownAfterWave;
-    public int amountOfNormalEnemies;
-    public int amountOfMosquitos;
+public float waveDurationSeconds;
+public float cooldownAfterWave;
+public int amountOfNormalEnemies;
+public int amountOfMosquitos;
+public int amountOfNightmares;
 }
