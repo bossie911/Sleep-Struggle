@@ -98,6 +98,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpeed: 10
   bulletDamage: 10
+  buffColor: {r: 0.45283484, g: 1, b: 0.41960788, a: 1}
+  bulletIsBuffed: 0
 --- !u!198 &2912996784383740272
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -288,7 +290,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.46742615, g: 0.46742615, b: 0.9811321, a: 1}
+      maxColor: {r: 0, g: 0.6114483, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

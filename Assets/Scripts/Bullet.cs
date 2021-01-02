@@ -10,6 +10,8 @@ public class Bullet : MonoBehaviour
 
     public float bulletDamage = 10f;
 
+    public Color buffColor;
+
     // Update is called once per frame
     void Update()
     {
@@ -47,7 +49,7 @@ public class Bullet : MonoBehaviour
         {
             target.GetComponent<Portal>().portalHealth -= bulletDamage;
         }
-        else if (target.gameObject.name == "Enemy 1(Clone)")
+        else /*if (target.gameObject.name == "Enemy 1(Clone)")*/
         {         
             target.GetComponent<Enemy>().currentHealth -= bulletDamage;
         }
@@ -61,8 +63,18 @@ public class Bullet : MonoBehaviour
         target = _target;
     }
 
-    public void BulletDamage(float _bulletDamage)
+    public void BulletDamage(float _bulletDamage, bool isBuffed)
     {
         bulletDamage = _bulletDamage;
+
+        if(isBuffed)
+        {
+            BuffParticles();
+        }
+    }
+
+    public void BuffParticles()
+    {
+        GetComponent<ParticleSystem>().startColor = buffColor;
     }
 }
