@@ -21,8 +21,7 @@ public class HPBarBase : MonoBehaviour
 
     void Update()
     {
-        healthGroup.alpha = health.fillAmount < 1f ? 1 : 0; 
-
+        healthGroup.alpha = health.fillAmount < 1f ? 1 : 0;
         health.fillAmount = baseHP / 100;
 
         if (baseHP <= 0)
