@@ -98,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpeed: 10
   bulletDamage: 10
+  buffColor: {r: 0.7986638, g: 0, b: 0.8867924, a: 1}
 --- !u!198 &2912996784383740272
 ParticleSystem:
   m_ObjectHideFlags: 0

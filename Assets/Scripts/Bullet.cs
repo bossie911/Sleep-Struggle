@@ -10,6 +10,10 @@ public class Bullet : MonoBehaviour
 
     public float bulletDamage = 10f;
 
+    public Color buffColor;
+
+
+
     // Update is called once per frame
     void Update()
     {
@@ -64,5 +68,9 @@ public class Bullet : MonoBehaviour
     public void BulletDamage(float _bulletDamage)
     {
         bulletDamage = _bulletDamage;
+    }
+
+    public void BuffParticles(){
+        GetComponent<ParticleSystem>().startColor = buffColor;
     }
 }
