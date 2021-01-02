@@ -111,6 +111,18 @@ public class EnemyManager : MonoBehaviour
         cooldownActive = false;
     }
 
+    
+    void findGameObject()
+    {
+
+        float closestDistToMosquito;
+
+        GameObject[] allResources = GameObject.FindGameObjectsWithTag("resource");
+
+
+
+    }
+
     void spawnEnemy(GameObject enemy)
     {
         int whereToSpawn = Random.Range(0, spawnPoints.Length);
@@ -118,6 +130,4 @@ public class EnemyManager : MonoBehaviour
         newGuy.transform.SetParent(parent);//orders the enemy to avoid cluttering
         newGuy.GetComponent<NavMeshAgent>().SetDestination(target.position);//sets the destination of the enemy
     }
-
-    
 }
