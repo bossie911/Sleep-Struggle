@@ -10,5 +10,5 @@ public float waveDurationSeconds;
 public float cooldownAfterWave;
 public int amountOfNormalEnemies;
 public int amountOfMosquitos;
-
+public int amountOfNightmares;
 }
