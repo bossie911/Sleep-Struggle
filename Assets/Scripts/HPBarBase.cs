@@ -6,23 +6,23 @@ using UnityEngine.SceneManagement;
 
 public class HPBarBase : MonoBehaviour
 {
-    [SerializeField]
-    private Image health;
+    private Slider slider;
+    public Image fillimage;
 
-    [SerializeField]
-    private CanvasGroup healthGroup;
+    public static float baseHP = 100;
 
-    public static float baseHP = 100f;
-
+    // Start is called before the first frame update
     void Start()
     {
-        health.fillAmount = 1f; 
+        slider = GetComponent<Slider>();
+        slider.value = 100;
     }
 
+    // Update is called once per frame
     void Update()
     {
-        healthGroup.alpha = health.fillAmount < 1f ? 1 : 0;
-        health.fillAmount = baseHP / 100;
+        slider.value = baseHP;
+
 
         if (baseHP <= 0)
         {
