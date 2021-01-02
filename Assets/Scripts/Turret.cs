@@ -45,9 +45,6 @@ public class Turret : BaseTurret
             }
             fireCounter -= Time.deltaTime;
         }
-
-
-
     }
 
     //finds enemies closest to the base, and add them to a list. 
