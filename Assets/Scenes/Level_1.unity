@@ -714,7 +714,7 @@ PrefabInstance:
     - target: {fileID: 1750933968504502052, guid: 5c92df52f08dc2b42b3c8522d6d2c07e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1750933968504502052, guid: 5c92df52f08dc2b42b3c8522d6d2c07e,
         type: 3}
@@ -44214,7 +44214,7 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 1661042527}
   parent: {fileID: 344794723}
-  middle: {fileID: 1889031152}
+  target: {fileID: 1889031152}
   waveDisplay: {fileID: 757189370}
   victoryText: {fileID: 227035675}
   endless: 1

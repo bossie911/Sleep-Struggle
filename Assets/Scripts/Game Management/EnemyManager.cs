@@ -18,6 +18,7 @@ public class EnemyManager : MonoBehaviour
 
     public Transform[] spawnPoints;
     public Transform parent;
+    public Transform target;
 
     public Text waveDisplay;
 
@@ -108,10 +109,6 @@ public class EnemyManager : MonoBehaviour
         nextMosquitoTime = timeBetweenMosquito;
 
         cooldownActive = false;
-    }
-    void findTarget(Transform target)
-    {
-
     }
 
     void spawnEnemy(GameObject enemy)
