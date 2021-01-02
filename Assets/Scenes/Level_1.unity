@@ -44121,20 +44121,25 @@ MonoBehaviour:
   mosquito: {fileID: 1091221307169219929, guid: 0d949b4b671a24144a5659d0ff61f876,
     type: 3}
   waves:
-  - waveDurationSeconds: 10
+  - waveDurationSeconds: 20
     cooldownAfterWave: 5
     amountOfNormalEnemies: 1
-    amountOfMosquitos: 0
-  - waveDurationSeconds: 30
+    amountOfMosquitos: 5
+  - waveDurationSeconds: 20
     cooldownAfterWave: 5
-    amountOfNormalEnemies: 4
+    amountOfNormalEnemies: 3
     amountOfMosquitos: 1
+  - waveDurationSeconds: 30
+    cooldownAfterWave: 1
+    amountOfNormalEnemies: 3
+    amountOfMosquitos: 2
   spawnPoints:
   - {fileID: 1661042527}
   parent: {fileID: 344794723}
   middle: {fileID: 1889031152}
   waveDisplay: {fileID: 757189370}
   victoryText: {fileID: 227035675}
+  endless: 1
 --- !u!4 &1930722075
 Transform:
   m_ObjectHideFlags: 0
