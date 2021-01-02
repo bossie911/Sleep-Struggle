@@ -47,7 +47,7 @@ public class Bullet : MonoBehaviour
         {
             target.GetComponent<Portal>().portalHealth -= bulletDamage;
         }
-        else if (target.gameObject.name == "Enemy 1(Clone)")
+        else /*if (target.gameObject.name == "Enemy 1(Clone)")*/
         {         
             target.GetComponent<Enemy>().currentHealth -= bulletDamage;
         }
