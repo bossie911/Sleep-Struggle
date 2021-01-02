@@ -18,7 +18,7 @@ public class EnemyManager : MonoBehaviour
 
     public Transform[] spawnPoints;
     public Transform parent;
-    public Transform middle;
+    public Transform target;
 
     public Text waveDisplay;
 
@@ -116,6 +116,8 @@ public class EnemyManager : MonoBehaviour
         int whereToSpawn = Random.Range(0, spawnPoints.Length);
         GameObject newGuy = Instantiate(enemy, spawnPoints[whereToSpawn].position, Quaternion.identity);//Creates a new enemy
         newGuy.transform.SetParent(parent);//orders the enemy to avoid cluttering
-        newGuy.GetComponent<NavMeshAgent>().SetDestination(middle.position);//sets the destination of the enemy
+        newGuy.GetComponent<NavMeshAgent>().SetDestination(target.position);//sets the destination of the enemy
     }
+
+    
 }
