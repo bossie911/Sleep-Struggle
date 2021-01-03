@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
-{   
+{
     public static float enemyDamage = 0.1f;
 
     public float currentHealth;
@@ -11,12 +11,12 @@ public class Enemy : MonoBehaviour
     public GameObject bloodSpat;
     public float startHealth;
 
-    
+
 
     public float maxHealth
-    { 
+    {
         get { return currentHealth; }
-        set { currentHealth = value; }    
+        set { currentHealth = value; }
     }
 
     public float getHealed = 5f;
@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
         //als er niet een naast hem staat, heal voor 5 hp en move dichterbij de player base
 
         //Als currentHealth 0 is, is de enemy dood en wordt hij verwijderd
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             EnemyDied();
         }
@@ -54,7 +54,11 @@ public class Enemy : MonoBehaviour
 
     public void EnemyDied()
     {
-        Instantiate(bloodSpat, transform);
+        if (bloodSpat != null)
+        {
+            Instantiate(bloodSpat, transform.position, Quaternion.identity);//starts the blood splatter animation
+            Debug.Log("splat");
+        }
         Destroy(this.gameObject);
     }
 }
