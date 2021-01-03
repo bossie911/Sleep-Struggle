@@ -826,7 +826,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 344794723}
-  - component: {fileID: 344794724}
   m_Layer: 0
   m_Name: Enemies
   m_TagString: Untagged
@@ -848,25 +847,6 @@ Transform:
   m_Father: {fileID: 1930722075}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &344794724
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 344794722}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6f47cab58b6abd046b82f3079a83511c, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &935426718
 GameObject:
   m_ObjectHideFlags: 0
@@ -978,6 +958,7 @@ MonoBehaviour:
   FactoryButton: {fileID: 0}
   TurretButton: {fileID: 303706932}
   mineButton: {fileID: 0}
+  totemButton: {fileID: 0}
 --- !u!1 &953360568
 GameObject:
   m_ObjectHideFlags: 0
@@ -1164,10 +1145,10 @@ MonoBehaviour:
   factoryPrefab: {fileID: 1521036077329811596, guid: 085f55935912aaa4cac61341a05cb2a2,
     type: 3}
   DreamFuel: {fileID: 935426718}
-  mine: {fileID: 9100678730388330573, guid: e89b305c5b84cb1498ee154fff4a8d54, type: 3}
+  Mine: {fileID: 0}
+  Totem: {fileID: 0}
   fogOfWar: {fileID: 1731973768}
   resourceCost: 0
-  factoryCost: 0
   factoryAddedGeneration: 2
   factoryExtraCost: 0
   factoryExtraCostPerFactory: 5
@@ -44180,7 +44161,8 @@ MonoBehaviour:
     type: 3}
   mosquito: {fileID: 1091221307169219929, guid: 0d949b4b671a24144a5659d0ff61f876,
     type: 3}
-  nightmare: {fileID: 0}
+  nightmare: {fileID: 3259984437773718698, guid: 3d7e6f1e6080cf445bd1668aeb9a1df4,
+    type: 3}
   waves:
   - waveDurationSeconds: 5
     cooldownAfterWave: 5
