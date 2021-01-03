@@ -37,7 +37,7 @@ public class Bullet : MonoBehaviour
     {
         if (target == null)
         {
-            DestroyImmediate(this.gameObject);
+            Destroy(this.gameObject);
             return;
         }
     }
@@ -66,6 +66,7 @@ public class Bullet : MonoBehaviour
         target = _target;
     }
 
+    //Funcite wordt aangeroepen in de turret script om te kijken of de turret gebuffed is
     public void BulletDamage(float _bulletDamage, bool isBuffed)
     {
         bulletDamage = _bulletDamage;

@@ -36,7 +36,14 @@ public class Totempaal : BaseTurret
         //Buff turrets in range
         foreach (GameObject Turret in turretsInRange)
         {
-            Turret.GetComponent<Turret>().turretIsBuffed = true;
+            if (Turret.name == "Turret(Clone)")
+            {
+                Turret.GetComponent<Turret>().turretIsBuffed = true;
+            }
+            else if (Turret.name == "Portaal stopper" || Turret.name == "Portaal stopper(Clone)")
+            {
+                Turret.GetComponent<PortaalStopper>().turretIsBuffed = true;
+            }
         }
     }
 
