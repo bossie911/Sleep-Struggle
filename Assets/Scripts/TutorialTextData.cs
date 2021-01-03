@@ -17,19 +17,13 @@ public class TutorialTextData
 
     public void EnableText(bool enable)
     {
-        if(text != null)
+        if (text == null) return; 
+
         if (enable)
-        {
             text.enabled = true;
-            return;
-        }
+        
         else
-        {
             text.enabled = false;
-            return;
-        }
+        
     }
-
-
-
 }

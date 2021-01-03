@@ -40,14 +40,13 @@ public class zoomController : MonoBehaviour
         if (Input.GetMouseButtonDown(2))
         {
             dragOrigin = cam.ScreenToWorldPoint(Input.mousePosition);
-
         }
 
         if (Input.GetMouseButton(2))
         {
             Vector3 difference = dragOrigin - cam.ScreenToWorldPoint(Input.mousePosition);
 
-            print(" origin " + dragOrigin + " newPosition " + cam.ScreenToWorldPoint(Input.mousePosition) + " =difference " + difference);
+            print(" origin " + dragOrigin + " newPosition " + cam.ScreenToWorldPoint(Input.mousePosition) + " = difference " + difference);
 
             cam.transform.position += difference;
 

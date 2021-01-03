@@ -7,7 +7,7 @@ public class TutorialTextManager : MonoBehaviour
     public TutorialTextData[] tutorials;
     int currentTutorial;
     float tutorialTimer;
-    // Start is called before the first frame update
+  
     void Start()
     {
         for (int i = 0; i < tutorials.Length; i++)
