@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4269026097595712011}
   - component: {fileID: 1578345039043337470}
   - component: {fileID: 6105495303759100411}
+  - component: {fileID: 8235758279827358571}
   m_Layer: 0
   m_Name: Enemy 3
   m_TagString: enemy
@@ -74,12 +75,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 240052b21634caf43a960e75674a5395, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 831865a88b6abf34eb715bfc87f68a39, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1.939394}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -131,6 +132,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b17678961ca78e648b60807604842592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHealth: 0
+  bloodSpat: {fileID: 1808764708431430057, guid: 4b06c31533719914eb3a332f67e53617,
+    type: 3}
+  getHealed: 5
+  turret: {fileID: 0}
 --- !u!61 &6105495303759100411
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -148,8 +154,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1.939394}
-    newSize: {x: 1, y: 1.939394}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -157,3 +163,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.50265026, y: 0.55855155}
   m_EdgeRadius: 0
+--- !u!95 &8235758279827358571
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3259984437773718698}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ee63ebfbd2e41a54f8ad7dc490af02a1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

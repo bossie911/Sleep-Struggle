@@ -3,32 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
-{   
+{
     public static float enemyDamage = 0.1f;
 
     public float currentHealth;
+
+    public GameObject bloodSpat;
+    public float startHealth;
+
+
+
     public float maxHealth
-    { 
+    {
         get { return currentHealth; }
-        set { currentHealth = value; }    
+        set { currentHealth = value; }
     }
 
     public float getHealed = 5f;
 
     public GameObject turret;
 
-    void Start()
+    public void Start()
     {
-        maxHealth = 100f;
+        maxHealth = startHealth;
+        currentHealth = maxHealth;
     }
 
-    void Update()
+    public void Update()
     {
         //Enemy scant de tiles naast hem voor turrets. als er een turret naast hem staat, val deze aan. 
         //als er niet een naast hem staat, heal voor 5 hp en move dichterbij de player base
 
         //Als currentHealth 0 is, is de enemy dood en wordt hij verwijderd
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             EnemyDied();
         }
@@ -47,6 +54,11 @@ public class Enemy : MonoBehaviour
 
     public void EnemyDied()
     {
+        if (bloodSpat != null)
+        {
+            Instantiate(bloodSpat, transform.position, Quaternion.identity);//starts the blood splatter animation
+            Debug.Log("splat");
+        }
         Destroy(this.gameObject);
     }
 }
