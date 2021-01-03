@@ -45,8 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e37c53e67e4df340a138ba7958c2946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceCost: 25
-  addedGeneration: 0.5
   fogOfWar: {fileID: 0}
   vision: 1
 --- !u!212 &5118669473735290144
@@ -87,7 +85,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: babaaef0d483c36428acf0cd726f9936, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

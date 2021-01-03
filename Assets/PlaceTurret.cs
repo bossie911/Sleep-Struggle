@@ -13,23 +13,22 @@ using UnityEngine.Analytics;
 public class PlaceTurret : MonoBehaviour
 {
     public Tilemap tilemap;
-    public GameObject turretPrefab, factoryPrefab, DreamFuel, mine;
+    public GameObject turretPrefab, factoryPrefab, DreamFuel, Mine, Totem;
     public Tilemap fogOfWar;
    
     TileManager manager;
-    
+
     static DreamFactorySelector selector;
     private int fow_layer; 
 
     private Rigidbody ghost; 
-    private Rigidbody turretGhost, factoryGhost, mineGhost;
+    private Rigidbody turretGhost, factoryGhost, mineGhost, totemGhost;
 
     //Place the turret slightly higher (looks better)
     private static Vector3 currentOffset; 
     static Vector3 turretOffset, factoryOffset, mineOffset;
 
     public float resourceCost;
-    public float factoryCost;
 
     public float factoryAddedGeneration = 0.5f;
     float factoryBaseCost = 30;
@@ -42,14 +41,15 @@ public class PlaceTurret : MonoBehaviour
     {
         turretOffset = new Vector3(0, 0.4f);
         factoryOffset = new Vector3(0, 0.66f);
-        mineOffset = new Vector3(0,0);
 
         turretGhost = GameObject.Find("TurretGhost").GetComponent<Rigidbody>(); 
         factoryGhost = GameObject.Find("FactoryGhost").GetComponent<Rigidbody>();
         mineGhost = GameObject.Find("MineGhost").GetComponent<Rigidbody>(); 
+        totemGhost = GameObject.Find("TotemGhost").GetComponent<Rigidbody>(); 
         manager = GameObject.Find("TileManager").GetComponent<TileManager>();
         selector = GameObject.Find("DreamFuelPanel").GetComponent<DreamFactorySelector>();
 
+        resourceCost = 50f; 
         fow_layer = 1 << 8; 
     }
 
@@ -59,17 +59,23 @@ public class PlaceTurret : MonoBehaviour
         {
             case DreamFactorySelector.Placeables.Turret: 
                 ghost = turretGhost;
-                currentOffset = turretOffset; 
+                currentOffset = turretOffset;
+                resourceCost = 50f;
                 break;
 
             case DreamFactorySelector.Placeables.Factory:
                 ghost = factoryGhost;
-                currentOffset = factoryOffset; 
+                currentOffset = factoryOffset;
                 break;
+
             case DreamFactorySelector.Placeables.Mine:
                 ghost = mineGhost;
-                currentOffset = mineOffset; 
-                break; 
+                break;
+
+            case DreamFactorySelector.Placeables.Totem:
+                ghost = totemGhost;
+                resourceCost = 100f; 
+                break;
         }
 
         Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -95,8 +101,12 @@ public class PlaceTurret : MonoBehaviour
                         break;
 
                     case DreamFactorySelector.Placeables.Mine:
-                        Place(point, currentTile, mine, currentOffset);
-                        break; 
+                        Place(point, currentTile, Mine, currentOffset);
+                        break;
+
+                    case DreamFactorySelector.Placeables.Totem:
+                        Place(point, currentTile, Totem, currentOffset);
+                        break;
                 }
             }
         }
@@ -117,12 +127,12 @@ public class PlaceTurret : MonoBehaviour
 
         return false; 
     }
-    
+
     private void Place(Vector3 point, TileObject currentTile, GameObject towerToPlace, Vector3 offset)
     {
         Vector3 worldPosition = tilemap.CellToWorld(tilemap.WorldToCell(point));
 
-        if (Equals(towerToPlace, turretPrefab))
+        if (towerToPlace == turretPrefab)
         {
             GameObject newTurret = Instantiate(turretPrefab, worldPosition + offset, Quaternion.identity);
 
@@ -135,14 +145,11 @@ public class PlaceTurret : MonoBehaviour
             turret.PayResourceCost(DreamFuel);
         }
 
-        else if(Equals(towerToPlace, factoryPrefab))
+        else if(towerToPlace == factoryPrefab)
         {
-            //Code voor factories die steeds meer kosten
             factoryExtraCost += factoryExtraCostPerFactory;
             factoryTotalCost = factoryBaseCost + factoryExtraCost;
-
             resourceCost = factoryTotalCost;
-            Debug.Log(resourceCost);
 
             GameObject newFactory = Instantiate(factoryPrefab, worldPosition + offset, Quaternion.identity);
 
@@ -154,14 +161,23 @@ public class PlaceTurret : MonoBehaviour
             DreamFuel.GetComponent<DreamFuel>().baseGeneration += 1f;//factoryAddedGeneration;
         }
 
-        else if(Equals(towerToPlace, mine)) {
+        else if(towerToPlace == Mine) {
             resourceCost = mineCost;
-            GameObject newMine = Instantiate(mine, worldPosition + offset, Quaternion.identity);
+            GameObject newMine = Instantiate(Mine, worldPosition + offset, Quaternion.identity);
             newMine.transform.SetParent(this.transform);
             DreamFuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost;
             //DreamFuel.GetComponent<DreamFuel>().baseGeneration += factoryAddedGeneration;
             newMine.GetComponent<Mine>().construct(manager, DreamFuel.GetComponent<DreamFuel>());
 
+        }
+        else if(towerToPlace == Totem)
+        {
+            GameObject newTotem = Instantiate(Totem, worldPosition + offset, Quaternion.identity);
+
+            newTotem.transform.SetParent(this.transform);
+            Totempaal totem = newTotem.GetComponent<Totempaal>();
+
+            totem.PayResourceCost(DreamFuel);
         }
 
         currentTile.TurretPlaced = true;

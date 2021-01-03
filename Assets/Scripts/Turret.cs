@@ -106,13 +106,6 @@ public class Turret : BaseTurret
         }
     }
 
-
-    public override void PayResourceCost(GameObject dreamfuel)
-    {
-        dreamfuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost;
-    }
-
- 
     public int vision = 1;
     void UpdateFogOfWar()
     {
