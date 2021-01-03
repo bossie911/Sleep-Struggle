@@ -8,6 +8,7 @@ public class DreamFactorySelector : MonoBehaviour
     public Button FactoryButton;
     public Button TurretButton;
     public Button mineButton;
+    public Button totemButton;
 
     private Placeables _selectedPlaceable;
 
@@ -15,7 +16,8 @@ public class DreamFactorySelector : MonoBehaviour
     {
         Turret,
         Factory,
-        Mine
+        Mine,
+        Totem
     }
 
     public Placeables SelectedPlaceable
@@ -24,12 +26,11 @@ public class DreamFactorySelector : MonoBehaviour
         private set { _selectedPlaceable = value; }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         if(FactoryButton != null){
-        Button button1 = FactoryButton.GetComponent<Button>();
-        button1.onClick.AddListener(TaskOnClickFactory);
+            Button button1 = FactoryButton.GetComponent<Button>();
+            button1.onClick.AddListener(TaskOnClickFactory);
         }
 
         if (TurretButton != null)
@@ -42,6 +43,12 @@ public class DreamFactorySelector : MonoBehaviour
         {
             Button button3 = mineButton.GetComponent<Button>();
             button3.onClick.AddListener(TaskOnClickMine);
+        }
+
+        if (totemButton != null)
+        {
+            Button button4 = totemButton.GetComponent<Button>();
+            button4.onClick.AddListener(TaskOnClickTotem);
         }
     }
 
@@ -61,5 +68,11 @@ public class DreamFactorySelector : MonoBehaviour
     {
         if (mineButton)
             _selectedPlaceable = Placeables.Mine;
+    }
+
+    public void TaskOnClickTotem()
+    {
+        if (totemButton)
+            _selectedPlaceable = Placeables.Totem;
     }
 }

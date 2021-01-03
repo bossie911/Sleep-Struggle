@@ -9,9 +9,7 @@ public class TutorialTextData
     public float timeVisible;
     public GameObject tutorial;
     Text text;
-    TutorialTextData()
-    {
-    }
+
     public void Setup()
     {
         text = tutorial.GetComponent<Text>();
@@ -19,18 +17,13 @@ public class TutorialTextData
 
     public void EnableText(bool enable)
     {
+        if (text == null) return; 
+
         if (enable)
-        {
             text.enabled = true;
-            return;
-        }
+        
         else
-        {
             text.enabled = false;
-            return;
-        }
+        
     }
-
-
-
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1091221307169219930}
   - component: {fileID: 1091221307169219924}
   - component: {fileID: 1091221307169219925}
-  - component: {fileID: 299815359215156100}
+  - component: {fileID: 8151942225607360191}
   - component: {fileID: 1287735372626047710}
   - component: {fileID: 4059442075715244296}
   m_Layer: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 774fbcc16d41d7b4ab2d9e34d1cb3739, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &299815359215156100
+--- !u!114 &8151942225607360191
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,10 +129,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1091221307169219929}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c5545214c67b164f8c7f0f862b03d86, type: 3}
+  m_Script: {fileID: 11500000, guid: c4ae731405d921e448ea98794398b85e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
+  bloodSpat: {fileID: 1808764708431430057, guid: 4b06c31533719914eb3a332f67e53617,
+    type: 3}
+  startHealth: 40
   getHealed: 5
   turret: {fileID: 0}
 --- !u!61 &1287735372626047710

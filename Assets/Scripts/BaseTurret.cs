@@ -26,11 +26,6 @@ public class BaseTurret : MonoBehaviour
         set { fogOfWar = value; }
     }
 
-    public float ResourceCost
-    {
-        get { return resourceCost; }
-    }
-
     public GameObject BulletPrefab
     {
         get { return bulletPrefab; }
@@ -40,7 +35,15 @@ public class BaseTurret : MonoBehaviour
     //Pay the resource cost of a particular turret
     public virtual void PayResourceCost(GameObject dreamfuel)
     {
-        dreamfuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost; 
+        var currFuel = dreamfuel.GetComponent<DreamFuel>().currentResourceValue; 
+
+        if (currFuel >= resourceCost)
+            dreamfuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost;
+    }
+
+    public float ResourceCost()
+    {
+        return resourceCost; 
     }
 
     //Drawn range

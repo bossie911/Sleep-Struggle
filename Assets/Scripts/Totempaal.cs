@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class Totempaal : BaseTurret
 {
-
     public List<GameObject> turretsInRange = new List<GameObject>();
 
-
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         range = 5f;
-        resourceCost = 100;
+        resourceCost = 100f;
         targetTag = "turret";
     }
 
@@ -20,7 +17,6 @@ public class Totempaal : BaseTurret
     void Update()
     {
         BuffTurrets();
-
         ClearList();
     }
 
@@ -43,7 +39,6 @@ public class Totempaal : BaseTurret
             Turret.GetComponent<Turret>().turretIsBuffed = true;
         }
     }
-
 
     void ClearList()
     {
