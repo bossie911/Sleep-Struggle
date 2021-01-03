@@ -133,6 +133,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
+  bloodSpat: {fileID: 1808764708431430057, guid: 4b06c31533719914eb3a332f67e53617,
+    type: 3}
   getHealed: 5
   turret: {fileID: 0}
 --- !u!61 &6105495303759100411

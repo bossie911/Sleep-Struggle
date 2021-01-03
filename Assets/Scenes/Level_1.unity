@@ -24632,6 +24632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2269438ba91e13b4ca39b5be5aee53aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 0}
   zoomLerpSpeed: 16
 --- !u!81 &1574986183
 AudioListener:

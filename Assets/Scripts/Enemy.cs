@@ -7,6 +7,12 @@ public class Enemy : MonoBehaviour
     public static float enemyDamage = 0.1f;
 
     public float currentHealth;
+
+    public GameObject bloodSpat;
+    public float startHealth;
+
+    
+
     public float maxHealth
     { 
         get { return currentHealth; }
@@ -17,12 +23,13 @@ public class Enemy : MonoBehaviour
 
     public GameObject turret;
 
-    void Start()
+    public void Start()
     {
-        maxHealth = 100f;
+        maxHealth = startHealth;
+        currentHealth = maxHealth;
     }
 
-    void Update()
+    public void Update()
     {
         //Enemy scant de tiles naast hem voor turrets. als er een turret naast hem staat, val deze aan. 
         //als er niet een naast hem staat, heal voor 5 hp en move dichterbij de player base
@@ -47,6 +54,7 @@ public class Enemy : MonoBehaviour
 
     public void EnemyDied()
     {
+        Instantiate(bloodSpat, transform);
         Destroy(this.gameObject);
     }
 }

@@ -5,17 +5,24 @@ using UnityEngine;
 
 public class Mosquito : Enemy
 {
+    NavMeshAgent navMeshAgent;
     // Start is called before the first frame update
     void Start()
     {
-        
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        base.Start();
     }
 
     // Update is called once per frame
     void Update()
     {
         //Sets the destination of the enemy
-        GetComponent<NavMeshAgent>().SetDestination(findGameObject().transform.position);
+        GameObject destFound = findGameObject();
+        if (destFound != null)
+        {
+            navMeshAgent.SetDestination(findGameObject().transform.position);
+        }
+        base.Update();
     }
 
     GameObject findGameObject()
@@ -36,7 +43,7 @@ public class Mosquito : Enemy
                 closestResource = resource;
             }
         }
-        
+
         return closestResource;
     }
 }
