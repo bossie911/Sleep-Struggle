@@ -44182,10 +44182,10 @@ MonoBehaviour:
     type: 3}
   nightmare: {fileID: 0}
   waves:
-  - waveDurationSeconds: 20
+  - waveDurationSeconds: 5
     cooldownAfterWave: 5
     amountOfNormalEnemies: 1
-    amountOfMosquitos: 10
+    amountOfMosquitos: 0
     amountOfNightmares: 0
   - waveDurationSeconds: 20
     cooldownAfterWave: 5
@@ -44275,8 +44275,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorials:
-  - timeVisible: 10
+  - timeVisible: 2
     tutorial: {fileID: 1630204236}
+  - timeVisible: 1
+    tutorial: {fileID: 0}
   - timeVisible: 10
     tutorial: {fileID: 166102032}
   - timeVisible: 10
