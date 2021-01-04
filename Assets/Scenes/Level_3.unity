@@ -44840,6 +44840,11 @@ MonoBehaviour:
     pitch: 1
     volume: 0.89
     audioClip: {fileID: 8300000, guid: cefc641f6cfaca64f9f664da7be8e8f5, type: 3}
+  - name: click
+    speed: 1
+    pitch: 1
+    volume: 0.89
+    audioClip: {fileID: 8300000, guid: 35169c4be7891cf4fb3dfd2b1096c565, type: 3}
   LoopMusic: 1
 --- !u!82 &1628195408
 AudioSource:

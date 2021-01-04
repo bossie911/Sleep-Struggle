@@ -394,6 +394,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 161237058}
     m_Modifications:
+    - target: {fileID: -3543671445172465131, guid: 5c92df52f08dc2b42b3c8522d6d2c07e,
+        type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 833783226}
     - target: {fileID: 1750933968504502052, guid: 5c92df52f08dc2b42b3c8522d6d2c07e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -24270,6 +24275,21 @@ MonoBehaviour:
     pitch: 1
     volume: 0.67
     audioClip: {fileID: 8300000, guid: 875b28df76dcf0049b35e4cd3fab9d45, type: 3}
+  - name: portalBreak
+    speed: 1
+    pitch: 0.62
+    volume: 0.67
+    audioClip: {fileID: 8300000, guid: d74bc556be86d9947980c16e81a0d983, type: 3}
+  - name: portalDamage
+    speed: 1
+    pitch: 1
+    volume: 0.89
+    audioClip: {fileID: 8300000, guid: cefc641f6cfaca64f9f664da7be8e8f5, type: 3}
+  - name: click
+    speed: 1
+    pitch: 1
+    volume: 0.89
+    audioClip: {fileID: 8300000, guid: 35169c4be7891cf4fb3dfd2b1096c565, type: 3}
   LoopMusic: 1
 --- !u!1 &870557604
 GameObject:
@@ -45049,6 +45069,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 161237058}
     m_Modifications:
+    - target: {fileID: -3543671445172465131, guid: 5c92df52f08dc2b42b3c8522d6d2c07e,
+        type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 833783226}
     - target: {fileID: 1750933968504502052, guid: 5c92df52f08dc2b42b3c8522d6d2c07e,
         type: 3}
       propertyPath: m_LocalPosition.x
