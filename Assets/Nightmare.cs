@@ -8,7 +8,7 @@ public class Nightmare : Enemy
     // Start is called before the first frame update
     void Start()
     {
-
+        base.Start();
     }
 
     // Update is called once per frame
@@ -16,6 +16,7 @@ public class Nightmare : Enemy
     {
         //Sets the destination of the enemy
         GetComponent<NavMeshAgent>().SetDestination(findGameObject().transform.position);
+        base.Update();
     }
 
     GameObject findGameObject()

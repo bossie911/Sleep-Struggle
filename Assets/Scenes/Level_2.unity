@@ -24455,8 +24455,8 @@ MonoBehaviour:
   - waveDurationSeconds: 20
     cooldownAfterWave: 5
     amountOfNormalEnemies: 3
-    amountOfMosquitos: 20
-    amountOfNightmares: 20
+    amountOfMosquitos: 1
+    amountOfNightmares: 0
   - waveDurationSeconds: 30
     cooldownAfterWave: 5
     amountOfNormalEnemies: 4
