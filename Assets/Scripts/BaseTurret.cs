@@ -13,7 +13,10 @@ public class BaseTurret : MonoBehaviour
 
     protected float fireSpeed;
     protected float fireCounter; 
-    protected float resourceCost; 
+    protected float resourceCost;
+
+    protected float turretHP = 50f;
+    float enemyDamageOnTurret = 0.1f;
 
     protected Transform bulletBeginPoint;
 
@@ -39,6 +42,18 @@ public class BaseTurret : MonoBehaviour
 
         if (currFuel >= resourceCost)
             dreamfuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost;
+    }
+    void OnCollisionStay2D(Collision2D col)
+    {
+        if (col.gameObject.tag.Equals("enemy"))
+        {
+            turretHP -= enemyDamageOnTurret;
+        }
+
+        if (turretHP <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public float ResourceCost()
