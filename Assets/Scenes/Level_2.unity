@@ -24048,10 +24048,15 @@ MonoBehaviour:
   - name: splat
     speed: 1
     pitch: 1
-    volume: 1
+    volume: 0.58
     audioClip: {fileID: 8300000, guid: 1909a78c0338c1b4d8ea7537ed55caf4, type: 3}
+  - name: shoot
+    speed: 1
+    pitch: 1
+    volume: 0.67
+    audioClip: {fileID: 8300000, guid: 875b28df76dcf0049b35e4cd3fab9d45, type: 3}
   boss: {fileID: 0}
-  LoopMusic: 0
+  LoopMusic: 1
 --- !u!1 &870557604
 GameObject:
   m_ObjectHideFlags: 0

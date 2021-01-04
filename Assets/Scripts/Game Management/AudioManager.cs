@@ -6,7 +6,6 @@ using System;
 public class AudioManager : MonoBehaviour
 {
     public AudioObject[] objects;
-    public GameObject boss;
 
     public bool LoopMusic;
 
