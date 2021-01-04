@@ -13,7 +13,7 @@ using UnityEngine.Analytics;
 public class PlaceTurret : MonoBehaviour
 {
     public Tilemap tilemap;
-    public GameObject turretPrefab, factoryPrefab, DreamFuel, Mine, Totem;
+    public GameObject turretPrefab, factoryPrefab, DreamFuel, Mine, Totem, Candle;
     public Tilemap fogOfWar;
    
     TileManager manager;
@@ -22,13 +22,14 @@ public class PlaceTurret : MonoBehaviour
     private int fow_layer; 
 
     private Rigidbody ghost; 
-    private Rigidbody turretGhost, factoryGhost, mineGhost, totemGhost;
+    private Rigidbody turretGhost, factoryGhost, mineGhost, totemGhost, candleGhost;
 
     //Place the turret slightly higher (looks better)
     private static Vector3 currentOffset; 
     static Vector3 turretOffset, factoryOffset, mineOffset;
 
-    public float resourceCost;
+    //Default selected turret is the dreamcatcher, which cost 50
+    public float resourceCost = 50f;
 
     public float factoryAddedGeneration = 0.5f;
     float factoryBaseCost = 30;
@@ -44,12 +45,13 @@ public class PlaceTurret : MonoBehaviour
 
         turretGhost = GameObject.Find("TurretGhost").GetComponent<Rigidbody>(); 
         factoryGhost = GameObject.Find("FactoryGhost").GetComponent<Rigidbody>();
-        mineGhost = GameObject.Find("MineGhost").GetComponent<Rigidbody>(); 
+        mineGhost = GameObject.Find("MineGhost").GetComponent<Rigidbody>();
+        candleGhost = GameObject.Find("CandleGhost").GetComponent<Rigidbody>();
         totemGhost = GameObject.Find("TotemGhost").GetComponent<Rigidbody>(); 
+
         manager = GameObject.Find("TileManager").GetComponent<TileManager>();
         selector = GameObject.Find("DreamFuelPanel").GetComponent<DreamFactorySelector>();
 
-        resourceCost = 50f; 
         fow_layer = 1 << 8; 
     }
 
@@ -75,6 +77,11 @@ public class PlaceTurret : MonoBehaviour
             case DreamFactorySelector.Placeables.Totem:
                 ghost = totemGhost;
                 resourceCost = 100f; 
+                break;
+
+            case DreamFactorySelector.Placeables.Candle:
+                ghost = candleGhost;
+                resourceCost = 20f;
                 break;
         }
 
@@ -107,6 +114,10 @@ public class PlaceTurret : MonoBehaviour
                     case DreamFactorySelector.Placeables.Totem:
                         Place(point, currentTile, Totem, currentOffset);
                         break;
+
+                    case DreamFactorySelector.Placeables.Candle:
+                        Place(point, currentTile, Candle, currentOffset);
+                        break;
                 }
             }
         }
@@ -138,10 +149,8 @@ public class PlaceTurret : MonoBehaviour
 
             //Create all turrets as a child of this gameobj, so the hierarchy doesn't get cluttered
             newTurret.transform.SetParent(this.transform);
-            Turret turret = newTurret.GetComponent<Turret>(); 
-
-            //Set reference FoW of the newly created turret
-            turret.FogOfWar = fogOfWar;
+            
+            Turret turret = newTurret.GetComponent<Turret>();
             turret.PayResourceCost(DreamFuel);
         }
 
@@ -178,6 +187,27 @@ public class PlaceTurret : MonoBehaviour
             Totempaal totem = newTotem.GetComponent<Totempaal>();
 
             totem.PayResourceCost(DreamFuel);
+        }
+
+        else if (towerToPlace == Totem)
+        {
+            GameObject newTotem = Instantiate(Totem, worldPosition + offset, Quaternion.identity);
+
+            newTotem.transform.SetParent(this.transform);
+            Totempaal totem = newTotem.GetComponent<Totempaal>();
+
+            totem.PayResourceCost(DreamFuel);
+        }
+
+        else if (towerToPlace == Candle)
+        {
+            GameObject newCandle = Instantiate(Candle, worldPosition + offset, Quaternion.identity);
+
+            newCandle.transform.SetParent(this.transform);
+            Candle candle = newCandle.GetComponent<Candle>();
+
+            candle.FogOfWar = fogOfWar; 
+            candle.PayResourceCost(DreamFuel);
         }
 
         currentTile.TurretPlaced = true;
