@@ -17,7 +17,6 @@ public class Candle : BaseTurret
         UpdateFogOfWar();
     }
 
-    
    private void UpdateFogOfWar()
     {
         Vector3Int currentTile = FogOfWar.WorldToCell(transform.position);
