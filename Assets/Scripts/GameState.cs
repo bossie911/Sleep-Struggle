@@ -7,7 +7,24 @@ public class GameState : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadScene("level_1");
+        SceneManager.LoadScene("LevelSelection");
+    }
+
+    public void GoToLevel(int whichLevel)
+    {
+
+        switch (whichLevel)
+        {
+            case 1:
+                SceneManager.LoadScene("Level_1");
+                break;
+            case 2:
+                SceneManager.LoadScene("Level_2");
+                break;
+            case 3:
+                SceneManager.LoadScene("Level_3");
+                break;
+        }
     }
 
     public void GoBack()
