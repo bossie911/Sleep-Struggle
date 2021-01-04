@@ -464,6 +464,11 @@ MonoBehaviour:
     pitch: 1
     volume: 0.89
     audioClip: {fileID: 8300000, guid: cefc641f6cfaca64f9f664da7be8e8f5, type: 3}
+  - name: click
+    speed: 1
+    pitch: 1
+    volume: 0.59
+    audioClip: {fileID: 8300000, guid: 575b7748aa79a404d83297f940e322a3, type: 3}
   LoopMusic: 1
 --- !u!1 &166102032
 GameObject:
