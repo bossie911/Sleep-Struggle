@@ -24270,6 +24270,16 @@ MonoBehaviour:
     pitch: 1
     volume: 0.67
     audioClip: {fileID: 8300000, guid: 875b28df76dcf0049b35e4cd3fab9d45, type: 3}
+  - name: portalBreak
+    speed: 1
+    pitch: 0.62
+    volume: 0.67
+    audioClip: {fileID: 8300000, guid: d74bc556be86d9947980c16e81a0d983, type: 3}
+  - name: portalDamage
+    speed: 1
+    pitch: 1
+    volume: 0.89
+    audioClip: {fileID: 8300000, guid: cefc641f6cfaca64f9f664da7be8e8f5, type: 3}
   LoopMusic: 1
 --- !u!1 &870557604
 GameObject:
