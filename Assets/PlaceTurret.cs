@@ -41,7 +41,6 @@ public class PlaceTurret : MonoBehaviour
     void Start()
     {
         turretOffset = new Vector3(0, 0.4f);
-        factoryOffset = new Vector3(0, 0.66f);
 
         turretGhost = GameObject.Find("TurretGhost").GetComponent<Rigidbody>(); 
         factoryGhost = GameObject.Find("FactoryGhost").GetComponent<Rigidbody>();
