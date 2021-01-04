@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class DreamFactorySelector : MonoBehaviour
 {
+    private AudioManager Manager; 
+
     public Button FactoryButton;
     public Button TurretButton;
     public Button mineButton;
