@@ -33,7 +33,6 @@ public class Turret : BaseTurret
     void Update()
     {
         FindTarget();
-        UpdateFogOfWar();
         BuffedCheck();
 
         if (target != null)
@@ -104,20 +103,5 @@ public class Turret : BaseTurret
             bulletDamage = buffedBulletDamage;
 
         }
-    }
-
-    public int vision = 1;
-    void UpdateFogOfWar()
-    {
-        Vector3Int currentTowerTile = FogOfWar.WorldToCell(transform.position);
-
-        //Clear the surrounding tiles
-        for(int x=-vision; x<= vision - 1; x++)
-        {
-            for(int y = -vision - 1; y<= vision; y++)
-            {
-                FogOfWar.SetTile(currentTowerTile + new Vector3Int(x, y, 0), null);
-            }    
-        }    
     }
 }

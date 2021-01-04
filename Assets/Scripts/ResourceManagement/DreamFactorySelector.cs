@@ -9,6 +9,7 @@ public class DreamFactorySelector : MonoBehaviour
     public Button TurretButton;
     public Button mineButton;
     public Button totemButton;
+    public Button candleButton;
 
     private Placeables _selectedPlaceable;
 
@@ -17,7 +18,8 @@ public class DreamFactorySelector : MonoBehaviour
         Turret,
         Factory,
         Mine,
-        Totem
+        Totem,
+        Candle
     }
 
     public Placeables SelectedPlaceable
@@ -50,6 +52,12 @@ public class DreamFactorySelector : MonoBehaviour
             Button button4 = totemButton.GetComponent<Button>();
             button4.onClick.AddListener(TaskOnClickTotem);
         }
+
+        if (candleButton != null)
+        {
+            Button button5 = candleButton.GetComponent<Button>();
+            button5.onClick.AddListener(TaskOnClickCandle);
+        }
     }
 
     public void TaskOnClickFactory()
@@ -75,4 +83,11 @@ public class DreamFactorySelector : MonoBehaviour
         if (totemButton)
             _selectedPlaceable = Placeables.Totem;
     }
+
+    public void TaskOnClickCandle()
+    {
+        if (candleButton)
+            _selectedPlaceable = Placeables.Candle;
+    }
+
 }
