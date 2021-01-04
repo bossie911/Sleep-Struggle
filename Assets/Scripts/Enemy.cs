@@ -22,12 +22,21 @@ public class Enemy : MonoBehaviour
     public float getHealed = 5f;
 
     public GameObject turret;
+    AudioManager audioManager;
+
+    public void Setup(AudioManager _audioManager)
+    {
+        audioManager = _audioManager;
+
+    }
 
     public void Start()
     {
         maxHealth = startHealth;
         currentHealth = maxHealth;
     }
+
+
 
     public void Update()
     {
@@ -54,10 +63,10 @@ public class Enemy : MonoBehaviour
 
     public void EnemyDied()
     {
+        audioManager.Play("splat");
         if (bloodSpat != null)
         {
             Instantiate(bloodSpat, transform.position, Quaternion.identity);//starts the blood splatter animation
-            Debug.Log("splat");
         }
         Destroy(this.gameObject);
     }

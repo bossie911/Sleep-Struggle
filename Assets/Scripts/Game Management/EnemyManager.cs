@@ -27,6 +27,8 @@ public class EnemyManager : MonoBehaviour
 
     float totalWaveTime, gameEndTimer;
     public Text victoryText;
+
+    public AudioManager audioManager;
     public bool endless;
 
 
@@ -124,10 +126,15 @@ public class EnemyManager : MonoBehaviour
         cooldownActive = false;
     }
     
+    /// <summary>
+    /// selects a random spawnpoint from the spawnpoints array and spawns an enemy there
+    /// </summary>
+    /// <param name="enemy">Prefab of the enemy spawned</param>
     void spawnEnemy(GameObject enemy)
     {
-        int whereToSpawn = Random.Range(0, spawnPoints.Length);
+        int whereToSpawn = Random.Range(0, spawnPoints.Length);//finds a spawnpoint to spawn an enemy
         GameObject newGuy = Instantiate(enemy, spawnPoints[whereToSpawn].position, Quaternion.identity);//Creates a new enemy
+        newGuy.GetComponent<Enemy>().Setup(audioManager);
         newGuy.transform.SetParent(parent);//orders the enemy to avoid cluttering
         newGuy.GetComponent<NavMeshAgent>().SetDestination(target.position);//sets the destination of the enemy
     }
