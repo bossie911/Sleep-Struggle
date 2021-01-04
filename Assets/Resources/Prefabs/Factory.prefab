@@ -48,7 +48,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fogOfWar: {fileID: 0}
-  vision: 1
 --- !u!212 &5118669473735290144
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -119,7 +118,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 3
+  m_Constraints: 7
 --- !u!58 &4858288730105748490
 CircleCollider2D:
   m_ObjectHideFlags: 0

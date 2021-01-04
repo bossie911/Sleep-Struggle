@@ -10,8 +10,5 @@ public class DreamFactory : BaseTurret
     // Update is called once per frame
     void Update()
     {
-        UpdateFogOfWar();
     }
-
-    public int vision = 1;
 }
