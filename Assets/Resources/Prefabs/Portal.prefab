@@ -95,3 +95,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portalHealth: 100
+  audioManager: {fileID: 0}
+  deathParticles: {fileID: 6521660286757581843, guid: 10481fcb93a600c40bd3c4c425108fff,
+    type: 3}

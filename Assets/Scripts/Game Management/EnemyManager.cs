@@ -30,6 +30,7 @@ public class EnemyManager : MonoBehaviour
 
     public AudioManager audioManager;
     public bool endless;
+    bool gameIsOver;
 
 
     // Start is called before the first frame update
@@ -104,6 +105,14 @@ public class EnemyManager : MonoBehaviour
             spawnEnemy(nightmare);
 
             nextNightmareTime += timeBetweenNightmare;
+        }
+
+        gameIsOver = true;
+        foreach(Transform spawn in spawnPoints){
+            gameIsOver = false;
+        }
+        if(gameIsOver){
+            //insert next level here
         }
     }
 
