@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &16407225
 RectTransform:
   m_ObjectHideFlags: 0
@@ -444,7 +444,6 @@ MonoBehaviour:
     pitch: 1
     volume: 0.37
     audioClip: {fileID: 8300000, guid: 75af70f0d5eb8fb4eaffd42ee52e4394, type: 3}
-  boss: {fileID: 0}
   LoopMusic: 0
 --- !u!1 &166102032
 GameObject:
@@ -44582,6 +44581,7 @@ MonoBehaviour:
   target: {fileID: 1889031152}
   waveDisplay: {fileID: 16407226}
   victoryText: {fileID: 227035675}
+  audioManager: {fileID: 0}
   endless: 1
 --- !u!4 &1930722075
 Transform:
