@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7318713595562460043}
   m_Layer: 0
   m_Name: Totempaal
-  m_TagString: Untagged
+  m_TagString: turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
