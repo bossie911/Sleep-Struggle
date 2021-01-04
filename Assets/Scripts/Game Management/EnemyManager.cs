@@ -53,6 +53,23 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        //checks if the portals are all destroyed
+        gameIsOver = true;
+        foreach (Transform spawn in spawnPoints)
+        {
+            if (spawn != null)
+            {
+                gameIsOver = false;
+            }
+        }
+        if (gameIsOver)
+        {
+            //insert next level here
+            Debug.Log("game is over");
+        }
+        //checks if the portals are all destroyed
+
         waveTimer += Time.deltaTime;
 
         if (waveTimer >= waves[currentWave].waveDurationSeconds)
@@ -60,23 +77,24 @@ public class EnemyManager : MonoBehaviour
             cooldownActive = true;
         }
 
-            if (waveTimer >= waves[currentWave].cooldownAfterWave + waves[currentWave].waveDurationSeconds && currentWave < waves.Length - 1)
+        if (waveTimer >= waves[currentWave].cooldownAfterWave + waves[currentWave].waveDurationSeconds && currentWave < waves.Length - 1)
+        {
+            if (currentWave > waves.Length - 1)
             {
-                if (currentWave > waves.Length - 1)
-                {
-                    AnalyticsResult result = Analytics.CustomEvent("CompleteLevel", new Dictionary<string, object>
+                AnalyticsResult result = Analytics.CustomEvent("CompleteLevel", new Dictionary<string, object>
                 {{"CompleteLevel", 1}
                 });
 
-                    Debug.Log("leveldone : " + result);
-                }
-                currentWave++;
-                if(endless && currentWave > waves.Length -1){
-                    currentWave = waves.Length -1;
-                }
-                startWave();
+                Debug.Log("leveldone : " + result);
             }
-        
+            currentWave++;
+            if (endless && currentWave > waves.Length - 1)
+            {
+                currentWave = waves.Length - 1;
+            }
+            startWave();
+        }
+
 
         gameEndTimer += Time.deltaTime;
         if (gameEndTimer > totalWaveTime)
@@ -107,13 +125,7 @@ public class EnemyManager : MonoBehaviour
             nextNightmareTime += timeBetweenNightmare;
         }
 
-        gameIsOver = true;
-        foreach(Transform spawn in spawnPoints){
-            gameIsOver = false;
-        }
-        if(gameIsOver){
-            //insert next level here
-        }
+
     }
 
     /// starts a new wave and calculates the values needed
@@ -134,7 +146,7 @@ public class EnemyManager : MonoBehaviour
 
         cooldownActive = false;
     }
-    
+
     /// <summary>
     /// selects a random spawnpoint from the spawnpoints array and spawns an enemy there
     /// </summary>
