@@ -27,6 +27,7 @@ public class HPBarBase : MonoBehaviour
         if (baseHP <= 0)
         {
             SceneManager.LoadScene("GameOverScreen");
+            baseHP = 100f;
         }
     }
 }
