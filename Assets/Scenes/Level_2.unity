@@ -269,7 +269,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Kill the portal to advance
+  m_Text: Find and kill the portals
 --- !u!222 &158116140
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -359,7 +359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorials:
-  - timeVisible: 1
+  - timeVisible: 7
     tutorial: {fileID: 467822673}
   - timeVisible: 2
     tutorial: {fileID: 1986881091}
@@ -908,7 +908,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Ensure you can build by building a '
+  m_Text: You need resources, build a tiki.
 --- !u!222 &467822675
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -45485,7 +45485,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Your turrets also attack the portal.
+  m_Text: Use the candle to erase the fog.
 --- !u!222 &1986881093
 CanvasRenderer:
   m_ObjectHideFlags: 0
