@@ -40,6 +40,7 @@ public class BaseTurret : MonoBehaviour
         get { return bulletPrefab; }
         protected set { bulletPrefab = value; }
     }
+
     void OnCollisionStay2D(Collision2D col)
     {
         if (col.gameObject.tag.Equals("enemy"))
@@ -47,7 +48,7 @@ public class BaseTurret : MonoBehaviour
 
         if (turretHP <= 0)
         {
-            Debug.Log("remove this");
+            //Debug.Log("remove this");
             myTile.TurretPlaced = false;
             Destroy(this.gameObject);
         }
@@ -60,6 +61,15 @@ public class BaseTurret : MonoBehaviour
 
         if (currFuel >= resourceCost)
             dreamfuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost;
+    }
+
+    //Overloaded method for the DreamFactory
+    public virtual void PayResourceCost(DreamFuel dreamfuel, float cost)
+    {
+        var currFuel = dreamfuel.GetComponent<DreamFuel>().currentResourceValue;
+
+        if (currFuel >= resourceCost)
+            dreamfuel.GetComponent<DreamFuel>().currentResourceValue -= cost;
     }
 
     //Drawn range

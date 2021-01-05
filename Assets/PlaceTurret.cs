@@ -167,11 +167,13 @@ public class PlaceTurret : MonoBehaviour
             newFactory.transform.SetParent(this.transform);
             newFactory.GetComponent<BaseTurret>().Setup(currentTile);
 
-            dreamFuel.currentResourceValue -= resourceCost;
-            dreamFuel.baseGeneration += 1f;//factoryAddedGeneration;
+            DreamFactory factory = newFactory.GetComponent<DreamFactory>(); 
+            factory.PayResourceCost(dreamFuel, resourceCost);
+            factory.increaseProduction(dreamFuel);
         }
 
-        else if(towerToPlace == Mine) {
+        else if(towerToPlace == Mine) 
+        {
             resourceCost = mineCost;
             GameObject newMine = Instantiate(Mine, worldPosition + offset, Quaternion.identity);
             newMine.transform.SetParent(this.transform);
@@ -181,6 +183,7 @@ public class PlaceTurret : MonoBehaviour
             newMine.GetComponent<Mine>().construct(manager, dreamFuel);
 
         }
+
         else if(towerToPlace == Totem)
         {
             GameObject newTotem = Instantiate(Totem, worldPosition + offset, Quaternion.identity);
@@ -196,10 +199,10 @@ public class PlaceTurret : MonoBehaviour
             GameObject newCandle = Instantiate(Candle, worldPosition + offset, Quaternion.identity);
 
             newCandle.transform.SetParent(this.transform);
-            newCandle.GetComponent<BaseTurret>().Setup(currentTile);
+           
             Candle candle = newCandle.GetComponent<Candle>();
-
             candle.FogOfWar = fogOfWar; 
+            candle.Setup(currentTile);
             candle.PayResourceCost(dreamFuel);
         }
 
