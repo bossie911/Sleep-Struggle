@@ -9,7 +9,6 @@ public class AudioObject
 {
     public string name;
 
-
     public float speed;
     [Range(.1f, 2f)]
     public float pitch;
@@ -19,7 +18,6 @@ public class AudioObject
     public AudioClip audioClip;
 
     AudioSource source;
-
 
     void PlaySound() {
     }
