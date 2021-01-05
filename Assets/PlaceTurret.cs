@@ -15,6 +15,7 @@ public class PlaceTurret : MonoBehaviour
     public Tilemap tilemap;
     public GameObject turretPrefab, factoryPrefab, Mine, Totem, Candle;
     public Tilemap fogOfWar;
+    public AudioManager audioManager; 
     
     TileManager manager;
     DreamFuel dreamFuel; 
@@ -202,6 +203,7 @@ public class PlaceTurret : MonoBehaviour
             candle.PayResourceCost(dreamFuel);
         }
 
+        audioManager.Play("thud");
         currentTile.TurretPlaced = true;
     }
 }

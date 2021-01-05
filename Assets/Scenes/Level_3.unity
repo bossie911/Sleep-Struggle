@@ -2089,6 +2089,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8543186329442608996, guid: f225e7327465f5e499cb76dc906390d1,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 35169c4be7891cf4fb3dfd2b1096c565, type: 3}
     - target: {fileID: 8543186329442608997, guid: f225e7327465f5e499cb76dc906390d1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -25119,6 +25124,7 @@ MonoBehaviour:
   Totem: {fileID: 7318713595562460040, guid: c261bb1da58546541aa0bfab1b2955ef, type: 3}
   Candle: {fileID: 6632914316725575977, guid: 3cafe2e12a2e985449863b339f27af6f, type: 3}
   fogOfWar: {fileID: 1282915657}
+  audioManager: {fileID: 1628195407}
   resourceCost: 0
   factoryAddedGeneration: 2
   factoryExtraCost: 0
@@ -128877,7 +128883,12 @@ MonoBehaviour:
     pitch: 1
     volume: 0.89
     audioClip: {fileID: 8300000, guid: 35169c4be7891cf4fb3dfd2b1096c565, type: 3}
-  LoopMusic: 1
+  - name: thud
+    speed: 1
+    pitch: 1
+    volume: 0.89
+    audioClip: {fileID: 8300000, guid: 9bfe6ff54fef26249b9d3b9b2fcc4a3f, type: 3}
+  LoopMusic: 0
 --- !u!4 &1628195409
 Transform:
   m_ObjectHideFlags: 0

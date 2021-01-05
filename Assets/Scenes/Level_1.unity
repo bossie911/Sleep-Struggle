@@ -372,7 +372,12 @@ MonoBehaviour:
     pitch: 1
     volume: 0.89
     audioClip: {fileID: 8300000, guid: 35169c4be7891cf4fb3dfd2b1096c565, type: 3}
-  LoopMusic: 1
+  - name: thud
+    speed: 1
+    pitch: 1
+    volume: 0.5
+    audioClip: {fileID: 8300000, guid: 9bfe6ff54fef26249b9d3b9b2fcc4a3f, type: 3}
+  LoopMusic: 0
 --- !u!1 &166102032
 GameObject:
   m_ObjectHideFlags: 0
@@ -1662,6 +1667,7 @@ MonoBehaviour:
   Totem: {fileID: 1721304623}
   Candle: {fileID: 6632914316725575977, guid: 3cafe2e12a2e985449863b339f27af6f, type: 3}
   fogOfWar: {fileID: 1731973768}
+  audioManager: {fileID: 147744372}
   resourceCost: 0
   factoryAddedGeneration: 2
   factoryExtraCost: 0
