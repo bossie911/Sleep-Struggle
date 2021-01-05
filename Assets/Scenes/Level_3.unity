@@ -1467,7 +1467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45fff8cd74e3a5049a913d88d4c43836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyDamage: 0.1
+  FogOfWar: {fileID: 1282915657}
 --- !u!58 &768705466
 CircleCollider2D:
   m_ObjectHideFlags: 0
