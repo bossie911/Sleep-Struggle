@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,12 +9,11 @@ public class Portal : MonoBehaviour
 
     public GameObject deathParticles;
     float lastHealth;
-    ParticleSystem damageParticles;
 
     // Start is called before the first frame update
     void Start()
     {
-        damageParticles = GetComponent<ParticleSystem>();
+
     }
 
     // Update is called once per frame
@@ -32,7 +31,6 @@ public class Portal : MonoBehaviour
         if (lastHealth > portalHealth)
         {
             audioManager.Play("portalDamage");
-            damageParticles.Play();
         }
         lastHealth = portalHealth;
     }

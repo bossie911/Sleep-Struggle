@@ -163,6 +163,8 @@ public class PlaceTurret : MonoBehaviour
 
             newFactory.transform.SetParent(this.transform);
 
+            newFactory.GetComponent<DreamFactory>().fogOfWar = fogOfWar;
+
             DreamFuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost;
             DreamFuel.GetComponent<DreamFuel>().baseGeneration += 1f;//factoryAddedGeneration;
         }
