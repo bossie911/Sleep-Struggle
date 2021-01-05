@@ -24360,42 +24360,42 @@ MonoBehaviour:
   nightmare: {fileID: 3259984437773718698, guid: 3d7e6f1e6080cf445bd1668aeb9a1df4,
     type: 3}
   waves:
-  - waveDurationSeconds: 20
+  - waveDurationSeconds: 30
     cooldownAfterWave: 5
     amountOfNormalEnemies: 3
     amountOfMosquitos: 1
     amountOfNightmares: 0
-  - waveDurationSeconds: 30
+  - waveDurationSeconds: 40
     cooldownAfterWave: 5
     amountOfNormalEnemies: 4
     amountOfMosquitos: 2
     amountOfNightmares: 0
-  - waveDurationSeconds: 30
+  - waveDurationSeconds: 40
     cooldownAfterWave: 5
     amountOfNormalEnemies: 10
     amountOfMosquitos: 5
     amountOfNightmares: 0
-  - waveDurationSeconds: 30
+  - waveDurationSeconds: 40
     cooldownAfterWave: 0
     amountOfNormalEnemies: 14
     amountOfMosquitos: 5
     amountOfNightmares: 0
-  - waveDurationSeconds: 30
+  - waveDurationSeconds: 40
     cooldownAfterWave: 5
     amountOfNormalEnemies: 20
     amountOfMosquitos: 5
     amountOfNightmares: 0
-  - waveDurationSeconds: 30
+  - waveDurationSeconds: 40
     cooldownAfterWave: 5
     amountOfNormalEnemies: 25
     amountOfMosquitos: 5
     amountOfNightmares: 0
-  - waveDurationSeconds: 15
+  - waveDurationSeconds: 25
     cooldownAfterWave: 5
     amountOfNormalEnemies: 15
     amountOfMosquitos: 5
     amountOfNightmares: 1
-  - waveDurationSeconds: 15
+  - waveDurationSeconds: 25
     cooldownAfterWave: 5
     amountOfNormalEnemies: 10
     amountOfMosquitos: 3
