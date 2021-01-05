@@ -7,7 +7,7 @@ public class TutorialTextManager : MonoBehaviour
     public TutorialTextData[] tutorials;
     int currentTutorial;
     float tutorialTimer;
-  
+
     void Start()
     {
         for (int i = 0; i < tutorials.Length; i++)

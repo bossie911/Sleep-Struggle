@@ -56,6 +56,10 @@ public class Bullet : MonoBehaviour
         else if(target.gameObject.name == "Enemy 2(Clone)"){
             target.GetComponent<Mosquito>().currentHealth -= bulletDamage;
         }
+        else if (target.gameObject.name == "Enemy 3(Clone)")
+        {
+            target.GetComponent<Nightmare>().currentHealth -= bulletDamage;
+        }
 
         Destroy(this.gameObject);
     }

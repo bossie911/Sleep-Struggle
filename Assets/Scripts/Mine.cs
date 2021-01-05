@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mine : MonoBehaviour
+public class Mine : BaseTurret
 {
     Transform transform;
     public int resourcesPerSecond;
