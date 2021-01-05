@@ -128144,39 +128144,39 @@ MonoBehaviour:
     amountOfNormalEnemies: 3
     amountOfMosquitos: 2
     amountOfNightmares: 0
-  - waveDurationSeconds: 30
-    cooldownAfterWave: 5
+  - waveDurationSeconds: 20
+    cooldownAfterWave: 0
     amountOfNormalEnemies: 4
     amountOfMosquitos: 2
-    amountOfNightmares: 0
+    amountOfNightmares: 1
   - waveDurationSeconds: 30
     cooldownAfterWave: 5
     amountOfNormalEnemies: 10
     amountOfMosquitos: 5
-    amountOfNightmares: 0
+    amountOfNightmares: 2
   - waveDurationSeconds: 30
     cooldownAfterWave: 0
     amountOfNormalEnemies: 14
     amountOfMosquitos: 5
-    amountOfNightmares: 0
+    amountOfNightmares: 2
   - waveDurationSeconds: 30
     cooldownAfterWave: 5
     amountOfNormalEnemies: 20
     amountOfMosquitos: 5
-    amountOfNightmares: 0
+    amountOfNightmares: 2
   - waveDurationSeconds: 30
     cooldownAfterWave: 5
     amountOfNormalEnemies: 25
     amountOfMosquitos: 5
-    amountOfNightmares: 0
+    amountOfNightmares: 2
   - waveDurationSeconds: 15
     cooldownAfterWave: 5
-    amountOfNormalEnemies: 25
+    amountOfNormalEnemies: 20
     amountOfMosquitos: 5
-    amountOfNightmares: 0
+    amountOfNightmares: 2
   - waveDurationSeconds: 15
     cooldownAfterWave: 7
-    amountOfNormalEnemies: 5
+    amountOfNormalEnemies: 8
     amountOfMosquitos: 5
     amountOfNightmares: 5
   spawnPoints:
