@@ -185,7 +185,6 @@ public class PlaceTurret : MonoBehaviour
             GameObject newTotem = Instantiate(Totem, worldPosition + offset, Quaternion.identity);
 
             newTotem.transform.SetParent(this.transform);
-            newTotem.GetComponent<BaseTurret>().Setup(currentTile);
             Totempaal totem = newTotem.GetComponent<Totempaal>();
 
             totem.PayResourceCost(dreamFuel);
