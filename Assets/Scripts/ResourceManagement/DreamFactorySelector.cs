@@ -60,34 +60,33 @@ public class DreamFactorySelector : MonoBehaviour
         }
     }
 
-    public void TaskOnClickFactory()
+    private void TaskOnClickFactory()
     {
         if (FactoryButton)
             _selectedPlaceable = Placeables.Factory;
     }
 
-    public void TaskOnClickTurret()
+    private void TaskOnClickTurret()
     {
         if (TurretButton)
             _selectedPlaceable = Placeables.Turret;
     }
 
-    public void TaskOnClickMine()
+    private void TaskOnClickMine()
     {
         if (mineButton)
             _selectedPlaceable = Placeables.Mine;
     }
 
-    public void TaskOnClickTotem()
+    private void TaskOnClickTotem()
     {
         if (totemButton)
             _selectedPlaceable = Placeables.Totem;
     }
 
-    public void TaskOnClickCandle()
+    private void TaskOnClickCandle()
     {
         if (candleButton)
             _selectedPlaceable = Placeables.Candle;
     }
-
 }
