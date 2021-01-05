@@ -70,7 +70,6 @@ public class EnemyManager : MonoBehaviour
         
         //checks if the portals are all destroyed
         waveTimer += Time.deltaTime;
-        Debug.Log("itry " + waveTimer + " current wave = " + currentWave);
 
 
         if (waveTimer >= waves[currentWave].waveDurationSeconds)
@@ -94,7 +93,6 @@ public class EnemyManager : MonoBehaviour
             
             if (endless && currentWave > waves.Length - 1)
             {
-                Debug.Log("Reset to previous wave");
                 currentWave = waves.Length - 1;
             }
             startWave();

@@ -48,7 +48,7 @@ public class BaseTurret : MonoBehaviour
         if (turretHP <= 0)
         {
             Debug.Log("remove this");
-            //myTile.TurretPlaced = false;
+            myTile.TurretPlaced = false;
             Destroy(this.gameObject);
         }
     }
