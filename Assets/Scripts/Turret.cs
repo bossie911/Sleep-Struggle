@@ -9,6 +9,7 @@ using UnityEngine.Tilemaps;
 public class Turret : BaseTurret
 {
     public bool turretIsBuffed = false;
+    bool turretWasBuffed;
 
     public Transform target;
 
@@ -81,6 +82,11 @@ public class Turret : BaseTurret
             }
         }
         enemiesInRange.Clear();
+
+        if(!turretWasBuffed && turretIsBuffed){
+            GetComponent<ParticleSystem>().Play();
+        }
+        turretWasBuffed = turretIsBuffed;
     }
 
     //Fire a bullet

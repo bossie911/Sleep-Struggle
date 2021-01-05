@@ -24,6 +24,7 @@ public class TutorialTextManager : MonoBehaviour
             tutorialTimer += Time.deltaTime;
             if (tutorialTimer > tutorials[currentTutorial].timeVisible)
             {
+                
                 tutorials[currentTutorial].EnableText(false);
                 tutorialTimer = 0;
                 currentTutorial++;
