@@ -132,7 +132,6 @@ public class EnemyManager : MonoBehaviour
     /// starts a new wave and calculates the values needed
     void startWave()
     {
-        Debug.Log("current wave = " + currentWave);
 
         waveTimer = 0;
         timeBetweenRegularEnemies = waves[currentWave].waveDurationSeconds / waves[currentWave].amountOfNormalEnemies;

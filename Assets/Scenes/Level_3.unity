@@ -128888,7 +128888,7 @@ MonoBehaviour:
     pitch: 1
     volume: 0.89
     audioClip: {fileID: 8300000, guid: 9bfe6ff54fef26249b9d3b9b2fcc4a3f, type: 3}
-  LoopMusic: 0
+  LoopMusic: 1
 --- !u!4 &1628195409
 Transform:
   m_ObjectHideFlags: 0

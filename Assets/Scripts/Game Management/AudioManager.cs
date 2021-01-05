@@ -31,10 +31,13 @@ public class AudioManager : MonoBehaviour
         {
             foreach (AudioObject a in objects)
             {
+
                 if (a.name == "music")
                 {
+                    
+
                     AudioSource source = a.getSource();
-                    if (!source.isPlaying && hasStarted)
+                    if (!source.isPlaying)
                     {
                         Play("music");
                     }
