@@ -34,7 +34,6 @@ public class DreamFuel : MonoBehaviour
         if(generationTimer >= generationDelay)
         {
             currentResourceValue += baseGeneration;
-            Debug.Log(baseGeneration);
             generationTimer = 0f;
         }
     }

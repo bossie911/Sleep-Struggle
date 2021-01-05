@@ -89,6 +89,7 @@ public class EnemyManager : MonoBehaviour
                 Debug.Log("leveldone : " + result);
             }
             currentWave++;
+            Debug.Log("current wave = " + currentWave);
             if (endless && currentWave > waves.Length - 1)
             {
                 currentWave = waves.Length - 1;
