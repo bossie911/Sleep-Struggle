@@ -16,7 +16,7 @@ public class DreamFactory : BaseTurret
     public void increaseProduction(DreamFuel fuel)
     {
         fuel.currentResourceValue -= resourceCost;
-        fuel.baseGeneration += 1f; //factoryAddedGeneration;
+        //fuel.baseGeneration += 1f; //factoryAddedGeneration;
     }
 
     private void Update()
