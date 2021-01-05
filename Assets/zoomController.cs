@@ -31,7 +31,7 @@ public class zoomController : MonoBehaviour
         targetZoom = Mathf.Clamp(targetZoom, 4f, 9f);
         cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetZoom, Time.deltaTime * zoomLerpSpeed);
 
-        //PanCamera();
+        PanCamera();
     }
 
     private void PanCamera()
