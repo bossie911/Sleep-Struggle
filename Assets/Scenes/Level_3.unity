@@ -128168,11 +128168,11 @@ MonoBehaviour:
     amountOfNormalEnemies: 25
     amountOfMosquitos: 5
     amountOfNightmares: 0
-  - waveDurationSeconds: 10
-    cooldownAfterWave: 5
-    amountOfNormalEnemies: 20
-    amountOfMosquitos: 3
-    amountOfNightmares: 0
+  - waveDurationSeconds: 15
+    cooldownAfterWave: 7
+    amountOfNormalEnemies: 5
+    amountOfMosquitos: 5
+    amountOfNightmares: 5
   spawnPoints:
   - {fileID: 926758214}
   - {fileID: 951130676}

@@ -70,15 +70,17 @@ public class EnemyManager : MonoBehaviour
         
         //checks if the portals are all destroyed
         waveTimer += Time.deltaTime;
+        Debug.Log("itry " + waveTimer + " current wave = " + currentWave);
+
 
         if (waveTimer >= waves[currentWave].waveDurationSeconds)
         {
             cooldownActive = true;
         }
 
-        if (waveTimer >= waves[currentWave].cooldownAfterWave + waves[currentWave].waveDurationSeconds && currentWave < waves.Length - 1)
-        {
-            if (currentWave > waves.Length - 1)
+        if (waveTimer >= waves[currentWave].cooldownAfterWave + waves[currentWave].waveDurationSeconds && currentWave < waves.Length)
+        {//If the wave is over go to the next one
+            if (!endless && currentWave > waves.Length - 1)
             {
                 AnalyticsResult result = Analytics.CustomEvent("CompleteLevel", new Dictionary<string, object>
                 {{"CompleteLevel", 1}
@@ -86,10 +88,13 @@ public class EnemyManager : MonoBehaviour
 
                 Debug.Log("leveldone : " + result);
             }
+
+
             currentWave++;
-            Debug.Log("current wave = " + currentWave);
+            
             if (endless && currentWave > waves.Length - 1)
             {
+                Debug.Log("Reset to previous wave");
                 currentWave = waves.Length - 1;
             }
             startWave();
@@ -129,6 +134,8 @@ public class EnemyManager : MonoBehaviour
     /// starts a new wave and calculates the values needed
     void startWave()
     {
+        Debug.Log("current wave = " + currentWave);
+
         waveTimer = 0;
         timeBetweenRegularEnemies = waves[currentWave].waveDurationSeconds / waves[currentWave].amountOfNormalEnemies;
         //calculates how often enemies are spawned
