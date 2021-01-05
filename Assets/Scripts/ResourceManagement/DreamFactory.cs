@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class DreamFactory : BaseTurret
 {
-    void awake()
+    void Awake()
     {
         turretHP = 30f; 
     }

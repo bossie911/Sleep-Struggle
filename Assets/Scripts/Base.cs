@@ -13,6 +13,7 @@ public class Base : BaseTurret
 
     void Start()
     {
+        turretHP = 100;
         vision = 3;
         FogOfWar = GameObject.Find("Towers").GetComponent<PlaceTurret>().fogOfWar; 
     }
