@@ -48,7 +48,4 @@ public class AudioManager : MonoBehaviour
         AudioObject a = Array.Find(objects, AudioObject => AudioObject.name == name);
         a.getSource().Play();
     }
-
-
-
 }
