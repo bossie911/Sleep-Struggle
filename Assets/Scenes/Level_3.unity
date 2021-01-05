@@ -957,7 +957,7 @@ Transform:
   m_LocalScale: {x: 0.0049678492, y: 0.017017324, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &748178580
 GameObject:
@@ -1454,7 +1454,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 3
+  m_Constraints: 7
 --- !u!114 &768705465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1536,6 +1536,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TowerPanel 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2900115979173712068, guid: ff867816aff16bb4eb1ea8c55e9b8edd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2900115979173712071, guid: ff867816aff16bb4eb1ea8c55e9b8edd,
         type: 3}
@@ -24838,7 +24843,7 @@ Tilemap:
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: 45e03a4433c989140b9c6738abb67d0a, type: 3}
+    m_Data: {fileID: 21300000, guid: a1c1db4ab30d3bb448c2501ce296cf92, type: 3}
   - m_RefCount: 694
     m_Data: {fileID: 21300000, guid: eb9dea9c1dddfa94a82b6adf0f2cb133, type: 3}
   m_TileMatrixArray:
@@ -24943,7 +24948,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0.008483827, y: 1.0465947, z: 0}
+  m_ChunkCullingBounds: {x: 0, y: 0.9545455, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 1
@@ -25110,7 +25115,6 @@ MonoBehaviour:
     type: 3}
   factoryPrefab: {fileID: 1521036077329811596, guid: 085f55935912aaa4cac61341a05cb2a2,
     type: 3}
-  DreamFuel: {fileID: 129751428}
   Mine: {fileID: 0}
   Totem: {fileID: 7318713595562460040, guid: c261bb1da58546541aa0bfab1b2955ef, type: 3}
   Candle: {fileID: 6632914316725575977, guid: 3cafe2e12a2e985449863b339f27af6f, type: 3}
@@ -44943,7 +44947,7 @@ Transform:
   m_LocalScale: {x: 0.0049678492, y: 0.017017324, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1502020647
 GameObject:

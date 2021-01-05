@@ -48,7 +48,7 @@ public class BaseTurret : MonoBehaviour
     }
 
     //Pay the resource cost of a particular turret
-    public virtual void PayResourceCost(GameObject dreamfuel)
+    public virtual void PayResourceCost(DreamFuel dreamfuel)
     {
         var currFuel = dreamfuel.GetComponent<DreamFuel>().currentResourceValue; 
 

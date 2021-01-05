@@ -13,16 +13,15 @@ using UnityEngine.Analytics;
 public class PlaceTurret : MonoBehaviour
 {
     public Tilemap tilemap;
-    public GameObject turretPrefab, factoryPrefab, DreamFuel, Mine, Totem, Candle;
+    public GameObject turretPrefab, factoryPrefab, Mine, Totem, Candle;
     public Tilemap fogOfWar;
-   
+    
     TileManager manager;
+    DreamFuel dreamFuel; 
 
     static DreamFactorySelector selector;
-    private int fow_layer; 
 
-    private Rigidbody ghost; 
-    private Rigidbody turretGhost, factoryGhost, mineGhost, totemGhost, candleGhost;
+    private Rigidbody ghost, turretGhost, factoryGhost, mineGhost, totemGhost, candleGhost;
 
     //Place the turret slightly higher (looks better)
     private static Vector3 currentOffset; 
@@ -30,6 +29,7 @@ public class PlaceTurret : MonoBehaviour
 
     //Default selected turret is the dreamcatcher, which cost 50
     public float resourceCost = 50f;
+    private int fow_layer;
 
     public float factoryAddedGeneration = 0.5f;
     float factoryBaseCost = 30;
@@ -50,6 +50,7 @@ public class PlaceTurret : MonoBehaviour
 
         manager = GameObject.Find("TileManager").GetComponent<TileManager>();
         selector = GameObject.Find("DreamFuelPanel").GetComponent<DreamFactorySelector>();
+        dreamFuel = GameObject.Find("DreamFuelPanel").GetComponent<DreamFuel>(); 
 
         fow_layer = 1 << 8; 
     }
@@ -131,7 +132,7 @@ public class PlaceTurret : MonoBehaviour
     private bool IfCanPlace(Ray ray)
     {
         if (!Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, fow_layer) && 
-            DreamFuel.GetComponent<DreamFuel>().currentResourceValue > 0 + resourceCost && 
+            dreamFuel.currentResourceValue > 0 + resourceCost && 
             !EventSystem.current.IsPointerOverGameObject())
             return true;
 
@@ -150,7 +151,7 @@ public class PlaceTurret : MonoBehaviour
             newTurret.transform.SetParent(this.transform);
             
             Turret turret = newTurret.GetComponent<Turret>();
-            turret.PayResourceCost(DreamFuel);
+            turret.PayResourceCost(dreamFuel);
         }
 
         else if(towerToPlace == factoryPrefab)
@@ -165,17 +166,17 @@ public class PlaceTurret : MonoBehaviour
 
             newFactory.GetComponent<DreamFactory>().fogOfWar = fogOfWar;
 
-            DreamFuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost;
-            DreamFuel.GetComponent<DreamFuel>().baseGeneration += 1f;//factoryAddedGeneration;
+            dreamFuel.currentResourceValue -= resourceCost;
+            dreamFuel.baseGeneration += 1f;//factoryAddedGeneration;
         }
 
         else if(towerToPlace == Mine) {
             resourceCost = mineCost;
             GameObject newMine = Instantiate(Mine, worldPosition + offset, Quaternion.identity);
             newMine.transform.SetParent(this.transform);
-            DreamFuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost;
+            dreamFuel.currentResourceValue -= resourceCost;
             //DreamFuel.GetComponent<DreamFuel>().baseGeneration += factoryAddedGeneration;
-            newMine.GetComponent<Mine>().construct(manager, DreamFuel.GetComponent<DreamFuel>());
+            newMine.GetComponent<Mine>().construct(manager, dreamFuel);
 
         }
         else if(towerToPlace == Totem)
@@ -185,7 +186,7 @@ public class PlaceTurret : MonoBehaviour
             newTotem.transform.SetParent(this.transform);
             Totempaal totem = newTotem.GetComponent<Totempaal>();
 
-            totem.PayResourceCost(DreamFuel);
+            totem.PayResourceCost(dreamFuel);
         }
 
         else if (towerToPlace == Totem)
@@ -195,7 +196,7 @@ public class PlaceTurret : MonoBehaviour
             newTotem.transform.SetParent(this.transform);
             Totempaal totem = newTotem.GetComponent<Totempaal>();
 
-            totem.PayResourceCost(DreamFuel);
+            totem.PayResourceCost(dreamFuel);
         }
 
         else if (towerToPlace == Candle)
@@ -206,7 +207,7 @@ public class PlaceTurret : MonoBehaviour
             Candle candle = newCandle.GetComponent<Candle>();
 
             candle.FogOfWar = fogOfWar; 
-            candle.PayResourceCost(DreamFuel);
+            candle.PayResourceCost(dreamFuel);
         }
 
         currentTile.TurretPlaced = true;
