@@ -24392,14 +24392,14 @@ MonoBehaviour:
     amountOfNightmares: 0
   - waveDurationSeconds: 15
     cooldownAfterWave: 5
-    amountOfNormalEnemies: 25
+    amountOfNormalEnemies: 15
     amountOfMosquitos: 5
-    amountOfNightmares: 0
-  - waveDurationSeconds: 10
+    amountOfNightmares: 1
+  - waveDurationSeconds: 15
     cooldownAfterWave: 5
-    amountOfNormalEnemies: 20
+    amountOfNormalEnemies: 10
     amountOfMosquitos: 3
-    amountOfNightmares: 0
+    amountOfNightmares: 2
   spawnPoints:
   - {fileID: 258259631}
   - {fileID: 1978960854}
