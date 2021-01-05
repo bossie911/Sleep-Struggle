@@ -187,16 +187,6 @@ public class PlaceTurret : MonoBehaviour
             totem.PayResourceCost(dreamFuel);
         }
 
-        else if (towerToPlace == Totem)
-        {
-            GameObject newTotem = Instantiate(Totem, worldPosition + offset, Quaternion.identity);
-
-            newTotem.transform.SetParent(this.transform);
-            Totempaal totem = newTotem.GetComponent<Totempaal>();
-
-            totem.PayResourceCost(dreamFuel);
-        }
-
         else if (towerToPlace == Candle)
         {
             GameObject newCandle = Instantiate(Candle, worldPosition + offset, Quaternion.identity);

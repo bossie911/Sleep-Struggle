@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 
 public class EnemyManager : MonoBehaviour
 {
-
     public GameObject regularEnemy, mosquito, nightmare;
     public WaveObject[] waves;
     int currentWave;
@@ -54,7 +53,6 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         //checks if the portals are all destroyed
         gameIsOver = true;
         foreach (Transform spawn in spawnPoints)
@@ -69,8 +67,8 @@ public class EnemyManager : MonoBehaviour
             SceneManager.LoadScene("LevelSelection");
             Debug.Log("game is over");
         }
+        
         //checks if the portals are all destroyed
-
         waveTimer += Time.deltaTime;
 
         if (waveTimer >= waves[currentWave].waveDurationSeconds)
@@ -125,8 +123,6 @@ public class EnemyManager : MonoBehaviour
 
             nextNightmareTime += timeBetweenNightmare;
         }
-
-
     }
 
     /// starts a new wave and calculates the values needed
