@@ -16,7 +16,7 @@ public class BaseTurret : MonoBehaviour
     protected float resourceCost;
 
     protected float turretHP;
-    protected float enemyDamageOnTurret = 0.1f;
+    protected float enemyDamageOnTurret = 10f;
 
     protected Transform bulletBeginPoint;
 
@@ -47,8 +47,9 @@ public class BaseTurret : MonoBehaviour
     void OnCollisionStay2D(Collision2D col)
     {
         if (col.gameObject.tag.Equals("enemy"))
-            turretHP -= enemyDamageOnTurret;
-
+        {
+            turretHP -= (enemyDamageOnTurret * Time.deltaTime);
+        }
         if (turretHP <= 0)
         {
             //Debug.Log("remove this");
