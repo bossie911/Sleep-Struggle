@@ -15,7 +15,7 @@ public class Candle : BaseTurret
     {
         vision = 2;
         resourceCost = 20f;
-        turretHP = 15f; 
+        turretHP = 30f; 
     }
 
     void Update()
