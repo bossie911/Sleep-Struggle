@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEngine.Analytics;
+using UnityEngine.SceneManagement;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -65,7 +66,7 @@ public class EnemyManager : MonoBehaviour
         }
         if (gameIsOver)
         {
-            //insert next level here
+            SceneManager.LoadScene("LevelSelection");
             Debug.Log("game is over");
         }
         //checks if the portals are all destroyed
