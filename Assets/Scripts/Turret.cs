@@ -29,6 +29,7 @@ public class Turret : BaseTurret
         fireCounter = 0f;
         BulletPrefab = Resources.Load("Prefabs/Bullet", typeof(GameObject)) as GameObject;
         resourceCost = 50f;
+        turretHP = 25f; 
     }
 
     void Update()

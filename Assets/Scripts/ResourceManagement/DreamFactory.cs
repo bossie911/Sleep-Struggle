@@ -5,10 +5,8 @@ using UnityEngine.Tilemaps;
 
 public class DreamFactory : BaseTurret
 {
-    public Tilemap fogOfWar;
-
-    // Update is called once per frame
-    void Update()
+    void awake()
     {
+        turretHP = 30f; 
     }
 }

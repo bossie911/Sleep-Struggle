@@ -11,6 +11,7 @@ public class Totempaal : BaseTurret
         range = 5f;
         resourceCost = 100f;
         targetTag = "turret";
+        turretHP = 30f; 
     }
 
     // Update is called once per frame

@@ -1,28 +1,46 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Accessibility;
+using UnityEngine.Tilemaps;
 
-public class Base : MonoBehaviour
+public class Base : BaseTurret
 {
-    public float enemyDamage = 0.1f;
+    private Vector3Int currentTile;
+    private int vision;
 
+    [SerializeField] private Tilemap FogOfWar; 
 
-    // Start is called before the first frame update
     void Start()
     {
+        vision = 3;
+        FogOfWar = GameObject.Find("Towers").GetComponent<PlaceTurret>().fogOfWar; 
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        AddFogOfWar();
     }
 
-    void OnCollisionStay2D (Collision2D col)
+    private void AddFogOfWar()
     {
-        if (col.gameObject.tag.Equals("enemy"))
+        currentTile = FogOfWar.WorldToCell(transform.position); 
+
+        //Clear the surrounding tiles
+        for (int x = -vision; x <= vision - 1; x++)
         {
-            HPBarBase.baseHP -= enemyDamage;
+            for (int y = -vision - 1; y <= vision; y++)
+            {
+                FogOfWar.SetTile(currentTile + new Vector3Int(x, y, 0), null);
+            }
         }
     }
+
+    //void OnCollisionStay2D (Collision2D col)
+    //{
+    //    if (col.gameObject.tag.Equals("enemy"))
+    //    {
+    //        HPBarBase.baseHP -= enemyDamage;
+    //    }
+    //}
 }
