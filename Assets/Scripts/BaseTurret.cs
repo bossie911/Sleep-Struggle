@@ -20,6 +20,8 @@ public class BaseTurret : MonoBehaviour
 
     protected Transform bulletBeginPoint;
 
+    public DreamFuel fuel;
+
     private GameObject bulletPrefab;
     private Tilemap fogOfWar;
 
@@ -30,9 +32,10 @@ public class BaseTurret : MonoBehaviour
         set { fogOfWar = value; }
     }
 
-    public void Setup(TileObject _myTile)
+    public void Setup(TileObject _myTile, DreamFuel _fuel)
     {
         myTile = _myTile;
+        fuel = _fuel;
     }
 
     public GameObject BulletPrefab
