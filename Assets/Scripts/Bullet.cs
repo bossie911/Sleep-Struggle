@@ -5,19 +5,14 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private Transform target;
-
     public float bulletSpeed = 10f;
-
     public float bulletDamage = 10f;
-
     public Color buffColor;
 
-    // Update is called once per frame
     void Update()
     {
         NoTargetDestroy();
-
-
+        
         Vector3 direction = target.position - transform.position;
         float distanceThisFrame = bulletSpeed * Time.deltaTime;
 
@@ -25,7 +20,6 @@ public class Bullet : MonoBehaviour
         if(direction.magnitude <= distanceThisFrame)
         {
             TargetHit();
-            //return;
         }
 
         //movement
@@ -38,7 +32,6 @@ public class Bullet : MonoBehaviour
         if (target == null)
         {
             Destroy(this.gameObject);
-            return;
         }
     }
 

@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vision: 0
+  fogTile: {fileID: 11400000, guid: e7b545f14c5b3704ba97d2e6fedd9809, type: 2}
 --- !u!58 &6814203939747817827
 CircleCollider2D:
   m_ObjectHideFlags: 0

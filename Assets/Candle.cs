@@ -1,25 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Candle : BaseTurret
 {
-    public int vision; 
+    private int vision;
+    
+    [SerializeField]
+    private TileBase fogTile; 
+    private Vector3Int currentTile; 
 
     void Awake()
     {
         vision = 2;
-        resourceCost = 20f; 
+        resourceCost = 20f;
+        turretHP = 15f; 
     }
 
     void Update()
     {
         UpdateFogOfWar();
+
+        if(turretHP < 1)
+            AddFogOfWar();
     }
 
    private void UpdateFogOfWar()
     {
-        Vector3Int currentTile = FogOfWar.WorldToCell(transform.position);
+        currentTile = FogOfWar.WorldToCell(transform.position);
 
         //Clear the surrounding tiles
         for (int x = -vision; x <= vision - 1; x++)
@@ -30,4 +39,16 @@ public class Candle : BaseTurret
             }
         }
     }
+
+   private void AddFogOfWar()
+   {
+       //Clear the surrounding tiles
+       for (int x = -vision; x <= vision - 1; x++)
+       {
+           for (int y = -vision - 1; y <= vision; y++)
+           {
+               FogOfWar.SetTile(currentTile + new Vector3Int(x, y, 0), fogTile);
+           }
+       }
+   }
 }
