@@ -106300,6 +106300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45fff8cd74e3a5049a913d88d4c43836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dreamFuel: {fileID: 0}
   FogOfWar: {fileID: 0}
 --- !u!58 &1889031155
 CircleCollider2D:
@@ -106512,13 +106513,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorials:
-  - timeVisible: 10
+  - timeVisible: 8
     tutorial: {fileID: 1630204236}
   - timeVisible: 10
     tutorial: {fileID: 166102032}
-  - timeVisible: 10
+  - timeVisible: 8
     tutorial: {fileID: 2133210944}
-  - timeVisible: 13
+  - timeVisible: 10
     tutorial: {fileID: 1709042987}
 --- !u!1 &2103539151
 GameObject:

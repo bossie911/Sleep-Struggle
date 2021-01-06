@@ -23,7 +23,7 @@ public class DreamFactory : BaseTurret
     {
         fuelTimer += Time.deltaTime;
         if (fuelTimer > 1) {
-            fuel.currentResourceValue += resourcesPerSecond;
+            dreamFuel.currentResourceValue += resourcesPerSecond;
             fuelTimer = 0;
         }
     }

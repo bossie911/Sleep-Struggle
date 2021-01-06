@@ -22,7 +22,7 @@ public class BaseTurret : MonoBehaviour
     protected Transform bulletBeginPoint;
     protected bool isBase;
 
-    public DreamFuel fuel;
+    public DreamFuel dreamFuel;
 
     private GameObject bulletPrefab;
     private Tilemap fogOfWar;
@@ -39,10 +39,10 @@ public class BaseTurret : MonoBehaviour
         return turretHP; 
     }
 
-    public void Setup(TileObject _myTile)
+    public void Setup(TileObject _myTile, DreamFuel _fuel)
     {
         myTile = _myTile;
-        fuel = _fuel;
+        dreamFuel = _fuel;
     }
 
     public GameObject BulletPrefab
@@ -74,21 +74,21 @@ public class BaseTurret : MonoBehaviour
     }
 
     //Pay the resource cost of a particular turret
-    public virtual void PayResourceCost(DreamFuel dreamfuel)
+    public virtual void PayResourceCost()
     {
-        var currFuel = dreamfuel.GetComponent<DreamFuel>().currentResourceValue;
+        var currFuel = dreamFuel.GetComponent<DreamFuel>().currentResourceValue;
 
         if (currFuel >= resourceCost)
-            dreamfuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost;
+            dreamFuel.GetComponent<DreamFuel>().currentResourceValue -= resourceCost;
     }
 
     //Overloaded method for the DreamFactory
-    public virtual void PayResourceCost(DreamFuel dreamfuel, float cost)
+    public virtual void PayResourceCost(float cost)
     {
-        var currFuel = dreamfuel.GetComponent<DreamFuel>().currentResourceValue;
+        var currFuel = dreamFuel.GetComponent<DreamFuel>().currentResourceValue;
 
         if (currFuel >= resourceCost)
-            dreamfuel.GetComponent<DreamFuel>().currentResourceValue -= cost;
+            dreamFuel.GetComponent<DreamFuel>().currentResourceValue -= cost;
     }
 
     //Drawn range

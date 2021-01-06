@@ -150,10 +150,11 @@ public class PlaceTurret : MonoBehaviour
 
             //Create all turrets as a child of this gameobj, so the hierarchy doesn't get cluttered
             newTurret.transform.SetParent(this.transform);
-            newTurret.GetComponent<BaseTurret>().Setup(currentTile, dreamFuel);
-            
+
             Turret turret = newTurret.GetComponent<Turret>();
-            turret.PayResourceCost(dreamFuel);
+          
+            turret.Setup(currentTile, dreamFuel);
+            turret.PayResourceCost();
         }
 
         else if(towerToPlace == factoryPrefab)
@@ -165,14 +166,15 @@ public class PlaceTurret : MonoBehaviour
             GameObject newFactory = Instantiate(factoryPrefab, worldPosition + offset, Quaternion.identity);
 
             newFactory.transform.SetParent(this.transform);
-            newFactory.GetComponent<BaseTurret>().Setup(currentTile, dreamFuel);
 
-            DreamFactory factory = newFactory.GetComponent<DreamFactory>(); 
-            factory.PayResourceCost(dreamFuel, resourceCost);
+            DreamFactory factory = newFactory.GetComponent<DreamFactory>();
+
+            factory.Setup(currentTile, dreamFuel);
+            factory.PayResourceCost(resourceCost);
             factory.increaseProduction(dreamFuel);
         }
 
-        else if(towerToPlace == Mine) 
+        else if (towerToPlace == Mine)
         {
             resourceCost = mineCost;
             GameObject newMine = Instantiate(Mine, worldPosition + offset, Quaternion.identity);
@@ -184,14 +186,16 @@ public class PlaceTurret : MonoBehaviour
 
         }
 
-        else if(towerToPlace == Totem)
+        else if (towerToPlace == Totem)
         {
             GameObject newTotem = Instantiate(Totem, worldPosition + offset, Quaternion.identity);
 
             newTotem.transform.SetParent(this.transform);
+            
             Totempaal totem = newTotem.GetComponent<Totempaal>();
 
-            totem.PayResourceCost(dreamFuel);
+            totem.Setup(currentTile, dreamFuel);
+            totem.PayResourceCost();
         }
 
         else if (towerToPlace == Candle)
@@ -203,7 +207,7 @@ public class PlaceTurret : MonoBehaviour
             Candle candle = newCandle.GetComponent<Candle>();
             candle.FogOfWar = fogOfWar; 
             candle.Setup(currentTile, dreamFuel);
-            candle.PayResourceCost(dreamFuel);
+            candle.PayResourceCost();
         }
 
         audioManager.Play("thud");
