@@ -5,6 +5,9 @@ using UnityEngine.Tilemaps;
 
 public class DreamFactory : BaseTurret
 {
+    float fuelTimer;
+    public int resourcesPerSecond;
+
     void Awake()
     {
         turretHP = 30f; 
@@ -13,6 +16,15 @@ public class DreamFactory : BaseTurret
     public void increaseProduction(DreamFuel fuel)
     {
         fuel.currentResourceValue -= resourceCost;
-        fuel.baseGeneration += 1f; //factoryAddedGeneration;
+        //fuel.baseGeneration += 1f; //factoryAddedGeneration;
+    }
+
+    private void Update()
+    {
+        fuelTimer += Time.deltaTime;
+        if (fuelTimer > 1) {
+            fuel.currentResourceValue += resourcesPerSecond;
+            fuelTimer = 0;
+        }
     }
 }

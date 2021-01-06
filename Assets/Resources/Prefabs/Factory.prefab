@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e37c53e67e4df340a138ba7958c2946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fogOfWar: {fileID: 0}
+  resourcesPerSecond: 1
 --- !u!212 &5118669473735290144
 SpriteRenderer:
   m_ObjectHideFlags: 0
