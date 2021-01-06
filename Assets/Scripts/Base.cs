@@ -15,7 +15,8 @@ public class Base : BaseTurret
     {
         turretHP = 100;
         vision = 3;
-        FogOfWar = GameObject.Find("Towers").GetComponent<PlaceTurret>().fogOfWar; 
+        FogOfWar = GameObject.Find("Towers").GetComponent<PlaceTurret>().fogOfWar;
+        isBase = true; 
     }
 
     void Update()
@@ -36,12 +37,4 @@ public class Base : BaseTurret
             }
         }
     }
-
-    //void OnCollisionStay2D (Collision2D col)
-    //{
-    //    if (col.gameObject.tag.Equals("enemy"))
-    //    {
-    //        HPBarBase.baseHP -= enemyDamage;
-    //    }
-    //}
 }

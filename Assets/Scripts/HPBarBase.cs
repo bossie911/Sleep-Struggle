@@ -12,22 +12,19 @@ public class HPBarBase : MonoBehaviour
     [SerializeField]
     private CanvasGroup healthGroup;
 
-    public static float baseHP = 100f;
+    private Base middleTower;
+    private float baseHP; 
 
     void Start()
     {
         health.fillAmount = 1f;
+        middleTower = GameObject.Find("MiddleTileLocation").GetComponent<Base>();         
     }
 
     void Update()
     {
-        healthGroup.alpha = health.fillAmount < 1f ? 1 : 0;
+        baseHP = middleTower.TurretHP(); 
+        healthGroup.alpha = health.fillAmount < 1f ? 1 : 0;                   
         health.fillAmount = baseHP / 100;
-
-        if (baseHP <= 0)
-        {
-            SceneManager.LoadScene("GameOverScreen");
-            baseHP = 100f;
-        }
     }
 }

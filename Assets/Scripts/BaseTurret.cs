@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public class BaseTurret : MonoBehaviour
@@ -19,6 +20,7 @@ public class BaseTurret : MonoBehaviour
     protected float enemyDamageOnTurret = 10f;
 
     protected Transform bulletBeginPoint;
+    protected bool isBase;
 
     public DreamFuel fuel;
 
@@ -32,7 +34,12 @@ public class BaseTurret : MonoBehaviour
         set { fogOfWar = value; }
     }
 
-    public void Setup(TileObject _myTile, DreamFuel _fuel)
+    public float TurretHP()
+    {
+        return turretHP; 
+    }
+
+    public void Setup(TileObject _myTile)
     {
         myTile = _myTile;
         fuel = _fuel;
@@ -52,8 +59,16 @@ public class BaseTurret : MonoBehaviour
         }
         if (turretHP <= 0)
         {
-            //Debug.Log("remove this");
-            myTile.TurretPlaced = false;
+            //The base is a tile, so it can't have a turret on it 
+            if (!isBase)
+                myTile.TurretPlaced = false;
+
+            if (isBase)
+            {
+                SceneManager.LoadScene("GameOverScreen");
+                turretHP = 100f;
+            }
+
             Destroy(this.gameObject);
         }
     }
