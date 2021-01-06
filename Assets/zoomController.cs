@@ -12,7 +12,6 @@ public class zoomController : MonoBehaviour
 
     private Vector3 dragOrigin;
 
-
     private float targetZoom;
     private float zoomFactor = 3f;
 
@@ -46,7 +45,7 @@ public class zoomController : MonoBehaviour
         {
             Vector3 difference = dragOrigin - cam.ScreenToWorldPoint(Input.mousePosition);
 
-            print(" origin " + dragOrigin + " newPosition " + cam.ScreenToWorldPoint(Input.mousePosition) + " = difference " + difference);
+            //print(" origin " + dragOrigin + " newPosition " + cam.ScreenToWorldPoint(Input.mousePosition) + " = difference " + difference);
 
             cam.transform.position += difference;
 

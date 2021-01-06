@@ -171,7 +171,7 @@ public class PlaceTurret : MonoBehaviour
 
             factory.Setup(currentTile, dreamFuel);
             factory.PayResourceCost(resourceCost);
-            factory.increaseProduction(dreamFuel);
+
         }
 
         else if (towerToPlace == Mine)
@@ -205,6 +205,7 @@ public class PlaceTurret : MonoBehaviour
             newCandle.transform.SetParent(this.transform);
            
             Candle candle = newCandle.GetComponent<Candle>();
+
             candle.FogOfWar = fogOfWar; 
             candle.Setup(currentTile, dreamFuel);
             candle.PayResourceCost();

@@ -342,7 +342,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130745905}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -369,7 +369,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Drag with your middle mouse button
 
-    to look around the map.'
+    to look around. '
 --- !u!222 &130745908
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -106380,7 +106380,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45fff8cd74e3a5049a913d88d4c43836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dreamFuel: {fileID: 0}
   FogOfWar: {fileID: 0}
 --- !u!58 &1889031155
 CircleCollider2D:
@@ -106602,7 +106601,7 @@ MonoBehaviour:
     tutorial: {fileID: 2133210944}
   - timeVisible: 10
     tutorial: {fileID: 1709042987}
-  - timeVisible: 13
+  - timeVisible: 8
     tutorial: {fileID: 130745905}
 --- !u!1 &2103539151
 GameObject:

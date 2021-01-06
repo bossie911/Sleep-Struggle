@@ -22,12 +22,13 @@ public class BaseTurret : MonoBehaviour
     protected Transform bulletBeginPoint;
     protected bool isBase;
 
-    public DreamFuel dreamFuel;
+    protected DreamFuel dreamFuel;
 
     private GameObject bulletPrefab;
     private Tilemap fogOfWar;
 
     TileObject myTile;
+
     public Tilemap FogOfWar
     {
         get { return fogOfWar; }
