@@ -9,6 +9,7 @@ public class Base : BaseTurret
     private Vector3Int currentTile;
     private int vision;
 
+<<<<<<< HEAD
     [SerializeField] private Tilemap FogOfWar; 
 
     void Start()
@@ -23,6 +24,9 @@ public class Base : BaseTurret
     {
         AddFogOfWar();
     }
+=======
+    //Deze functie checked of de base collide met een enemy en de enemy doet dan damage
+>>>>>>> Turret
 
     private void AddFogOfWar()
     {

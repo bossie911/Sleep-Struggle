@@ -5,18 +5,19 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private Transform target;
+
     public float bulletSpeed = 10f;
+
     public float bulletDamage = 10f;
+
     public Color buffColor;
 
+    // Update is called once per frame
     void Update()
     {
         NoTargetDestroy();
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> Turret
+
         Vector3 direction = target.position - transform.position;
         float distanceThisFrame = bulletSpeed * Time.deltaTime;
 
@@ -24,10 +25,7 @@ public class Bullet : MonoBehaviour
         if(direction.magnitude <= distanceThisFrame)
         {
             TargetHit();
-<<<<<<< HEAD
-=======
-            return;
->>>>>>> Turret
+            //return;
         }
 
         //movement
@@ -40,10 +38,11 @@ public class Bullet : MonoBehaviour
         if (target == null)
         {
             Destroy(this.gameObject);
+            return;
         }
     }
 
-    //Code voor damage op enemies en destroyed de bullet gameobject
+    //Code die wordt uitgevoerd als de bullet collide met een enemy
     void TargetHit()
     {
         if (target.gameObject.name == "Portal")
@@ -54,13 +53,8 @@ public class Bullet : MonoBehaviour
         {         
             target.GetComponent<Enemy>().currentHealth -= bulletDamage;
         }
-        else if(target.gameObject.name == "Enemy 2(Clone)")
-        {
+        else if(target.gameObject.name == "Enemy 2(Clone)"){
             target.GetComponent<Mosquito>().currentHealth -= bulletDamage;
-        }
-        else if (target.gameObject.name == "Enemy 3(Clone)")
-        {
-            target.GetComponent<Nightmare>().currentHealth -= bulletDamage;
         }
 
         Destroy(this.gameObject);
@@ -72,7 +66,7 @@ public class Bullet : MonoBehaviour
         target = _target;
     }
 
-    //Functie wordt aangeroepen in de turret script om te kijken of de turret gebuffed is
+    //Funcite wordt aangeroepen in de turret script om te kijken of de turret gebuffed is
     public void BulletDamage(float _bulletDamage, bool isBuffed)
     {
         bulletDamage = _bulletDamage;
