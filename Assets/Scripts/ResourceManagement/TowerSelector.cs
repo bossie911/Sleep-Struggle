@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DreamFactorySelector : MonoBehaviour
+public class TowerSelector : MonoBehaviour
 {
+    private static TowerSelector _instance;
+    private Placeables _selectedPlaceable;
+
     public Button FactoryButton;
     public Button TurretButton;
     public Button mineButton;
     public Button totemButton;
     public Button candleButton;
-
-    private Placeables _selectedPlaceable;
 
     public enum Placeables
     {
@@ -22,10 +23,20 @@ public class DreamFactorySelector : MonoBehaviour
         Candle
     }
 
-    public Placeables SelectedPlaceable
+    public Placeables SelectedPlaceable {get { return _selectedPlaceable; } }    
+    public static TowerSelector Instance { get { return _instance; } }
+
+    private void Awake()
     {
-        get { return _selectedPlaceable; }
-        private set { _selectedPlaceable = value; }
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Start()

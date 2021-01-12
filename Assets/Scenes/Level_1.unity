@@ -1193,7 +1193,7 @@ PrefabInstance:
     - target: {fileID: 2900115979173712071, guid: ff867816aff16bb4eb1ea8c55e9b8edd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2900115979173712071, guid: ff867816aff16bb4eb1ea8c55e9b8edd,
         type: 3}
@@ -1337,7 +1337,6 @@ GameObject:
   - component: {fileID: 935426722}
   - component: {fileID: 935426721}
   - component: {fileID: 935426720}
-  - component: {fileID: 935426723}
   m_Layer: 5
   m_Name: DreamFuelPanel
   m_TagString: Untagged
@@ -1383,7 +1382,7 @@ MonoBehaviour:
   baseGeneration: 3
   generationDelay: 1
   addedGeneration: 0
-  dreamFuelDisp: {fileID: 953360570}
+  dreamFuelDisplay: {fileID: 953360570}
 --- !u!114 &935426721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1421,23 +1420,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 935426718}
   m_CullTransparentMesh: 0
---- !u!114 &935426723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 935426718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d4bdaa7542bfeb43bd57577fc55b93f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FactoryButton: {fileID: 0}
-  TurretButton: {fileID: 303706932}
-  mineButton: {fileID: 0}
-  totemButton: {fileID: 0}
-  candleButton: {fileID: 776535228}
 --- !u!1 &953360568
 GameObject:
   m_ObjectHideFlags: 0
@@ -2138,6 +2120,7 @@ RectTransform:
   - {fileID: 776535227}
   - {fileID: 1962109913}
   - {fileID: 16407225}
+  - {fileID: 1512168940}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -25225,6 +25208,59 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1512168939
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1512168940}
+  - component: {fileID: 1512168941}
+  m_Layer: 5
+  m_Name: TowerSelectorHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1512168940
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512168939}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1120280796}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -36.776367, y: -18.951736}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1512168941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512168939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d4bdaa7542bfeb43bd57577fc55b93f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FactoryButton: {fileID: 0}
+  TurretButton: {fileID: 303706932}
+  mineButton: {fileID: 0}
+  totemButton: {fileID: 0}
+  candleButton: {fileID: 776535228}
 --- !u!1 &1574986181
 GameObject:
   m_ObjectHideFlags: 0
@@ -106869,7 +106905,7 @@ PrefabInstance:
     - target: {fileID: 2900115979173712071, guid: ff867816aff16bb4eb1ea8c55e9b8edd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2900115979173712071, guid: ff867816aff16bb4eb1ea8c55e9b8edd,
         type: 3}

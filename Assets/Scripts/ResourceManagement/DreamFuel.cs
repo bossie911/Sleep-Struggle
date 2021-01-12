@@ -10,19 +10,14 @@ public class DreamFuel : MonoBehaviour
 
     public float baseGeneration = 1f;
     public float generationDelay = 1f;
-    protected float generationTimer;
+    private float generationTimer;
     public float addedGeneration;
 
-    public Text dreamFuelDisp;
+    public Text dreamFuelDisplay;
 
-    // Update is called once per frame
     void Update()
     {
         ResourceGeneration();
-
-        //voor nu displayt het baseGeneration, moet veranderen naar basegeneration + addedGeneration
-        //dreamFuelDisp.text = "" + currentResourceValue + "/" + baseGeneration;
-        dreamFuelDisp.text = currentResourceValue.ToString();
     }
 
     //ResourceGeneration manages the amount of DreamFuel that is added per x amount of time.
@@ -36,5 +31,7 @@ public class DreamFuel : MonoBehaviour
             currentResourceValue += baseGeneration;
             generationTimer = 0f;
         }
+        
+        dreamFuelDisplay.text = currentResourceValue.ToString();
     }
 }

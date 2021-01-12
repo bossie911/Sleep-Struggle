@@ -20,8 +20,6 @@ public class PlaceTurret : MonoBehaviour
     TileManager manager;
     DreamFuel dreamFuel; 
 
-    static DreamFactorySelector selector;
-
     private Rigidbody ghost, turretGhost, factoryGhost, mineGhost, totemGhost, candleGhost;
 
     //Place the turret slightly higher (looks better)
@@ -50,7 +48,6 @@ public class PlaceTurret : MonoBehaviour
         totemGhost = GameObject.Find("TotemGhost").GetComponent<Rigidbody>(); 
 
         manager = GameObject.Find("TileManager").GetComponent<TileManager>();
-        selector = GameObject.Find("DreamFuelPanel").GetComponent<DreamFactorySelector>();
         dreamFuel = GameObject.Find("DreamFuelPanel").GetComponent<DreamFuel>(); 
 
         fow_layer = 1 << 8; 
@@ -58,29 +55,29 @@ public class PlaceTurret : MonoBehaviour
 
     void Update()
     {
-        switch (selector.SelectedPlaceable)
+        switch (TowerSelector.Instance.SelectedPlaceable)
         {
-            case DreamFactorySelector.Placeables.Turret: 
+            case TowerSelector.Placeables.Turret: 
                 ghost = turretGhost;
                 currentOffset = turretOffset;
                 resourceCost = 50f;
                 break;
 
-            case DreamFactorySelector.Placeables.Factory:
+            case TowerSelector.Placeables.Factory:
                 ghost = factoryGhost;
                 currentOffset = factoryOffset;
                 break;
 
-            case DreamFactorySelector.Placeables.Mine:
+            case TowerSelector.Placeables.Mine:
                 ghost = mineGhost;
                 break;
 
-            case DreamFactorySelector.Placeables.Totem:
+            case TowerSelector.Placeables.Totem:
                 ghost = totemGhost;
                 resourceCost = 100f; 
                 break;
 
-            case DreamFactorySelector.Placeables.Candle:
+            case TowerSelector.Placeables.Candle:
                 ghost = candleGhost;
                 resourceCost = 20f;
                 break;
@@ -98,25 +95,25 @@ public class PlaceTurret : MonoBehaviour
         {
             if (IfCanPlace(ray))
             {
-                switch (selector.SelectedPlaceable)
+                switch (TowerSelector.Instance.SelectedPlaceable)
                 {
-                    case DreamFactorySelector.Placeables.Turret:
+                    case TowerSelector.Placeables.Turret:
                         Place(point, currentTile, turretPrefab, currentOffset);
                         break;
 
-                    case DreamFactorySelector.Placeables.Factory:
+                    case TowerSelector.Placeables.Factory:
                         Place(point, currentTile, factoryPrefab, currentOffset);
                         break;
 
-                    case DreamFactorySelector.Placeables.Mine:
+                    case TowerSelector.Placeables.Mine:
                         Place(point, currentTile, Mine, currentOffset);
                         break;
 
-                    case DreamFactorySelector.Placeables.Totem:
+                    case TowerSelector.Placeables.Totem:
                         Place(point, currentTile, Totem, currentOffset);
                         break;
 
-                    case DreamFactorySelector.Placeables.Candle:
+                    case TowerSelector.Placeables.Candle:
                         Place(point, currentTile, Candle, currentOffset);
                         break;
                 }

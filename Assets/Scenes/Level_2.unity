@@ -23959,6 +23959,7 @@ RectTransform:
   - {fileID: 1433103176}
   - {fileID: 591083772}
   - {fileID: 174033714}
+  - {fileID: 1381331643}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -24792,6 +24793,59 @@ AudioSource:
     type: 3}
   m_PrefabInstance: {fileID: 1329056702}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1381331642
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1381331643}
+  - component: {fileID: 1381331644}
+  m_Layer: 5
+  m_Name: TowerSelectorHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1381331643
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381331642}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 696003043}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1381331644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381331642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d4bdaa7542bfeb43bd57577fc55b93f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FactoryButton: {fileID: 1250755027}
+  TurretButton: {fileID: 1519009249}
+  mineButton: {fileID: 0}
+  totemButton: {fileID: 0}
+  candleButton: {fileID: 1241136201}
 --- !u!1 &1392730304
 GameObject:
   m_ObjectHideFlags: 0
@@ -24804,7 +24858,6 @@ GameObject:
   - component: {fileID: 1392730309}
   - component: {fileID: 1392730308}
   - component: {fileID: 1392730307}
-  - component: {fileID: 1392730306}
   m_Layer: 5
   m_Name: DreamFuelPanel
   m_TagString: Untagged
@@ -24833,23 +24886,6 @@ RectTransform:
   m_AnchoredPosition: {x: 8, y: 8}
   m_SizeDelta: {x: 177.93982, y: 65.903625}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1392730306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1392730304}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d4bdaa7542bfeb43bd57577fc55b93f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FactoryButton: {fileID: 1250755027}
-  TurretButton: {fileID: 1519009249}
-  mineButton: {fileID: 0}
-  totemButton: {fileID: 0}
-  candleButton: {fileID: 1241136201}
 --- !u!114 &1392730307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24867,7 +24903,7 @@ MonoBehaviour:
   baseGeneration: 1
   generationDelay: 1
   addedGeneration: 0
-  dreamFuelDisp: {fileID: 421499224}
+  dreamFuelDisplay: {fileID: 421499224}
 --- !u!114 &1392730308
 MonoBehaviour:
   m_ObjectHideFlags: 0
