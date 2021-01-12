@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class DreamFuel : MonoBehaviour
 {
+    // This is a comment! 
     public float minimumResourceValue = 0f;
     public float currentResourceValue = 50f;
 
