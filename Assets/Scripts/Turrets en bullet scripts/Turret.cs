@@ -108,7 +108,6 @@ public class Turret : BaseTurret
         if (turretIsBuffed == true)
         {
             bulletDamage = buffedBulletDamage;
-
         }
     }
 }
