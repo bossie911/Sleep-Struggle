@@ -7,7 +7,6 @@ public class Bullet : MonoBehaviour
     private Transform target;
 
     public float bulletSpeed = 10f;
-
     public float bulletDamage = 10f;
 
     public Color buffColor;
@@ -17,7 +16,6 @@ public class Bullet : MonoBehaviour
     {
         NoTargetDestroy();
 
-
         Vector3 direction = target.position - transform.position;
         float distanceThisFrame = bulletSpeed * Time.deltaTime;
 
@@ -25,7 +23,7 @@ public class Bullet : MonoBehaviour
         if(direction.magnitude <= distanceThisFrame)
         {
             TargetHit();
-            //return;
+            return;
         }
 
         //movement
@@ -42,7 +40,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    //Code die wordt uitgevoerd als de bullet collide met een enemy
+    //Code voor damage op enemies en destroyed de bullet gameobject
     void TargetHit()
     {
         if (target.gameObject.name == "Portal")
@@ -53,7 +51,8 @@ public class Bullet : MonoBehaviour
         {         
             target.GetComponent<Enemy>().currentHealth -= bulletDamage;
         }
-        else if(target.gameObject.name == "Enemy 2(Clone)"){
+        else if(target.gameObject.name == "Enemy 2(Clone)")
+        {
             target.GetComponent<Mosquito>().currentHealth -= bulletDamage;
         }
 
@@ -66,7 +65,7 @@ public class Bullet : MonoBehaviour
         target = _target;
     }
 
-    //Funcite wordt aangeroepen in de turret script om te kijken of de turret gebuffed is
+    //Functie wordt aangeroepen in de turret script om te kijken of de turret gebuffed is
     public void BulletDamage(float _bulletDamage, bool isBuffed)
     {
         bulletDamage = _bulletDamage;

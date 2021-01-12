@@ -22,6 +22,7 @@ public class AIMovement : MonoBehaviour
         cornersCalculation();
     }
 
+    //Deze functie berekend de afstand naar de base met behulp van de corners van de NavMeshPath
     void cornersCalculation()
     {
         NavMeshPath path = agent.path;
@@ -37,6 +38,5 @@ public class AIMovement : MonoBehaviour
             i++;
         }
         distanceToBase = lengthSoFar;
-        //Debug.Log(distanceToBase);
     }
 }
