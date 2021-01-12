@@ -24,6 +24,9 @@ public class Base : BaseTurret
         AddFogOfWar();
     }
 
+    //Deze functie checked of de base collide met een enemy en de enemy doet dan damage
+
+
     private void AddFogOfWar()
     {
         currentTile = FogOfWar.WorldToCell(transform.position); 
