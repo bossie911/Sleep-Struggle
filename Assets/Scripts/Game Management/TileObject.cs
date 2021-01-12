@@ -19,9 +19,8 @@ public class TileObject
     /// An object with different values all linked to a specific tile in the tilemap
     /// </summary>
     /// <param name="tile">The tile that this place in the tilemap will start with</param>
-    public TileObject(TileBase tile, int x, int y, bool canPlace, bool isResource)
+    public TileObject(int x, int y, bool canPlace, bool isResource)
     {
-        tileBase = tile;
         xLocation = x;
         yLocation = y;
         turretCanBePlaced = canPlace;

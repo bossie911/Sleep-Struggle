@@ -22,7 +22,7 @@ public class TileManager : MonoBehaviour
 
     Vector3Int middleTile;
 
-    int[,] tileTypes;
+    float[,] tileTypes;
     TileObject[,] tileObjects;
 
     public int width, height;
@@ -37,11 +37,13 @@ public class TileManager : MonoBehaviour
 
     public bool generateRandomMap;
 
+    public float waterChance;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        tileTypes = new int[width, height];
+        tileTypes = new float[width, height];
         tileObjects = new TileObject[width, height];
         SetTiles();
         cam = Camera.main;
@@ -55,9 +57,9 @@ public class TileManager : MonoBehaviour
         }
     }
 
-    public int[,] GenerateNoiseMap(int mapWidth, int mapHeight, float scale, float xOffset, float yOffset)
+    public float[,] GenerateNoiseMap(int mapWidth, int mapHeight, float scale, float xOffset, float yOffset)
     {
-        int[,] noiseMap = new int[mapWidth, mapHeight];
+        float[,] noiseMap = new float[mapWidth, mapHeight];
 
         for (int x = 0; x < mapWidth; x++)
         {
@@ -65,8 +67,8 @@ public class TileManager : MonoBehaviour
             {
                 float sampleX = (float)x / mapWidth * scale + xOffset * 10;
                 float sampleY = (float)y / mapHeight * scale + yOffset * 10;
-                float noise = Mathf.PerlinNoise(sampleX, sampleY) * differentTiles.Length;
-                noiseMap[x, y] = (int)noise;
+                float noise = Mathf.PerlinNoise(sampleX, sampleY);
+                noiseMap[x, y] = noise;
             }
         }
         return noiseMap;
@@ -86,17 +88,12 @@ public class TileManager : MonoBehaviour
             {
                 for (int y = 0; y < height; y++)//two dimentional for loop
                 {
-                    switch (tileTypes[x, y])//checks which tiles to place
+                    if (tileTypes[x, y] > waterChance) {
+                        PlaceWalkable(new Vector2Int(x, y));
+                    }
+                    else
                     {
-                        case 0:
-                            PlaceWalkable(new Vector2Int(x, y));
-                            break;
-                        case 1:
-                            PlaceWalkable(new Vector2Int(x, y));
-                            break;
-                        case 2:
-                            PlaceObstacle(x, y);
-                            break;
+                        PlaceObstacle(x, y);
                     }
                 }
             }
@@ -108,6 +105,7 @@ public class TileManager : MonoBehaviour
         UpdateNavMesh();
     }
 
+    
     void CheckMiddleTileLocation()
     {
         bool onWater = !GetTileFromPosition(middleTilePoint.transform.position).CanPlaceTower();
@@ -153,8 +151,8 @@ public class TileManager : MonoBehaviour
     /// <param name="y">the Y in the tilemap</param>
     public void PlaceWalkable(Vector2Int loc)
     {
-        tileObjects[loc.x, loc.y] = new TileObject(differentTiles[tileTypes[loc.x, loc.y]], loc.x, loc.y, true, false);
-        tilemap.SetTile(new Vector3Int(loc.x - width / 2, loc.y - height / 2, 0), tileObjects[loc.x, loc.y].GetTile());
+        tileObjects[loc.x, loc.y] = new TileObject(loc.x, loc.y, true, false);
+        tilemap.SetTile(new Vector3Int(loc.x - width / 2, loc.y - height / 2, 0), GrassTilePrefab);
     }
 
     /// <summary>
@@ -164,8 +162,8 @@ public class TileManager : MonoBehaviour
     /// <param name="y">the Y in the tilemap</param>
     void PlaceObstacle(int x, int y)
     {
-        tileObjects[x, y] = new TileObject(differentTiles[tileTypes[x, y]], x, y, false, false);
-        obstacles.SetTile(new Vector3Int(x - width / 2, y - height / 2, 0), tileObjects[x, y].GetTile());
+        tileObjects[x, y] = new TileObject( x, y, false, false);
+        obstacles.SetTile(new Vector3Int(x - width / 2, y - height / 2, 0), waterTilePrefab);
     }
 
     /// <summary>
@@ -177,8 +175,8 @@ public class TileManager : MonoBehaviour
         int y = height / 2;
         middleTilePosition = new Vector2Int(x, y);
 
-        tileObjects[x, y] = new TileObject(middleTileSprite, x, height / 2, false, false);
-        tilemap.SetTile(tilemap.WorldToCell(middleTilePoint.position), tileObjects[x, height / 2].GetTile());
+        tileObjects[x, y] = new TileObject(x, height / 2, false, false);
+        tilemap.SetTile(tilemap.WorldToCell(middleTilePoint.position), middleTileSprite);
     }
 
     /// <summary>
@@ -221,13 +219,13 @@ public class TileManager : MonoBehaviour
                 switch (tilemap.GetSprite(new Vector3Int(mid.x - width / 2 + x, mid.y - height / 2 + y, 0)).name)
                 {
                     case "Grass":
-                        objects[x, y] = new TileObject(GrassTilePrefab, x, y, true, false);
+                        objects[x, y] = new TileObject( x, y, true, false);
                         break;
                     case "Resource":
-                        objects[x, y] = new TileObject(GrassTilePrefab, x, y, true, true);
+                        objects[x, y] = new TileObject( x, y, true, true);
                         break;
                     case "Water":
-                        objects[x, y] = new TileObject(waterTilePrefab, x, y, false, false);
+                        objects[x, y] = new TileObject(x, y, false, false);
                         tilemap.SetTile(new Vector3Int(x - width / 2, y - height / 2, 0), null);
                         obstacles.SetTile(new Vector3Int(x - width / 2, y - height / 2, 0), waterTilePrefab);
                         break;
@@ -280,69 +278,8 @@ public class TileManager : MonoBehaviour
     /// <param name="loc">The location where the resource tile will be placed</param>
     void PlaceResource(Vector2Int loc)
     {
-        tileObjects[loc.x, loc.y] = new TileObject(resourceTilePrefab, loc.x, loc.y, true, true);
-        tilemap.SetTile(new Vector3Int(loc.x - width / 2, loc.y - height / 2, 0), tileObjects[loc.x, loc.y].GetTile());
+        tileObjects[loc.x, loc.y] = new TileObject(loc.x, loc.y, true, true);
+        tilemap.SetTile(new Vector3Int(loc.x - width / 2, loc.y - height / 2, 0), resourceTilePrefab);
     }
-
-
-    /*//completely broken now
-    /// <summary>
-    /// Returns if a coordinate of the tilemap is surrounded by water tiles
-    /// </summary>
-    /// <param name="loc"></param>
-    /// <returns></returns>
-    public bool IsSurroundedByWater(Vector2Int loc)
-    {
-        if (tileObjects[loc.x - 1, loc.y - 1] != null)
-        {
-            if (tileObjects[loc.x - 1, loc.y - 1].CanPlaceTurret())
-            {
-                return false;
-            }
-        }
-        if (tileObjects[loc.x, loc.y - 1] != null)
-        {
-            if (tileObjects[loc.x, loc.y - 1].CanPlaceTurret())
-            {
-                return false;
-            }
-        }
-        if (tileObjects[loc.x - 1, loc.y - 1] != null)
-        {
-            if (tileObjects[loc.x - 1, loc.y - 1].CanPlaceTurret())
-            {
-                return false;
-            }
-        }
-        if (tileObjects[loc.x + 1, loc.y] != null)
-        {
-            if (tileObjects[loc.x + 1, loc.y].CanPlaceTurret())
-            {
-                return false;
-            }
-        }
-        if (tileObjects[loc.x - 1, loc.y + 1] != null)
-        {
-            if (tileObjects[loc.x - 1, loc.y + 1].CanPlaceTurret())
-            {
-                return false;
-            }
-        }
-        if (tileObjects[loc.x, loc.y + 1] != null)
-        {
-            if (tileObjects[loc.x, loc.y + 1].CanPlaceTurret())
-            {
-                return false;
-            }
-        }
-        if (tileObjects[loc.x + 1, loc.y + 1] != null)
-        {
-            if (tileObjects[loc.x + 1, loc.y + 1].CanPlaceTurret())
-            {
-                return false;
-            }
-        }
-        return true;
-    }*/
 }
 
